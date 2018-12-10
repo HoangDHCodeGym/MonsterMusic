@@ -11,6 +11,16 @@ public class Playlist {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    private String name;
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "playlist_song",
