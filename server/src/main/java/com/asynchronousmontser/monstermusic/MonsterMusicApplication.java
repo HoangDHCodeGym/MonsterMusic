@@ -11,4 +11,5 @@ public class MonsterMusicApplication {
     public static void main(String[] args) {
         SpringApplication.run(MonsterMusicApplication.class, args);
     }
+
 }
