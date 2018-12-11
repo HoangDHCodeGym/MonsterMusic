@@ -12,7 +12,7 @@ import {Song} from "../../../model/song";
 export class UpdateSongComponent implements OnInit {
   updateSongForm: FormGroup;
   id: number = 6;
-  song: Song;
+  song: Song = new Song();
   songFiles: FileList;
   status: string = '';
 
@@ -26,22 +26,20 @@ export class UpdateSongComponent implements OnInit {
     this.updateSongForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       singer: ['', [Validators.required]],
-      file: ['', Validators.required]
     });
     this.httpClient
       .get(this.url + '/' + this.id, {observe: 'response'})
       .subscribe((resp) => {
-        if (resp.status) {
-          console.log(resp.status);
+        if (resp.status == 200) {
           const songResp = resp.body as any;
           this.song = {
             id: this.id,
             name: songResp.name,
-            singer: songResp._link.singer.href,
-            creator: songResp._link.creator.href,
+            singer: songResp._links.singer.href,
+            creator: songResp._links.creator.href,
             createdDate: songResp.createdDate,
             link: songResp.link
-          }
+          };
         }
         console.log(this.song)
       })
@@ -51,4 +49,19 @@ export class UpdateSongComponent implements OnInit {
     this.songFiles = files;
   }
 
+  onSubmit() {
+    const changedValue = this.updateSongForm.value;
+    if (changedValue) {
+      for (const val in changedValue) {
+        if (changedValue.hasOwnProperty(val)) {
+          const property = changedValue[val];
+          if (property || property != '') {
+            if (this.song[val] != null) {
+              this.song[val] = property;
+            }
+          }
+        }
+      }
+    }
+  }
 }
