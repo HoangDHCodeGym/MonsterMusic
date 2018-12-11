@@ -23,7 +23,7 @@ public class Song {
     private String link;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "createdDate", columnDefinition = "DATETIME")
+    @Column(name = "created_date", columnDefinition = "DATETIME")
     private Date createdDate;
 
     public Song() {
