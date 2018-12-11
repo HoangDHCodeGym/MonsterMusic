@@ -1,28 +1,26 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {ReactiveFormsModule} from "@angular/forms";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {MessageService} from "../service/message.service";
-import {PlaylistService} from "../service/playlist.service";
-import {SingerService} from "../service/singer.service";
-import {SongService} from "../service/song.service";
-import {UserService} from "../service/user.service";
-import {CrudService} from "../service/crud.service";
 import {HttpClientModule} from "@angular/common/http";
 import { SamplecrudComponent } from './samplecrud/samplecrud.component';
+import { UploadSongComponent } from './songs/upload-song/upload-song.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SamplecrudComponent
+    SamplecrudComponent,
+    UploadSongComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
-  providers: [CrudService, MessageService, PlaylistService, SingerService, SongService, UserService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
