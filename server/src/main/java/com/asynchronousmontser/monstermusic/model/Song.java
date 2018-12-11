@@ -9,16 +9,6 @@ public class Song {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String name;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User creator;
@@ -26,6 +16,8 @@ public class Song {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "singer_id")
     private Singer singer;
+
+    private String name;
 
     public Song() {
     }
@@ -52,5 +44,13 @@ public class Song {
 
     public void setSinger(Singer singer) {
         this.singer = singer;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

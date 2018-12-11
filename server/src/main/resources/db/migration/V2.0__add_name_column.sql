@@ -1,0 +1,8 @@
+ALTER TABLE user
+  ADD name NVARCHAR(100);
+ALTER TABLE playlist
+  ADD name NVARCHAR(100);
+ALTER TABLE singer
+  ADD name NVARCHAR(100);
+ALTER TABLE song
+  ADD name NVARCHAR(100);
