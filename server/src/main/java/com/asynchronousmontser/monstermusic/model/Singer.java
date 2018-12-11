@@ -10,22 +10,14 @@ public class Singer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String name;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     @OneToMany(mappedBy = "singer", cascade = CascadeType.ALL)
     private List<Song> songList;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User creator;
+
+    private String name;
 
     public Singer() {
     }
@@ -52,5 +44,13 @@ public class Singer {
 
     public void setCreator(User creator) {
         this.creator = creator;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

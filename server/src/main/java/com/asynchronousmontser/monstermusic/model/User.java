@@ -11,16 +11,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    private String name;
-
     @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL)
     private List<Playlist> playlistList;
 
@@ -29,6 +19,8 @@ public class User {
 
     @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL)
     private List<Song> songList;
+
+    private String name;
 
     public User() {
     }
@@ -63,5 +55,13 @@ public class User {
 
     public void setSongList(List<Song> songList) {
         this.songList = songList;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
