@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 
@@ -6,7 +6,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
   providedIn: 'root'
 })
 export class FileService {
-  private url = 'http://localhost:8080/api/files';
+  private url = this.hostUrl + '/api/files';
 
   upload(files: FileList, multiFile: boolean = true): Observable<any> {
     const formData: FormData = new FormData();
@@ -25,6 +25,7 @@ export class FileService {
     })
   }
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient,
+              @Inject('HOST_URL') private hostUrl: string) {
   }
 }
