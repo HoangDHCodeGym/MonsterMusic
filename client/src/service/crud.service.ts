@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {MessageService} from "./message.service";
 import {Observable, of} from "rxjs";
-import {catchError, tap} from "rxjs/operators";
+import {catchError, map, tap} from "rxjs/operators";
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type' : 'application/json'})
 };
@@ -11,7 +11,9 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class CrudService<T> {
-  url: string;
+  url: string = "";
+  collectionField: string = "";
+  itemField: string = "";
 
   constructor(
     private http: HttpClient,
@@ -24,21 +26,22 @@ export class CrudService<T> {
 
   getAll(): Observable<T[]> {
     this.messageService.add('Fetched list of objects');
-    return this.http.get<T[]>(this.url).pipe(tap(_ => this.log('fetched object')), catchError(this.handleError('get objects', [])));
+    return this.http.get<T[]>(this.url)
+    .pipe(map((data:any) => {return data['_embedded'][this.collectionField]}),
+      catchError(this.handleError('get objects', [])));
   }
 
   getOne(id: number): Observable<T> {
     this.messageService.add(`fetched object with id = ${id}`);
     const fullUrl = `${this.url}/${id}`;
-    return this.http.get<T>(fullUrl).pipe(
-      tap(_ => this.log(`fetched object id=${id}`)),
+    return this.http.get<T>(fullUrl).pipe(map((data: any) => {return data['_embedded'][this.itemField]}),
       catchError(this.handleError<T>(`get object id=${id}`))
     );
   }
 
   updateOne(object: T): Observable<T> {
     return this.http.post<T>(this.url, object, httpOptions).pipe(
-      tap((object: T) => this.log(`added object`)),
+      map((data: any) => {return data['_embedded'][this.itemField]}),
       catchError(this.handleError<T>('add Object'))
     );
   }
