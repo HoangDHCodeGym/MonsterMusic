@@ -19,7 +19,7 @@ import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-@Service
+@Service("storageService")
 public class FileSystemStorageService implements StorageService {
 
     private final Path rootLocation;
@@ -41,9 +41,6 @@ public class FileSystemStorageService implements StorageService {
                 throw new StorageException(
                         "Cannot store file with relative path outside current directory "
                                 + filename);
-            }
-            if (!Files.exists(this.rootLocation.resolve(filename))) {
-                Files.createFile(this.rootLocation.resolve(filename));
             }
             try (InputStream inputStream = file.getInputStream()) {
                 Files.copy(inputStream, this.rootLocation.resolve(filename),
