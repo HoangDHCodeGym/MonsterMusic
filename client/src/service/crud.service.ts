@@ -1,10 +1,12 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {MessageService} from "./message.service";
 import {Observable, of} from "rxjs";
 import {catchError, map, tap} from "rxjs/operators";
+
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type' : 'application/json'})
+  obverse: 'response',
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
 
 @Injectable({
@@ -18,7 +20,8 @@ export class CrudService<T> {
   constructor(
     private http: HttpClient,
     private messageService: MessageService,
-  ) { }
+  ) {
+  }
 
   setUrl(url: string) {
     this.url = url;
@@ -27,21 +30,27 @@ export class CrudService<T> {
   getAll(): Observable<T[]> {
     this.messageService.add('Fetched list of objects');
     return this.http.get<T[]>(this.url)
-    .pipe(map((data:any) => {return data['_embedded'][this.collectionField]}),
-      catchError(this.handleError('get objects', [])));
+      .pipe(map((data: any) => {
+          return data['_embedded'][this.collectionField]
+        }),
+        catchError(this.handleError('get objects', [])));
   }
 
   getOne(id: number): Observable<T> {
     this.messageService.add(`fetched object with id = ${id}`);
     const fullUrl = `${this.url}/${id}`;
-    return this.http.get<T>(fullUrl).pipe(map((data: any) => {return data['_embedded'][this.itemField]}),
+    return this.http.get<T>(fullUrl).pipe(map((data: any) => {
+        return data['_embedded'][this.itemField]
+      }),
       catchError(this.handleError<T>(`get object id=${id}`))
     );
   }
 
   updateOne(object: T): Observable<T> {
     return this.http.post<T>(this.url, object, httpOptions).pipe(
-      map((data: any) => {return data['_embedded'][this.itemField]}),
+      map((data: any) => {
+        return data['_embedded'][this.itemField]
+      }),
       catchError(this.handleError<T>('add Object'))
     );
   }
@@ -68,7 +77,7 @@ export class CrudService<T> {
     this.messageService.add(`HeroService: ${message}`);
   }
 
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure
