@@ -43,15 +43,14 @@ dependencies {
     testImplementation('org.springframework.security:spring-security-test')
     compileOnly('org.projectlombok:lombok')
 
-
     //others
+    compileOnly('org.springframework.boot:spring-boot-configuration-processor')
 //   implementation('org.springframework.boot:spring-boot-starter-thymeleaf')
-//    implementation('org.springframework.boot:spring-boot-starter-validation')
-//    implementation('org.springframework.boot:spring-boot-starter-security')
+//   implementation('org.springframework.boot:spring-boot-starter-validation')
+//   implementation('org.springframework.boot:spring-boot-starter-security')
 
     //optional
 //    implementation('org.springframework.boot:spring-boot-starter-cache')
 //    implementation('org.springframework.session:spring-session-jdbc')
-//    compileOnly('org.springframework.boot:spring-boot-configuration-processor')
 //    compileOnly('org.projectlombok:lombok')
 }
