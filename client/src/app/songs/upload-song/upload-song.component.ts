@@ -62,7 +62,6 @@ export class UploadSongComponent implements OnInit {
       singer: ['', [Validators.required]],
       file: ['', Validators.required]
     })
-
   }
 
 }

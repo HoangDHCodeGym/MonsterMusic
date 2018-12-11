@@ -6,13 +6,15 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HttpClientModule} from "@angular/common/http";
 import {UploadSongComponent} from './songs/upload-song/upload-song.component';
+import { UpdatesongComponent } from './songs/updatesong/updatesong.component';
 
 const host: string = 'http://localhost:8080';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UploadSongComponent
+    UploadSongComponent,
+    UpdatesongComponent
   ],
   imports: [
     BrowserModule,

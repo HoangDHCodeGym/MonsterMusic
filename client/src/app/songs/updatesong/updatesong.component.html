@@ -1,14 +1,14 @@
-<form [formGroup]="createSongForm"
-      (ngSubmit)="onSubmit()">
+<form [formGroup]="updateSongForm"
+      (ngSubmit)="">
   <label>
     name:
-    <input type="text" formControlName="name" value="{{1}}">
+    <input type="text" formControlName="name" value="{{song.name||''}}">
   </label>
   <br>
   <br>
   <label>
     singer:
-    <input type="text" formControlName="singer" placeholder="ignored">
+    <input type="text" formControlName="singer" placeholder="ignored" value="{{song.singer||''}}">
   </label>
   <br>
   <br>
