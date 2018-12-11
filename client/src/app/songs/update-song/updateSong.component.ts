@@ -6,12 +6,12 @@ import {Song} from "../../../model/song";
 
 @Component({
   selector: 'app-updatesong',
-  templateUrl: './updatesong.component.html',
-  styleUrls: ['./updatesong.component.scss']
+  templateUrl: './updateSong.component.html',
+  styleUrls: ['./updateSong.component.scss']
 })
-export class UpdatesongComponent implements OnInit {
+export class UpdateSongComponent implements OnInit {
   updateSongForm: FormGroup;
-  id: number;
+  id: number = 6;
   song: Song;
   songFiles: FileList;
   status: string = '';
