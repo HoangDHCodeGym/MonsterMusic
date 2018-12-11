@@ -5,7 +5,6 @@ import {Observable, of} from "rxjs";
 import {catchError, map, tap} from "rxjs/operators";
 
 const httpOptions = {
-  obverse: 'response',
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
 
