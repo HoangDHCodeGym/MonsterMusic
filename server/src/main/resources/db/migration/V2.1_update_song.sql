@@ -1,0 +1,4 @@
+ALTER TABLE song
+  ADD name NVARCHAR(100),
+  ADD createdDate DATETIME,
+  ADD link VARCHAR(256);
