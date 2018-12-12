@@ -36,7 +36,7 @@ public class FileController {
             if (!files.isEmpty()) {
                 for (MultipartFile multipartFile : files) {
                     if (!multipartFile.isEmpty()) storageService.store(multipartFile);
-                    links.add(multipartFile.getName());
+                    links.add(multipartFile.getOriginalFilename());
                 }
                 return new ResponseEntity<>(links, HttpStatus.CREATED);
             }
@@ -44,7 +44,7 @@ public class FileController {
         if (file != null) {
             if (!file.isEmpty()) {
                 storageService.store(file);
-                links.add(file.getName());
+                links.add(file.getOriginalFilename());
                 return new ResponseEntity<>(links, HttpStatus.CREATED);
             }
         }
