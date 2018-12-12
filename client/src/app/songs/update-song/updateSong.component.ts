@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {FileService} from "../../../service/file.service";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Song} from "../../../model/song";
 import {ObjectResolverService} from "../../../service/object-resolver.service";
 
@@ -12,7 +12,7 @@ import {ObjectResolverService} from "../../../service/object-resolver.service";
 })
 export class UpdateSongComponent implements OnInit {
   updateSongForm: FormGroup;
-  id: number = 6;
+  id: number = 1;
   song: Song = new Song();
   songFiles: FileList;
   status: string = '';
@@ -47,5 +47,44 @@ export class UpdateSongComponent implements OnInit {
 
   onSubmit() {
     const changedValue = this.updateSongForm.value;
+    this.song = this.resolver
+      .resolve(changedValue, this.song);
+    if (this.songFiles) {
+      this.status = 'uploading files...';
+      this.fileService
+        .upload(this.songFiles)
+        .subscribe((resp) => {
+          resp = resp as HttpResponse<any>;
+          if (resp.status == 201) {
+            this.fileService
+              .delete(this.song.link)
+              .subscribe((resp) => {
+                resp = resp as HttpResponse<any>;
+                if (resp.status == 200) {
+                  this.song.link = this.songFiles.item(0).name;
+                  this.changeInfo();
+                }
+              });
+          } else {
+            this.status='upload failed'
+          }
+        });
+    } else {
+      this.changeInfo();
+    }
   }
+
+  changeInfo() {
+    this.status = 'updating info...';
+    this.httpClient.post<HttpResponse<any>>(this.url + '/' + this.id, this.song).subscribe(
+      (resp) => {
+        if (resp.status == 200) {
+          this.status = 'updated';
+        } else {
+          this.status = 'update failed';
+        }
+      }
+    )
+  }
+
 }

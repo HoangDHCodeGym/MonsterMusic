@@ -1,5 +1,5 @@
 <form [formGroup]="updateSongForm"
-      (ngSubmit)="append(file.files)">
+      (ngSubmit)="onSubmit()">
   <label>
     name:
     <input type="text" formControlName="name" value="{{song.name||''}}">
@@ -13,7 +13,7 @@
   <br>
   <br>
   <label>
-    file:
+    file: {{song.link || ''}}
     <input type="file" (change)="append(file.files)" #file>
   </label>
   <br>
