@@ -13,7 +13,7 @@ import {ObjectResolverService} from "../../../service/object-resolver.service";
 export class UpdateSongComponent implements OnInit {
   updateSongForm: FormGroup;
   id: number = 6;
-  song: Song = new Song();
+  song: any = {toandz:'ok'};
   songFiles: FileList;
   status: string = '';
 
@@ -34,7 +34,7 @@ export class UpdateSongComponent implements OnInit {
       .subscribe((resp) => {
         if (resp.status == 200) {
           const songResp = resp.body as any;
-          this.song = this.resolver.resolve<Song>(songResp);
+          this.song = this.resolver.resolve<Song>(songResp,this.song);
           console.log('test resolve');
           console.log(this.song);
           console.log(songResp);

@@ -28,12 +28,14 @@ export class ObjectResolverService {
 
   /** Trả về object thuộc kiểu T từ object đã cho.
    *  Không bao gồm các trường trong _links
-   *  Trả về null nếu object này không đúng kiểu nhận về từ server
+   *  Trả về object được đính kèm nếu object này không đúng kiểu nhận về từ server
+   *
    * @Param selfLink: có trả về selfLink hay không. mặc định không.
+   * @Param appendTo: object đính kèm, mặc định {}, sẽ trả về object này đã được đính thêm các field nhận được.
    * **/
-  resolveBase<T>(object: any, selfLink: boolean = false): T {
+  resolveBase<T>(object: any, appendTo: any = {}, selfLink: boolean = false): T {
     if (!object.hasOwnProperty('_embedded')) {
-      let resolvedObject = {};
+      let resolvedObject = appendTo;
       resolvedObject['id'] = this.resolveId(object);
       if (selfLink) {
         if (object.hasOwnProperty('_links')) {
@@ -49,44 +51,39 @@ export class ObjectResolverService {
       }
       return resolvedObject as T;
     }
-    return null;
+    return appendTo;
   }
 
   /** Trả về object '_links' đã được làm gọn.
+   *
+   * @Param selfLink: có trả về selfLink hay không. mặc định có.
+   * @Param appendTo: object đính kèm, mặc định {}, sẽ trả về object này đã được đính thêm các field nhận được.
    * **/
-  resolveLinks(object: any): any {
-    let resolvedObject = {};
+  resolveLinks(object: any, appendTo: any = {}, selfLink: boolean = true): any {
+    let resolvedObject = appendTo;
     if (object.hasOwnProperty('_links')) {
       object = object._links;
       for (const property in object) {
-        if (object.hasOwnProperty(property)) {
+        if (object.hasOwnProperty(property) && (selfLink || property !== 'self')) {
           resolvedObject[property] = object[property].href;
         }
       }
       return resolvedObject;
     }
-    return null;
+    return appendTo;
   }
 
   /** Trả về object thuộc kiểu T từ object đã cho.
    * Object này có cấu trúc đơn giản hơn object nhận từ sever
    * các phần trong '_links' đã được lấy ra và gộp vào object trả về.
-   * Trả về null nếu object này không đúng kiểu nhận về từ server
+   * Trả về object được đính kèm nếu object này không đúng kiểu nhận về từ server
+   *
    * @Param selfLink: có lấy _link.self hay không, mặc định có.
+   * @Param appendTo: object đính kèm, mặc định {}, sẽ trả về object này đã được đính thêm các field nhận được.
    * **/
-  resolve<T>(object: any, selfLink: boolean = true): T {
-    if (!object.hasOwnProperty('_embedded')) {
-      let resolvedObject = this.resolveBase(object);
-      if (object.hasOwnProperty('_links')) {
-        object = object._links;
-        for (const property in object) {
-          if (object.hasOwnProperty(property) && (selfLink || property !== 'self')) {
-            resolvedObject[property] = object[property].href;
-          }
-        }
-      }
-      return resolvedObject as T;
-    }
-    return null;
+  resolve<T>(object: any, appendTo: any = {}, selfLink: boolean = true): T {
+    let resolvedObject = this.resolveLinks(object, appendTo, selfLink);
+    resolvedObject = this.resolveBase(object, resolvedObject,false);
+    return resolvedObject as T;
   }
 }
