@@ -18,12 +18,12 @@ public class Song {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "singer_id")
+    private Singer singer;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_date", columnDefinition = "DATETIME")
     private Date createdDate;
 
-    private Singer singer;
 
     private String name;
 
