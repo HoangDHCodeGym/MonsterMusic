@@ -76,7 +76,7 @@ export class UpdateSongComponent implements OnInit {
 
   changeInfo() {
     this.status = 'updating info...';
-    this.httpClient.post<HttpResponse<any>>(this.url + '/' + this.id, this.song).subscribe(
+    this.httpClient.patch<HttpResponse<any>>(this.url + '/' + this.id, this.song).subscribe(
       (resp) => {
         if (resp.status == 200) {
           this.status = 'updated';
