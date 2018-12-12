@@ -34,7 +34,7 @@ export class UpdateSongComponent implements OnInit {
       .subscribe((resp) => {
         if (resp.status == 200) {
           const songResp = resp.body as any;
-          this.song = this.resolver.resolve<Song>(songResp, this.song);
+          this.song = this.resolver.resolveBase<Song>(songResp, this.song);
           console.log(this.song)
         }
 
@@ -66,7 +66,7 @@ export class UpdateSongComponent implements OnInit {
                 }
               });
           } else {
-            this.status='upload failed'
+            this.status = 'upload failed'
           }
         });
     } else {
