@@ -20,7 +20,7 @@ export class UploadSongComponent implements OnInit {
     this.fileService
       .upload(this.songFiles)
       .subscribe((response) => {
-        if (response.status === 200) {
+        if (response.status === 201) {
           response = response.body as string[];
           const song: Song = {
             id: null,
