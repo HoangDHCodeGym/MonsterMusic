@@ -29,11 +29,19 @@ export class ObjectResolverService {
   /** Trả về object thuộc kiểu T từ object đã cho.
    *  Không bao gồm các trường trong _links
    *  Trả về null nếu object này không đúng kiểu nhận về từ server
+   * @Param selfLink: có trả về selfLink hay không. mặc định không.
    * **/
-  resolveBase<T>(object: any): T {
+  resolveBase<T>(object: any, selfLink: boolean = false): T {
     if (!object.hasOwnProperty('_embedded')) {
       let resolvedObject = {};
       resolvedObject['id'] = this.resolveId(object);
+      if (selfLink) {
+        if (object.hasOwnProperty('_links')) {
+          if (object._links.hasOwnProperty('self')) {
+            resolvedObject['self'] = object._links.self.href;
+          }
+        }
+      }
       for (const property in object) {
         if (object.hasOwnProperty(property) && property !== '_links') {
           resolvedObject[property] = object[property];
@@ -63,16 +71,16 @@ export class ObjectResolverService {
   /** Trả về object thuộc kiểu T từ object đã cho.
    * Object này có cấu trúc đơn giản hơn object nhận từ sever
    * các phần trong '_links' đã được lấy ra và gộp vào object trả về.
-   *
    * Trả về null nếu object này không đúng kiểu nhận về từ server
+   * @Param selfLink: có lấy _link.self hay không, mặc định có.
    * **/
-  resolve<T>(object: any): T {
+  resolve<T>(object: any, selfLink: boolean = true): T {
     if (!object.hasOwnProperty('_embedded')) {
       let resolvedObject = this.resolveBase(object);
       if (object.hasOwnProperty('_links')) {
         object = object._links;
         for (const property in object) {
-          if (object.hasOwnProperty(property) && property !== 'self') {
+          if (object.hasOwnProperty(property) && (selfLink || property !== 'self')) {
             resolvedObject[property] = object[property].href;
           }
         }
