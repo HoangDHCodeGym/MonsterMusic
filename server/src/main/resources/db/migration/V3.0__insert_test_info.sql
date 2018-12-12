@@ -1,1 +1,1 @@
-INSERT INTO user VALUES (0,'lana','admin','123456',NULL);
+INSERT INTO user VALUES (1,'lana','admin','123456',null);
