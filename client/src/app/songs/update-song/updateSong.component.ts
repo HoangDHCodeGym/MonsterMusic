@@ -35,9 +35,8 @@ export class UpdateSongComponent implements OnInit {
         if (resp.status == 200) {
           const songResp = resp.body as any;
           this.song = this.resolver.resolve<Song>(songResp);
-          console.log(songResp);
         }
-        console.log(this.song)
+
       })
   }
 
