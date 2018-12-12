@@ -30,7 +30,7 @@ public class Playlist {
 
     private String name;
 
-    private Integer views;
+    private Integer views = 0;
 
     public Playlist() {
     }
@@ -80,10 +80,6 @@ public class Playlist {
     }
 
     public void setViews(Integer views) {
-        if (this.views == null || views == null) {
-            this.views = 0;
-        } else {
-            this.views = views;
-        }
+        this.views = views;
     }
 }

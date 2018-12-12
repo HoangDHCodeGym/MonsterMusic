@@ -1,6 +1,6 @@
 package com.asynchronousmontser.monstermusic.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -22,14 +22,15 @@ public class Song {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_date", columnDefinition = "DATETIME")
-    private Date createdDate;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private Date createdDate = new Date();
 
 
     private String name;
 
     private String link;
 
-    private Integer views;
+    private Integer views = 0;
 
     public Song() {
     }
@@ -87,10 +88,6 @@ public class Song {
     }
 
     public void setViews(Integer views) {
-        if (this.views == null || views == null) {
-            this.views = 0;
-        } else {
-            this.views = views;
-        }
+        this.views = views;
     }
 }
