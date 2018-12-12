@@ -13,7 +13,7 @@ import {ObjectResolverService} from "../../../service/object-resolver.service";
 export class UpdateSongComponent implements OnInit {
   updateSongForm: FormGroup;
   id: number = 6;
-  song: any = {toandz:'ok'};
+  song: Song = new Song();
   songFiles: FileList;
   status: string = '';
 
@@ -34,19 +34,8 @@ export class UpdateSongComponent implements OnInit {
       .subscribe((resp) => {
         if (resp.status == 200) {
           const songResp = resp.body as any;
-          this.song = this.resolver.resolve<Song>(songResp,this.song);
-          console.log('test resolve');
-          console.log(this.song);
-          console.log(songResp);
-          console.log('test resolveBasic');
-          console.log(this.resolver.resolveBase(songResp));
-          console.log(songResp);
-          console.log('test resolveLinks');
-          console.log(this.resolver.resolveLinks(songResp));
-          console.log(songResp);
-          console.log('test resolveId');
-          console.log(this.resolver.resolveId(songResp));
-          console.log(songResp);
+          this.song = this.resolver.resolve<Song>(songResp, this.song);
+          console.log(this.song)
         }
 
       })
@@ -58,17 +47,5 @@ export class UpdateSongComponent implements OnInit {
 
   onSubmit() {
     const changedValue = this.updateSongForm.value;
-    if (changedValue) {
-      for (const val in changedValue) {
-        if (changedValue.hasOwnProperty(val)) {
-          const property = changedValue[val];
-          if (property || property != '') {
-            if (this.song[val] != null) {
-              this.song[val] = property;
-            }
-          }
-        }
-      }
-    }
   }
 }

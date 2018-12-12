@@ -51,7 +51,7 @@ export class ObjectResolverService {
       }
       return resolvedObject as T;
     }
-    return appendTo;
+    return appendTo as T;
   }
 
   /** Trả về object '_links' đã được làm gọn.
