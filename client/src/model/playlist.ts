@@ -6,4 +6,5 @@ export class Playlist {
   name: string;
   songList: Array<Song>;
   creator: User;
+  self:string;
 }

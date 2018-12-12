@@ -12,10 +12,10 @@ export class FileService {
     const formData: FormData = new FormData();
     if (multiFile) {
       for (let i = 0; i < files.length; i++) {
-        formData.append('files', files.item(i))
+        formData.append('files', files.item(i), randomString() + files.item(i).name);
       }
     } else {
-      formData.append('file', files.item(0));
+      formData.append('file', files.item(0), randomString() + files.item(0).name);
     }
     const _header: HttpHeaders = header || new HttpHeaders();
     _header.append('Content-Type', undefined);
@@ -27,11 +27,18 @@ export class FileService {
 
   delete(fileName: string) {
     fileName = fileName.replace(/^ $/g, '%20');
-    console.log(fileName);
     return this.httpClient.delete(this.url + '/' + fileName, {observe: 'response'})
   }
 
   constructor(private httpClient: HttpClient,
               @Inject('HOST_URL') private hostUrl: string) {
   }
+}
+
+function randomString(length: number = 1): string {
+  let randomString: string = '';
+  for (let i = 0; i < length; i++) {
+    randomString += Math.random().toString().split('.')[1]
+  }
+  return randomString;
 }

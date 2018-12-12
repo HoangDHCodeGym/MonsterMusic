@@ -83,7 +83,37 @@ export class ObjectResolverService {
    * **/
   resolve<T>(object: any, appendTo: any = {}, selfLink: boolean = true): T {
     let resolvedObject = this.resolveLinks(object, appendTo, selfLink);
-    resolvedObject = this.resolveBase(object, resolvedObject,false);
+    resolvedObject = this.resolveBase(object, resolvedObject, false);
     return resolvedObject as T;
+  }
+
+  /** Trả về một object
+   *   cấu trúc : * page:{} chứa các thông tin về paging and sorting
+   *              * list là 1 mảng chứa các object đã được xử lý bằng hàm resolveBase ở trên.
+   *              * self, profile chứa thông tin của _link.
+   *
+   *   @Param appendTo: object đính kèm, mặc định {}, sẽ trả về object này đã được đính thêm các field nhận được.
+   * **/
+  resolveList<T>(object: any, appendTo: any = {}) {
+    if (object.hasOwnProperty('_embedded')) {
+      for (const property in object) {
+        if (object.hasOwnProperty(property)) {
+          if (property !== '_embedded' && property !== '_links') {
+            appendTo[property] = object[property]
+          }
+        }
+      }
+      appendTo = this.resolveLinks(object, appendTo);
+      object = object._embedded;
+      for (const prop in object) {
+        if (object.hasOwnProperty(prop)) {
+          appendTo['list'] = object[prop];
+          for (let e of appendTo['list']) {
+            e = this.resolveBase(e, {}, true);
+          }
+        }
+      }
+    }
+    return appendTo as T;
   }
 }

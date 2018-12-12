@@ -5,7 +5,7 @@ import {UpdateSongComponent} from "./songs/update-song/updateSong.component";
 
 const routes: Routes = [
   {path: 'upload', component: UploadSongComponent},
-  {path: 'update', component: UpdateSongComponent},
+  {path: 'edit/:id', component: UpdateSongComponent},
 ];
 
 @NgModule({

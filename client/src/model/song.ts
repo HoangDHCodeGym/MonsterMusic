@@ -8,4 +8,5 @@ export class Song {
   singer: Singer;
   createdDate: Date;
   link: string;
+  self:string;
 }

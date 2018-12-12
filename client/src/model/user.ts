@@ -7,5 +7,6 @@ export class User {
   name: string;
   playlist: Array<Playlist>;
   singerList: Array<Singer>;
-  songList: Array<Song>
+  songList: Array<Song>;
+  self:string;
 }
