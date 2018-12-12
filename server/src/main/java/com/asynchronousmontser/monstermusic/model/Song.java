@@ -1,6 +1,7 @@
 package com.asynchronousmontser.monstermusic.model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "song")
@@ -18,6 +19,12 @@ public class Song {
     private Singer singer;
 
     private String name;
+
+    private String link;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_date", columnDefinition = "DATETIME")
+    private Date createdDate;
 
     public Song() {
     }
@@ -52,5 +59,21 @@ public class Song {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 }

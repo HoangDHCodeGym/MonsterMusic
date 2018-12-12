@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SamplecrudComponent } from './samplecrud.component';
+import { UploadSongComponent } from './upload-song.component';
 
-describe('SamplecrudComponent', () => {
-  let component: SamplecrudComponent;
-  let fixture: ComponentFixture<SamplecrudComponent>;
+describe('UploadSongComponent', () => {
+  let component: UploadSongComponent;
+  let fixture: ComponentFixture<UploadSongComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SamplecrudComponent ]
+      declarations: [ UploadSongComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SamplecrudComponent);
+    fixture = TestBed.createComponent(UploadSongComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

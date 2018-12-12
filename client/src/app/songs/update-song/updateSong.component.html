@@ -1,0 +1,24 @@
+<form [formGroup]="updateSongForm"
+      (ngSubmit)="append(file.files)">
+  <label>
+    name:
+    <input type="text" formControlName="name" value="{{song.name||''}}">
+  </label>
+  <br>
+  <br>
+  <label>
+    singer:
+    <input type="text" formControlName="singer" placeholder="ignored" value="{{song.singer||''}}">
+  </label>
+  <br>
+  <br>
+  <label>
+    file:
+    <input type="file" (change)="append(file.files)" #file>
+  </label>
+  <br>
+  <br>
+  <input type="submit" value="create">
+</form>
+<hr>
+<i>status: {{status}}</i>

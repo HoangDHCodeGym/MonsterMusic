@@ -5,5 +5,7 @@ export class Song {
   id: number;
   name: string;
   creator: User;
-  singer: Singer
+  singer: Singer;
+  createdDate: Date;
+  link: string;
 }
