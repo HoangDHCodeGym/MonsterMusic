@@ -1,7 +1,10 @@
 package com.asynchronousmontser.monstermusic.model;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -26,7 +29,8 @@ public class Playlist {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_date", columnDefinition = "DATETIME")
-    private Date createdDate;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private Date createdDate = new Date();
 
     private String name;
 

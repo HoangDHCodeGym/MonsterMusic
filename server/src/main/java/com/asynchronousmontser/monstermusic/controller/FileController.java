@@ -56,5 +56,4 @@ public class FileController {
         storageService.delete(name);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 }

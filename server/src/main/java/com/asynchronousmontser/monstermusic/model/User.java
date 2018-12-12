@@ -25,7 +25,8 @@ public class User {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_date", columnDefinition = "DATETIME")
-    private Date createdDate;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private Date createdDate = new Date();
 
     private String name;
 
