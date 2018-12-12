@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {FileService} from "../../../service/file.service";
 import {HttpClient} from "@angular/common/http";
 import {Song} from "../../../model/song";
+import {ObjectResolverService} from "../../../service/object-resolver.service";
 
 @Component({
   selector: 'app-updatesong',
@@ -19,6 +20,7 @@ export class UpdateSongComponent implements OnInit {
   constructor(private fileService: FileService,
               private httpClient: HttpClient,
               private formBuilder: FormBuilder,
+              private resolver: ObjectResolverService,
               @Inject('SONG_API') private url: string) {
   }
 
@@ -32,14 +34,7 @@ export class UpdateSongComponent implements OnInit {
       .subscribe((resp) => {
         if (resp.status == 200) {
           const songResp = resp.body as any;
-          this.song = {
-            id: this.id,
-            name: songResp.name,
-            singer: songResp._links.singer.href,
-            creator: songResp._links.creator.href,
-            createdDate: songResp.createdDate,
-            link: songResp.link
-          };
+          this.song = this.resolver.resolve<Song>(songResp);
         }
         console.log(this.song)
       })
