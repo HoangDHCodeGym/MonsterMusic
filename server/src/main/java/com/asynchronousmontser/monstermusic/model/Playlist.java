@@ -30,6 +30,8 @@ public class Playlist {
 
     private String name;
 
+    private Integer views;
+
     public Playlist() {
     }
 
@@ -71,5 +73,17 @@ public class Playlist {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public Integer getViews() {
+        return views;
+    }
+
+    public void setViews(Integer views) {
+        if (this.views == null || views == null) {
+            this.views = 0;
+        } else {
+            this.views = views;
+        }
     }
 }

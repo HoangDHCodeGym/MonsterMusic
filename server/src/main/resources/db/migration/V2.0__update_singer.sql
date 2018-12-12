@@ -1,0 +1,2 @@
+ALTER TABLE singer
+  ADD name NVARCHAR(128);
