@@ -1,4 +1,5 @@
 ALTER TABLE song
-  ADD name NVARCHAR(100),
+  ADD name NVARCHAR(128),
   ADD created_date DATETIME,
-  ADD link VARCHAR(256);
+  ADD link VARCHAR(256),
+  ADD views INT(100) DEFAULT 0;

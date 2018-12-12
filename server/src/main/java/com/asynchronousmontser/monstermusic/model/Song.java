@@ -1,5 +1,7 @@
 package com.asynchronousmontser.monstermusic.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -16,15 +18,18 @@ public class Song {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "singer_id")
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_date", columnDefinition = "DATETIME")
+    private Date createdDate;
+
     private Singer singer;
 
     private String name;
 
     private String link;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "created_date", columnDefinition = "DATETIME")
-    private Date createdDate;
+    private Integer views;
 
     public Song() {
     }
@@ -75,5 +80,16 @@ public class Song {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public Integer getViews() {
+        views++;
+        setViews(views);
+        return views;
+    }
+
+    @JsonIgnore
+    public void setViews(Integer views) {
+        this.views = views;
     }
 }

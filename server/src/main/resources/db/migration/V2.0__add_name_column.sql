@@ -1,6 +1,4 @@
-ALTER TABLE user
-  ADD name NVARCHAR(100);
 ALTER TABLE playlist
-  ADD name NVARCHAR(100);
+  ADD name NVARCHAR(128);
 ALTER TABLE singer
-  ADD name NVARCHAR(100);
+  ADD name NVARCHAR(128);
