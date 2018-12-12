@@ -1,14 +1,16 @@
 CREATE TABLE user
 (
-  id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT
+  id           INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  created_date DATETIME
 )
   CHARACTER SET utf8
   COLLATE utf8_unicode_ci;
 
 CREATE TABLE singer
 (
-  id      INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  user_id INT(11)             ,
+  id           INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  user_id      INT(11),
+  created_date DATETIME,
   FOREIGN KEY (user_id) REFERENCES user (id)
 )
   CHARACTER SET utf8
@@ -16,9 +18,10 @@ CREATE TABLE singer
 
 CREATE TABLE song
 (
-  id        INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  user_id   INT(11)             ,
-  singer_id INT(11),
+  id           INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  user_id      INT(11),
+  singer_id    INT(11),
+  created_date DATETIME,
   FOREIGN KEY (singer_id) REFERENCES singer (id),
   FOREIGN KEY (user_id) REFERENCES user (id)
 )
@@ -27,8 +30,9 @@ CREATE TABLE song
 
 CREATE TABLE playlist
 (
-  id      INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  user_id INT(11)             ,
+  id           INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  user_id      INT(11),
+  created_date DATETIME,
   FOREIGN KEY (user_id) REFERENCES user (id)
 )
   CHARACTER SET utf8
@@ -36,8 +40,9 @@ CREATE TABLE playlist
 
 CREATE TABLE playlist_song
 (
-  playlist_id INT(11) NOT NULL,
-  song_id     INT(11) NOT NULL,
+  playlist_id  INT(11) NOT NULL,
+  song_id      INT(11) NOT NULL,
+  created_date DATETIME,
   PRIMARY KEY (playlist_id, song_id),
   FOREIGN KEY (playlist_id) REFERENCES playlist (id),
   FOREIGN KEY (song_id) REFERENCES song (id)

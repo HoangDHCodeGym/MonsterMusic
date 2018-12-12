@@ -83,13 +83,14 @@ public class Song {
     }
 
     public Integer getViews() {
-        views++;
-        setViews(views);
         return views;
     }
 
-    @JsonIgnore
     public void setViews(Integer views) {
-        this.views = views;
+        if (this.views == null || views == null) {
+            this.views = 0;
+        } else {
+            this.views = views;
+        }
     }
 }
