@@ -13,8 +13,8 @@ import java.util.List;
 @Entity
 @Table(name = "user")
 public class User {
-    @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
+//    @Autowired
+//    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -108,13 +108,11 @@ public class User {
     }
 
     public void setPassword(String password) {
-
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         this.password = bCryptPasswordEncoder.encode(password);
     }
 
-    public String getRole() {
-        return role;
-    }
+    public String getRole() { return role;}
 
     public void setRole(String role) {
         this.role = role;
