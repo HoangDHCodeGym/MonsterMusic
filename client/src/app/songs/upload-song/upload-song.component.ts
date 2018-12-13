@@ -22,15 +22,13 @@ export class UploadSongComponent implements OnInit {
       .subscribe((response) => {
         if (response.status === 201) {
           response = response.body as string[];
-          const song: Song = {
+          const song = {
             id: null,
             //TODO: fill constrains
             singer: null,
             creator: null,
             name: this.createSongForm.value.name,
-            createdDate: null,
             link: response[0],
-            self: null
           };
           this.httpClient
             .post(this.url, song, {observe: 'response'})

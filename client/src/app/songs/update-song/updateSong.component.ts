@@ -2,9 +2,9 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {FileService} from "../../../service/file.service";
 import {HttpClient, HttpResponse} from "@angular/common/http";
 import {ObjectResolverService} from "../../../service/object-resolver.service";
-import {Singer} from "../../../model/singer";
 import {NgForm} from "@angular/forms";
 import {ActivatedRoute, ParamMap} from "@angular/router";
+import {Song} from "../../../model/song";
 
 @Component({
   selector: 'app-updatesong',
@@ -27,7 +27,8 @@ export class UpdateSongComponent implements OnInit {
               private httpClient: HttpClient,
               private resolver: ObjectResolverService,
               private router: ActivatedRoute,
-              @Inject('SONG_API') private url: string) {
+              @Inject('SONG_API') private url: string,
+              @Inject('USER_API') private urluser) {
   }
 
   ngOnInit() {
@@ -36,7 +37,7 @@ export class UpdateSongComponent implements OnInit {
       .subscribe((paramMap: ParamMap) => {
         this.id = Number(paramMap.get('id'));
         this.fetch();
-        this.resolver.get(this.url, this.id).subscribe(
+        this.resolver.get(this.urluser, 1).subscribe(
           out => {
             console.log(out)
           }
@@ -112,20 +113,14 @@ export class UpdateSongComponent implements OnInit {
   }
 
   fetch() {
-    this.httpClient
-      .get(this.url + '/' + this.id)
-      .toPromise()
-      .then(resp => this.resolver.resolve(resp) as any)
-      .then(fullSong => {
-        this.songForm.link = fullSong.link;
-        this.songForm.name = fullSong.name;
-        this.httpClient
-          .get(fullSong.singer, {observe: 'response'})
-          .subscribe(resp => {
-            const singer = this.resolver.resolveBase<Singer>(resp.body);
-            this.songForm.singerName = singer.self;
-            this.songForm.name = singer.name;
-          })
+    this.resolver
+      .get(this.url, this.id)
+      .subscribe((resp) => {
+        const song = resp.data as Song;
+        this.songForm.name = song.name;
+        this.songForm.link = song.link;
+        this.songForm.singer = song.singer.self;
+        this.songForm.singerName = song.singer.name;
       })
   }
 }

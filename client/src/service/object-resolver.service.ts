@@ -121,12 +121,13 @@ export class ObjectResolverService {
 
   /** tương tự như httpClient.get nhưng trả về 1 object trong đó tất
    * cả các thành phần trong _links đã được get và resolve.
+   * Trả về một Observable<Dto> xem Dto ở dưới
    *
    * @param url : link api để get
    * @param id : id của object cần get
    * **/
-  get(url, id: number): Observable<any> {
-    let output = {
+  get(url, id: number): Observable<Dto> {
+    let output:Dto = {
       data: {},
       uploadData: {},
     };
@@ -151,10 +152,11 @@ export class ObjectResolverService {
                   .toPromise()
                   .then((resp) => {
                       if (links._links[prop] !== url + '/' + id) {
-                        if (!resp.hasOwnProperty('"_embedded"')) {
+                        if (!resp.hasOwnProperty('_embedded')) {
                           links.solved[prop] = this.resolveBase(resp, {}, true);
+                          output.uploadData[prop] = links.solved[prop].self;
                         } else {
-                          links.solved[prop] = this.resolveList(resp,)
+                          links.solved[prop] = this.resolveList(resp);
                         }
                       }
                     }
@@ -172,4 +174,14 @@ export class ObjectResolverService {
       )
       .then(() => output))
   }
+}
+
+/** kiểu Dto. có thể ép kiể các trường về interface đã có sẵn.
+ *
+ * @Field data chứa các trường đã được reslove.
+ * @Field uploadData chứa các trường dưới dạng link, upload được tới server.
+ * **/
+export interface Dto {
+  data: any,
+  uploadData: any,
 }
