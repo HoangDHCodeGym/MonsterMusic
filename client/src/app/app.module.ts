@@ -9,17 +9,18 @@ import {HttpClientModule} from "@angular/common/http";
 import {UploadSongComponent} from './songs/upload-song/upload-song.component';
 import {UpdateSongComponent} from './songs/update-song/updateSong.component';
 import {StreamSongComponent} from './songs/stream-song/stream-song.component';
+import { ListTabComponent } from './list-tab/list-tab.component';
 
 
 const host: string = 'http://localhost:8080' || window.location.protocol + "//" + window.location.host;
-console.log(host);
 
 @NgModule({
   declarations: [
     AppComponent,
     UploadSongComponent,
     UpdateSongComponent,
-    StreamSongComponent
+    StreamSongComponent,
+    ListTabComponent
   ],
   imports: [
     BrowserModule,

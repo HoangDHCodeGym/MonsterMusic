@@ -127,7 +127,7 @@ export class ObjectResolverService {
    * @param url : link api để get
    * @param id : id của object cần get
    * **/
-  get(url, id: number): Observable<Dto> {
+  get(url, id: number, solveArray: boolean = true): Observable<Dto> {
     let output: Dto = {
       data: {},
       uploadData: {},
@@ -148,7 +148,7 @@ export class ObjectResolverService {
             for (const prop in links._links) {
               try {
                 await this.httpClient
-                  .get(links._links[prop])
+                  .get<any>(links._links[prop])
                   .toPromise()
                   .then((resp) => {
                       if (links._links[prop] !== url + '/' + id) {
@@ -156,11 +156,11 @@ export class ObjectResolverService {
                           links.solved[prop] = this.resolveBase(resp, {}, true);
                           output.uploadData[prop] = links.solved[prop].self;
                         } else {
-                          console.log('pack');
-                          console.log(links.solved[prop]);
-                          links.solved[prop] = this.resolveList(resp);
-                          console.log(this.resolveList(resp));
-                          console.log(links.solved[prop]);
+                          if (solveArray) {
+                            links.solved[prop] = this.resolveList(resp);
+                          } else {
+                            links.solved[prop] = resp._links.self.href;
+                          }
                         }
                       }
                     }
