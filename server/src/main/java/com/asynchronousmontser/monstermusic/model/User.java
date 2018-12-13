@@ -2,7 +2,9 @@ package com.asynchronousmontser.monstermusic.model;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,6 +13,9 @@ import java.util.List;
 @Entity
 @Table(name = "user")
 public class User {
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -32,6 +37,7 @@ public class User {
     private String name;
 
     private String username;
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
@@ -102,7 +108,8 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+
+        this.password = bCryptPasswordEncoder.encode(password);
     }
 
     public String getRole() {
