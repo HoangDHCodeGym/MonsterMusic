@@ -50,9 +50,9 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-starter-security')
     compileOnly('org.springframework.boot:spring-boot-configuration-processor')
 
-
     //optional
 //    implementation('org.springframework.boot:spring-boot-starter-cache')
 //    implementation('org.springframework.session:spring-session-jdbc')
 //    compileOnly('org.projectlombok:lombok')
+    compileOnly('org.springframework.boot:spring-boot-starter-actuator')
 }
