@@ -11,7 +11,7 @@ import {UpdateSongComponent} from './songs/update-song/updateSong.component';
 import {StreamSongComponent} from './songs/stream-song/stream-song.component';
 
 
-const host: string = window.location.protocol + "//" + window.location.host;
+const host: string = 'http://localhost:8080' || window.location.protocol + "//" + window.location.host;
 console.log(host);
 
 @NgModule({
