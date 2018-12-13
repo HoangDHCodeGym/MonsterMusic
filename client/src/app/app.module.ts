@@ -7,15 +7,19 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HttpClientModule} from "@angular/common/http";
 import {UploadSongComponent} from './songs/upload-song/upload-song.component';
-import { UpdateSongComponent } from './songs/update-song/updateSong.component';
+import {UpdateSongComponent} from './songs/update-song/updateSong.component';
+import {StreamSongComponent} from './songs/stream-song/stream-song.component';
 
-const host: string = 'http://localhost:8080';
+
+const host: string = 'http://localhost:8080' || window.location.protocol + "//" + window.location.host;
+console.log(host);
 
 @NgModule({
   declarations: [
     AppComponent,
     UploadSongComponent,
-    UpdateSongComponent
+    UpdateSongComponent,
+    StreamSongComponent
   ],
   imports: [
     BrowserModule,

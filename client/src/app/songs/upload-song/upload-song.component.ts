@@ -37,10 +37,11 @@ export class UploadSongComponent implements OnInit {
             .subscribe(response => {
               if (response.status === 201) {
                 this.status = 'uploaded';
-                //TODO: remove this.
-                console.log(response.body)
               } else {
                 this.status = 'error: ' + response.status;
+                this.fileService
+                  .delete(song.link)
+                  .subscribe();
               }
             })
         } else {
