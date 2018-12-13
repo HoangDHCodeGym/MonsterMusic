@@ -8,7 +8,7 @@ CREATE TABLE user
 CREATE TABLE singer
 (
   id      INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  user_id INT(11)             ,
+  user_id INT(11),
   FOREIGN KEY (user_id) REFERENCES user (id)
 )
   CHARACTER SET utf8
@@ -17,7 +17,7 @@ CREATE TABLE singer
 CREATE TABLE song
 (
   id        INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  user_id   INT(11)             ,
+  user_id   INT(11),
   singer_id INT(11),
   FOREIGN KEY (singer_id) REFERENCES singer (id),
   FOREIGN KEY (user_id) REFERENCES user (id)
@@ -28,7 +28,7 @@ CREATE TABLE song
 CREATE TABLE playlist
 (
   id      INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  user_id INT(11)             ,
+  user_id INT(11),
   FOREIGN KEY (user_id) REFERENCES user (id)
 )
   CHARACTER SET utf8

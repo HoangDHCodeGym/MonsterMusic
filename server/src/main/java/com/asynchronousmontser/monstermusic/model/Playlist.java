@@ -1,7 +1,11 @@
 package com.asynchronousmontser.monstermusic.model;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -23,7 +27,14 @@ public class Playlist {
     @JoinColumn(name = "user_id")
     private User creator;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_date", columnDefinition = "DATETIME")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private Date createdDate = new Date();
+
     private String name;
+
+    private Integer views = 0;
 
     public Playlist() {
     }
@@ -60,4 +71,19 @@ public class Playlist {
         this.name = name;
     }
 
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Integer getViews() {
+        return views;
+    }
+
+    public void setViews(Integer views) {
+        this.views = views;
+    }
 }

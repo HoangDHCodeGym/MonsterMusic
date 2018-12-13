@@ -6,4 +6,5 @@ export class Singer {
   name: string;
   songList: Array<Song>;
   creator: User;
+  self:string;
 }

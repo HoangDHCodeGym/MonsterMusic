@@ -20,7 +20,7 @@ export class UploadSongComponent implements OnInit {
     this.fileService
       .upload(this.songFiles)
       .subscribe((response) => {
-        if (response.status === 200) {
+        if (response.status === 201) {
           response = response.body as string[];
           const song: Song = {
             id: null,
@@ -29,13 +29,16 @@ export class UploadSongComponent implements OnInit {
             creator: null,
             name: this.createSongForm.value.name,
             createdDate: new Date(),
-            link: response[0]
+            link: response[0],
+            self: null
           };
           this.httpClient
             .post(this.url, song, {observe: 'response'})
             .subscribe(response => {
               if (response.status === 201) {
                 this.status = 'uploaded';
+                //TODO: remove this.
+                console.log(response.body)
               } else {
                 this.status = 'error: ' + response.status;
               }
@@ -57,6 +60,7 @@ export class UploadSongComponent implements OnInit {
   }
 
   ngOnInit() {
+    //TODO: add Validate
     this.createSongForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       singer: ['', [Validators.required]],
