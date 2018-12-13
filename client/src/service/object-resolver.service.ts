@@ -109,9 +109,10 @@ export class ObjectResolverService {
       object = object._embedded;
       for (const prop in object) {
         if (object.hasOwnProperty(prop)) {
-          appendTo['list'] = object[prop];
-          for (let e of appendTo['list']) {
-            e = this.resolveBase(e, {}, true);
+          appendTo['list'] = [];
+          let i = 0;
+          for (let e of object[prop]) {
+            appendTo['list'][i++] = this.resolveBase(e, {}, true);
           }
         }
       }
@@ -127,7 +128,7 @@ export class ObjectResolverService {
    * @param id : id của object cần get
    * **/
   get(url, id: number): Observable<Dto> {
-    let output:Dto = {
+    let output: Dto = {
       data: {},
       uploadData: {},
     };
@@ -143,7 +144,6 @@ export class ObjectResolverService {
           if (response.status == 200) {
             output.uploadData = this.resolveBase(response.body);
             output.data = this.resolve(response.body);
-            console.log(output.data);
             links._links = this.resolveLinks(response.body, {}, false);
             for (const prop in links._links) {
               try {
@@ -156,7 +156,11 @@ export class ObjectResolverService {
                           links.solved[prop] = this.resolveBase(resp, {}, true);
                           output.uploadData[prop] = links.solved[prop].self;
                         } else {
+                          console.log('pack');
+                          console.log(links.solved[prop]);
                           links.solved[prop] = this.resolveList(resp);
+                          console.log(this.resolveList(resp));
+                          console.log(links.solved[prop]);
                         }
                       }
                     }
