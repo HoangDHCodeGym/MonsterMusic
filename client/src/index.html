@@ -1,14 +1,367 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Client</title>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- Latest compiled and minified CSS -->
+  <!--<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />-->
   <base href="/">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <style>
+    .navb-01{
+      height: 50px;
+      margin-bottom: 0;
+      background-color: #000;
+      color: #fff;
+    }
+    .navbar-inverse{
+      margin-bottom:0px;
+    }
+    .panelheading{
+      background-color: #222;
+      color: #ffffff;}
+
+  </style>
 </head>
 <body>
-  <app-root></app-root>
+<!--Wrapper-->
+<!-- <div class="wrapper"> -->
+
+<!-- navbar-header -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="wrapper">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <i class="fas fa-align-justify" style="font-size: 40px"></i>
+      </button>
+
+      <a href="#" class="navbar-brand pointer font-link" >
+        <svg aria-hidden="true" data-prefix="fas" data-icon="home" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="svg-inline--fa fa-home fa-w-18 fa-spin fa-lg"><path fill="currentColor" d="M488 312.7V456c0 13.3-10.7 24-24 24H348c-6.6 0-12-5.4-12-12V356c0-6.6-5.4-12-12-12h-72c-6.6 0-12 5.4-12 12v112c0 6.6-5.4 12-12 12H112c-13.3 0-24-10.7-24-24V312.7c0-3.6 1.6-7 4.4-9.3l188-154.8c4.4-3.6 10.8-3.6 15.3 0l188 154.8c2.7 2.3 4.3 5.7 4.3 9.3zm83.6-60.9L488 182.9V44.4c0-6.6-5.4-12-12-12h-56c-6.6 0-12 5.4-12 12V117l-89.5-73.7c-17.7-14.6-43.3-14.6-61 0L4.4 251.8c-5.1 4.2-5.8 11.8-1.6 16.9l25.5 31c4.2 5.1 11.8 5.8 16.9 1.6l235.2-193.7c4.4-3.6 10.8-3.6 15.3 0l235.2 193.7c5.1 4.2 12.7 3.5 16.9-1.6l25.5-31c4.2-5.2 3.4-12.7-1.7-16.9z" class=""></path></svg>
+        <span>Trang chủ </span>
+      </a>
+    </div>
+
+
+    <div id = "navbar" class="collapse navbar-collapse" aria-expanded="false">
+      <ul class="nav navbar-nav">
+        <li><a href="#" class="font-link">Page 1</a></li>
+        <li><a href="#" class="font-link">Page 2</a></li>
+        <li><a href="#" class="font-link">Page 3</a></li>
+      </ul>
+      <div class="nav navbar-nav navbar-right">
+        <p class="navbar-text"><a href="#" class="navbar-link" data-toggle="modal" data-target="#signin-modal"><i class="fas fa-sign-in-alt"> Sign in</i></a></p>
+        <button type="button" class="btn btn-default navbar-btn"data-toggle="modal" data-target="#signup-modal"><i class="fas fa-user-plus"> Sign up</i></button>
+        <button type="button" class="btn btn-default navbar-btn"data-toggle="modal" data-target="#settings-modal"><i class="fas fa-cogs"></i></button>
+      </div>
+
+      <form class="navbar-form form-search" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+      </form>
+    </div>
+
+  </div>
+</div>
+<!-- End Navbar-header -->
+
+<!-- <div class="clear"></div> -->
+
+<app-root></app-root>
+
+<!-- Footer -->
+<footer class="page-footer font-small lighten-5 ">
+
+  <div class="panelheading">
+    <div class="container">
+
+      <!-- Grid row-->
+      <div class="row py-4 d-flex align-items-center">
+
+        <!-- Grid column -->
+        <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0 ">
+          <h6 class="mb-0">Get connected with us on social networks!</h6>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row-->
+
+    </div>
+  </div>
+
+  <!-- Footer Links -->
+  <div class="container text-center text-md-left mt-5 text-center ">
+
+    <!-- Grid row -->
+    <div class="row mt-3 dark-grey-text">
+
+      <!-- Grid column -->
+      <div class="col-md-3 col-lg-4 col-xl-3 mb-4 text-center">
+
+        <!-- Content -->
+        <h6 class="text-uppercase font-weight-bold">Company name</h6>
+        <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" >
+        <p>Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet, consectetur
+          adipisicing elit.</p>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 text-center">
+
+        <!-- Links -->
+        <h6 class="text-uppercase font-weight-bold">Products</h6>
+        <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" >
+        <p>
+          <a class="dark-grey-text" href="#!">MDBootstrap</a>
+        </p>
+        <p>
+          <a class="dark-grey-text" href="#!">MDWordPress</a>
+        </p>
+        <p>
+          <a class="dark-grey-text" href="#!">BrandFlow</a>
+        </p>
+        <p>
+          <a class="dark-grey-text" href="#!">Bootstrap Angular</a>
+        </p>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4 text-center">
+
+        <!-- Links -->
+        <h6 class="text-uppercase font-weight-bold">Useful links</h6>
+        <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto">
+        <p>
+          <a class="dark-grey-text">Your Account</a>
+        </p>
+        <p>
+          <a class="dark-grey-text" href="#!">Become an Affiliate</a>
+        </p>
+        <p>
+          <a class="dark-grey-text" href="#!">Shipping Rates</a>
+        </p>
+        <p>
+          <a class="dark-grey-text" href="#!">Help</a>
+        </p>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4 text-center">
+
+        <!-- Links -->
+        <h6 class="text-uppercase font-weight-bold">Contact</h6>
+        <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto">
+        <p>
+          <i class="fa fa-home mr-3"></i> New York, NY 10012, US</p>
+        <p>
+          <i class="fa fa-envelope mr-3"></i> info@example.com</p>
+        <p>
+          <i class="fa fa-phone mr-3"></i> + 01 234 567 88</p>
+        <p>
+          <i class="fa fa-print mr-3"></i> + 01 234 567 89</p>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+
+  <!-- Copyright -->
+
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+
+<footer class="page-footer font-small cyan darken-3 " style="background-color: #222; height: 0">
+
+  <!-- Footer Elements -->
+  <div class="container">
+
+    <!-- Grid row-->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-12 py-5">
+        <div class="mb-5 flex-center" style="text-align: center">
+
+          <!-- Facebook -->
+          <a class="fb-ic pointer">
+            <i class="fab fa-facebook-f" style="margin-right: 25px"></i>
+          </a>
+
+          <!-- Twitter -->
+          <a class="tw-ic pointer">
+            <i class="fab fa-twitter" style="margin-right: 25px"></i>
+          </a>
+
+          <!-- Google +-->
+          <a class="gplus-ic pointer">
+            <i class="fab fa-google-plus-g" style="margin-right: 25px"></i>
+          </a>
+
+          <!--Linkedin -->
+          <a class="li-ic pointer">
+            <i class="fab fa-linkedin-in" style="margin-right: 25px"></i>
+          </a>
+
+          <!--Instagram-->
+          <a class="ins-ic pointer">
+            <i class="fab fa-instagram" style="margin-right: 25px"></i>
+          </a>
+
+          <!--Pinterest-->
+          <a class="pin-ic pointer">
+            <i class="fab fa-pinterest" style="margin-right: 25px"></i>
+          </a>
+        </div>
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row-->
+
+  </div>
+
+</footer>
+<!-- Footer -->
+
+
+
+
+
+
+
+
+
+<!-- Settings-modal -->
+<div class="modal fade" id="settings-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h2 class="modal-title" id="exampleModalLabel">#Setting</h2>
+      </div>
+      <div class="modal-body">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active">
+            <a href="#create" aria-controls="create" role="tab" data-toggle="tab">#Create</a>
+          </li>
+          <li role="presentation">
+            <a href="#upfiles" aria-controls="upfiles" role="tab" data-toggle="tab">#Upfiles</a>
+          </li>
+          <li role="presentation">
+            <a href="#view" aria-controls="view" role="tab" data-toggle="tab">#View</a>
+          </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="create">
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">New</button>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="upfiles">
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Upload</button>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="view">
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">OK</button>
+            </div>
+          </div>
+        </div>
+        <!-- End-tabpanes -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Signin-modal -->
+<div class="modal fade" id="signin-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Sign in</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="username" class="control-label">User name:</label>
+            <input type="text" class="form-control" id="username">
+          </div>
+          <div class="form-group">
+            <label for="password" class="control-label">Password:</label>
+            <input type="password" class="form-control" id="password">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Signup-modal -->
+<div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Sign up</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">Recipient:</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="control-label">Message:</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </body>
 </html>

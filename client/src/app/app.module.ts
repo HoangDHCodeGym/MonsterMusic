@@ -10,12 +10,12 @@ import {SongService} from "../service/song.service";
 import {UserService} from "../service/user.service";
 import {CrudService} from "../service/crud.service";
 import {HttpClientModule} from "@angular/common/http";
-import { SamplecrudComponent } from './samplecrud/samplecrud.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SamplecrudComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
