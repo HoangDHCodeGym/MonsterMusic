@@ -28,7 +28,7 @@ export class UploadSongComponent implements OnInit {
             singer: null,
             creator: null,
             name: this.createSongForm.value.name,
-            createdDate: new Date(),
+            createdDate: null,
             link: response[0],
             self: null
           };

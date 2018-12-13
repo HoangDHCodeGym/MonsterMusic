@@ -3,10 +3,18 @@ import {User} from "./user";
 
 export class Song {
   id: number;
-  name: string;
   creator: User;
-  singer: Singer;
-  createdDate: Date;
+  createdDate: string;
+  self: string;
   link: string;
-  self:string;
+
+  name: string;
+  singer: Singer;
+
+}
+
+export class DtoSong {
+  name: string;
+  singer: string;
+  link: string;
 }

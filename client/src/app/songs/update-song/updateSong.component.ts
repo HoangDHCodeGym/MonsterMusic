@@ -36,6 +36,11 @@ export class UpdateSongComponent implements OnInit {
       .subscribe((paramMap: ParamMap) => {
         this.id = Number(paramMap.get('id'));
         this.fetch();
+        this.resolver.get(this.url, this.id).subscribe(
+          out => {
+            console.log(out)
+          }
+        )
       });
   }
 
