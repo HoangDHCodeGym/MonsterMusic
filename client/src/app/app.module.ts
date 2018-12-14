@@ -12,14 +12,13 @@ import {StreamSongComponent} from './songs/stream-song/stream-song.component';
 
 
 const host: string = 'http://localhost:8080' || window.location.protocol + "//" + window.location.host;
-console.log(host);
 
 @NgModule({
   declarations: [
     AppComponent,
     UploadSongComponent,
     UpdateSongComponent,
-    StreamSongComponent
+    StreamSongComponent,
   ],
   imports: [
     BrowserModule,

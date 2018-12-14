@@ -12,10 +12,10 @@ export class FileService {
     const formData: FormData = new FormData();
     if (multiFile) {
       for (let i = 0; i < files.length; i++) {
-        formData.append('files', files.item(i), randomString() + files.item(i).name);
+        formData.append('files', files.item(i), randomString());
       }
     } else {
-      formData.append('file', files.item(0), randomString() + files.item(0).name);
+      formData.append('file', files.item(0), randomString());
     }
     const _header: HttpHeaders = header || new HttpHeaders();
     _header.append('Content-Type', undefined);

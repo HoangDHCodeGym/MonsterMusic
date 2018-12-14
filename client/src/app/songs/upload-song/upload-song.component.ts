@@ -1,7 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FileService} from "../../../service/file.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Song} from "../../../model/song";
 import {HttpClient} from "@angular/common/http";
 
 
@@ -22,15 +21,13 @@ export class UploadSongComponent implements OnInit {
       .subscribe((response) => {
         if (response.status === 201) {
           response = response.body as string[];
-          const song: Song = {
+          const song = {
             id: null,
             //TODO: fill constrains
             singer: null,
-            creator: null,
+            creator: this.urlUser+'/1',//TODO user.
             name: this.createSongForm.value.name,
-            createdDate: new Date(),
             link: response[0],
-            self: null
           };
           this.httpClient
             .post(this.url, song, {observe: 'response'})
@@ -53,7 +50,8 @@ export class UploadSongComponent implements OnInit {
   constructor(private fileService: FileService,
               private httpClient: HttpClient,
               private formBuilder: FormBuilder,
-              @Inject('SONG_API') private url: string) {
+              @Inject('SONG_API') private url: string,
+              @Inject('USER_API') private urlUser) {
   }
 
   append(files: FileList) {

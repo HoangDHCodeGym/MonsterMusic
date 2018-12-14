@@ -1,4 +1,6 @@
 import {Injectable} from '@angular/core';
+import {from, Observable} from "rxjs";
+import {HttpClient, HttpResponse} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -6,7 +8,7 @@ import {Injectable} from '@angular/core';
 /** service hỗ trợ mapping response body nhận được từ server thành các object.
  * **/
 export class ObjectResolverService {
-  constructor() {
+  constructor(private httpClient: HttpClient) {
   }
 
   /** hàm trả về id của object nhận vào.
@@ -107,13 +109,83 @@ export class ObjectResolverService {
       object = object._embedded;
       for (const prop in object) {
         if (object.hasOwnProperty(prop)) {
-          appendTo['list'] = object[prop];
-          for (let e of appendTo['list']) {
-            e = this.resolveBase(e, {}, true);
+          appendTo['list'] = [];
+          let i = 0;
+          for (let e of object[prop]) {
+            appendTo['list'][i++] = this.resolveBase(e, {}, true);
           }
         }
       }
     }
     return appendTo as T;
   }
+
+  /** tương tự như httpClient.get nhưng trả về 1 object trong đó tất
+   * cả các thành phần trong _links đã được get và resolve.
+   * Trả về một Observable<Dto> xem Dto ở dưới
+   *
+   * @param url : link api để get
+   * @param id : id của object cần get
+   * **/
+  get(url, id: number, solveArray: boolean = true): Observable<Dto> {
+    let output: Dto = {
+      data: {},
+      uploadData: {},
+    };
+    let links = {
+      _links: {},
+      solved: {}
+    };
+    return from(this.httpClient
+      .get<HttpResponse<any>>(url + '/' + id, {observe: 'response'})
+      .toPromise()
+      .then(
+        async (response) => {
+          if (response.status == 200) {
+            output.uploadData = this.resolveBase(response.body);
+            output.data = this.resolve(response.body);
+            links._links = this.resolveLinks(response.body, {}, false);
+            for (const prop in links._links) {
+              try {
+                await this.httpClient
+                  .get<any>(links._links[prop])
+                  .toPromise()
+                  .then((resp) => {
+                      if (links._links[prop] !== url + '/' + id) {
+                        if (!resp.hasOwnProperty('_embedded')) {
+                          links.solved[prop] = this.resolveBase(resp, {}, true);
+                          output.uploadData[prop] = links.solved[prop].self;
+                        } else {
+                          if (solveArray) {
+                            links.solved[prop] = this.resolveList(resp);
+                          } else {
+                            links.solved[prop] = resp._links.self.href;
+                          }
+                        }
+                      }
+                    }
+                  )
+              } catch (e) {
+                links.solved[prop] = null;
+              }
+            }
+            output.data = this.resolve(links.solved, output.data);
+            output.data['id'] = id;
+          }
+        }, () => {
+          output = null;
+        }
+      )
+      .then(() => output))
+  }
+}
+
+/** kiểu Dto. có thể ép kiể các trường về interface đã có sẵn.
+ *
+ * @Field data chứa các trường đã được reslove.
+ * @Field uploadData chứa các trường dưới dạng link, upload được tới server.
+ * **/
+export interface Dto {
+  data: any,
+  uploadData: any,
 }
