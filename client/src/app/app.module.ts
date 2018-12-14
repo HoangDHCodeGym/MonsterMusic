@@ -9,7 +9,6 @@ import {HttpClientModule} from "@angular/common/http";
 import {UploadSongComponent} from './songs/upload-song/upload-song.component';
 import {UpdateSongComponent} from './songs/update-song/updateSong.component';
 import {StreamSongComponent} from './songs/stream-song/stream-song.component';
-import { ListTabComponent } from './list-tab/list-tab.component';
 
 
 const host: string = 'http://localhost:8080' || window.location.protocol + "//" + window.location.host;
@@ -20,7 +19,6 @@ const host: string = 'http://localhost:8080' || window.location.protocol + "//" 
     UploadSongComponent,
     UpdateSongComponent,
     StreamSongComponent,
-    ListTabComponent
   ],
   imports: [
     BrowserModule,
