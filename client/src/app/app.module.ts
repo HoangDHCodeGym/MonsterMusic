@@ -9,9 +9,13 @@ import {HttpClientModule} from "@angular/common/http";
 import {UploadSongComponent} from './songs/upload-song/upload-song.component';
 import {UpdateSongComponent} from './songs/update-song/updateSong.component';
 import {StreamSongComponent} from './songs/stream-song/stream-song.component';
+import { HomeComponent } from './home/home.component';
+import { ToplistComponent } from './toplist/toplist.component';
+import { ListsingersComponent } from './listsingers/listsingers.component';
 
 
 const host: string = 'http://localhost:8080' || window.location.protocol + "//" + window.location.host;
+console.log(host);
 
 @NgModule({
   declarations: [
@@ -19,6 +23,9 @@ const host: string = 'http://localhost:8080' || window.location.protocol + "//" 
     UploadSongComponent,
     UpdateSongComponent,
     StreamSongComponent,
+    HomeComponent,
+    ToplistComponent,
+    ListsingersComponent
   ],
   imports: [
     BrowserModule,
