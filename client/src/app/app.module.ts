@@ -5,10 +5,14 @@ import {ReactiveFormsModule} from "@angular/forms";
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {UploadSongComponent} from './songs/upload-song/upload-song.component';
 import {UpdateSongComponent} from './songs/update-song/updateSong.component';
 import {StreamSongComponent} from './songs/stream-song/stream-song.component';
+import { LoginComponent } from './login/login.component';
+import {AuthService} from "../service/auth.service";
+import {TokenStorage} from "./token.storage";
+import {Interceptor} from "./app.interceptor";
 
 
 const host: string = 'http://localhost:8080' || window.location.protocol + "//" + window.location.host;
@@ -19,7 +23,8 @@ console.log(host);
     AppComponent,
     UploadSongComponent,
     UpdateSongComponent,
-    StreamSongComponent
+    StreamSongComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +38,10 @@ console.log(host);
     {provide: 'SONG_API', useValue: host + '/api/songs'},
     {provide: 'USER_API', useValue: host + '/api/users'},
     {provide: 'SINGER_API', useValue: host + '/api/users'},
-    {provide: 'HOST_URL', useValue: host}
+    {provide: 'HOST_URL', useValue: host},
+    AuthService,
+    TokenStorage,
+    {provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi : true}
   ],
   bootstrap: [AppComponent]
 })
