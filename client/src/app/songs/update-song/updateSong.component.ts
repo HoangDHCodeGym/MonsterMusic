@@ -27,8 +27,7 @@ export class UpdateSongComponent implements OnInit {
               private httpClient: HttpClient,
               private resolver: ObjectResolverService,
               private router: ActivatedRoute,
-              @Inject('SONG_API') private url: string,
-              @Inject('USER_API') private urluser) {
+              @Inject('SONG_API') private url: string) {
   }
 
   ngOnInit() {
@@ -37,11 +36,6 @@ export class UpdateSongComponent implements OnInit {
       .subscribe((paramMap: ParamMap) => {
         this.id = Number(paramMap.get('id'));
         this.fetch();
-        this.resolver.get(this.urluser, 1).subscribe(
-          out => {
-            console.log(out)
-          }
-        )
       });
   }
 
@@ -62,6 +56,7 @@ export class UpdateSongComponent implements OnInit {
                 .subscribe(resp => {
                   if (resp.status == 200) {
                     this.songForm.link = response.body[0];
+                    //TODO: user.
                     this.changeInfo();
                   } else {
                     this.deleteFile(response.body[0], false);
@@ -97,7 +92,7 @@ export class UpdateSongComponent implements OnInit {
   deleteFile(fileName, deleteInfo: boolean = true) {
     this.fileService
       .delete(fileName)
-      .subscribe(resp => {
+      .subscribe(() => {
         if (deleteInfo) {
           this.httpClient
             .delete(this.url + '/' + this.id)
