@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class ViewController {
-    @GetMapping({"/","/edit/**","/upload"})
+    @GetMapping({"/","/edit/**","/upload", "/login"})
     public String rootMapping() {
         return "index.html";
     }

@@ -6,7 +6,7 @@ import {TokenStorage} from "../token.storage";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
 
@@ -20,7 +20,7 @@ export class LoginComponent {
     this.authService.attemptAuth(this.username, this.password).subscribe(
       data => {
         this.token.saveToken(data.token);
-        this.router.navigate(['user']);
+        this.router.navigate(['upload']);
       }
     );
   }
