@@ -1,14 +1,20 @@
 package com.asynchronousmontser.monstermusic.service;
 
-import com.asynchronousmontser.monstermusic.model.Playlist;
+import com.asynchronousmontser.monstermusic.model.Song;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+
+import java.util.List;
 
 public interface SongService {
     void delete(Integer id);
 
-    void save(Playlist playlist);
+    void save(Song song);
 
-    Page<Playlist> findAll();
+    Page<Song> findAll(Pageable pageable);
 
-    Playlist findOne(Integer id);
+    List<Song> findAll(Sort sort);
+
+    Song findOne(Integer id);
 }
