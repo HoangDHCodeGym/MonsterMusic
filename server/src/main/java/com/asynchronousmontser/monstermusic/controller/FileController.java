@@ -2,7 +2,6 @@ package com.asynchronousmontser.monstermusic.controller;
 
 import com.asynchronousmontser.monstermusic.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -10,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,7 +59,7 @@ public class FileController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    //TODO: This is not streaming yet.
+    //TODO: This is not streaming yet. Write a stream method.
     @GetMapping("/{fileName}")
     public ResponseEntity<Resource> streamFile(@PathVariable("fileName") String name) {
         try {
