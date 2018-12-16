@@ -14,6 +14,7 @@ public class Singer {
     private Integer id;
 
     @OneToMany(mappedBy = "singer", cascade = CascadeType.ALL)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Song> songList;
 
     @ManyToOne(cascade = CascadeType.ALL)

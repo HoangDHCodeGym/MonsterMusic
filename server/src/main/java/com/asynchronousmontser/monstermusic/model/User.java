@@ -14,12 +14,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL)
     private List<Playlist> playlistList;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL)
     private List<Singer> singerList;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL)
     private List<Song> songList;
 
