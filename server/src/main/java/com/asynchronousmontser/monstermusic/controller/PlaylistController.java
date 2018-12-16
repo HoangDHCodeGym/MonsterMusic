@@ -37,14 +37,14 @@ public class PlaylistController {
     @PostMapping
     public ResponseEntity<Playlist> createPlaylist(@RequestBody Playlist playlist,
                                                    UriComponentsBuilder uriComponentsBuilder) {
-        playlistService.save(playlist);
+        Playlist savedPlaylist = playlistService.save(playlist);
         URI uri = uriComponentsBuilder
                 .path("/api/playlists/{id}")
-                .buildAndExpand(playlist.getId())
+                .buildAndExpand(savedPlaylist.getId())
                 .toUri();
         return ResponseEntity
                 .created(uri)
-                .body(playlist);
+                .body(savedPlaylist);
     }
 
     @GetMapping("/{id}")
@@ -62,8 +62,8 @@ public class PlaylistController {
             , @PathVariable("id") Integer id) {
         if (playlistService.findOne(id) != null) {
             playlist.setId(id);
-            playlistService.save(playlist);
-            return ResponseEntity.ok(playlist);
+            Playlist updatedPlaylist = playlistService.save(playlist);
+            return ResponseEntity.ok(updatedPlaylist);
         }
         return ResponseEntity.notFound().build();
     }

@@ -37,14 +37,14 @@ public class SingerController {
     @PostMapping
     public ResponseEntity<Singer> createSinger(@RequestBody Singer singer,
                                                UriComponentsBuilder uriComponentsBuilder) {
-        singerService.save(singer);
+        Singer savedSinger = singerService.save(singer);
         URI uri = uriComponentsBuilder
                 .path("/api/singers/{id}")
-                .buildAndExpand(singer.getId())
+                .buildAndExpand(savedSinger.getId())
                 .toUri();
         return ResponseEntity
                 .created(uri)
-                .body(singer);
+                .body(savedSinger);
     }
 
     @GetMapping("/{id}")
@@ -62,8 +62,8 @@ public class SingerController {
             , @PathVariable("id") Integer id) {
         if (singerService.findOne(id) != null) {
             singer.setId(id);
-            singerService.save(singer);
-            return ResponseEntity.ok(singer);
+            Singer updatedSinger = singerService.save(singer);
+            return ResponseEntity.ok(updatedSinger);
         }
         return ResponseEntity.notFound().build();
     }

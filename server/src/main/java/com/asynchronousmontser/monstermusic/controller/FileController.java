@@ -59,7 +59,7 @@ public class FileController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    //TODO: This is not streaming yet.
+    //TODO: This is not streaming yet. Write a stream method.
     @GetMapping("/{fileName}")
     public ResponseEntity<Resource> streamFile(@PathVariable("fileName") String name) {
         try {

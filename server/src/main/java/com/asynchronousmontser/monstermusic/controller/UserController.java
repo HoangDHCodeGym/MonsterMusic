@@ -37,14 +37,14 @@ public class UserController {
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user,
                                            UriComponentsBuilder uriComponentsBuilder) {
-        userService.save(user);
+        User savedUser = userService.save(user);
         URI uri = uriComponentsBuilder
                 .path("/api/users/{id}")
-                .buildAndExpand(user.getId())
+                .buildAndExpand(savedUser.getId())
                 .toUri();
         return ResponseEntity
                 .created(uri)
-                .body(user);
+                .body(savedUser);
     }
 
     @GetMapping("/{id}")
@@ -62,8 +62,8 @@ public class UserController {
             , @PathVariable("id") Integer id) {
         if (userService.findOne(id) != null) {
             user.setId(id);
-            userService.save(user);
-            return ResponseEntity.ok(user);
+            User updatedUser = userService.save(user);
+            return ResponseEntity.ok(updatedUser);
         }
         return ResponseEntity.notFound().build();
     }
