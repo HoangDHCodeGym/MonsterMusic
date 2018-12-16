@@ -10,7 +10,7 @@ import java.util.List;
 public interface SingerService {
     void delete(Integer id);
 
-    void save(Singer singer);
+    Singer save(Singer singer);
 
     Page<Singer> findAll(Pageable pageable);
 

@@ -10,7 +10,7 @@ import java.util.List;
 public interface UserService {
     void delete(Integer id);
 
-    void save(User ser);
+    User save(User ser);
 
     Page<User> findAll(Pageable pageable);
 

@@ -27,8 +27,8 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
-    public void save(Song song) {
-        songRepo.save(song);
+    public Song save(Song song) {
+        return songRepo.save(song);
     }
 
     @Override

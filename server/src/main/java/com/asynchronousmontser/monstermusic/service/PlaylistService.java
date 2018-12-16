@@ -11,7 +11,7 @@ import java.util.List;
 public interface PlaylistService {
     void delete(Integer id);
 
-    void save(Playlist playlist);
+    Playlist save(Playlist playlist);
 
     Page<Playlist> findAll(Pageable pageable);
 

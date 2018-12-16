@@ -28,8 +28,8 @@ public class PlaylistServiceImpl implements PlaylistService {
     }
 
     @Override
-    public void save(Playlist playlist) {
-        playlistRepo.save(playlist);
+    public Playlist save(Playlist playlist) {
+        return playlistRepo.save(playlist);
     }
 
     @Override
