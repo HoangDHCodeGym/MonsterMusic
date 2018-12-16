@@ -36,7 +36,7 @@ public class SingerController {
 
     @PostMapping
     public ResponseEntity<Singer> createSinger(@RequestBody Singer singer,
-                                                   UriComponentsBuilder uriComponentsBuilder) {
+                                               UriComponentsBuilder uriComponentsBuilder) {
         singerService.save(singer);
         URI uri = uriComponentsBuilder
                 .path("/api/singers/{id}")

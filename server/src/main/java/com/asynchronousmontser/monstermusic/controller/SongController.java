@@ -60,7 +60,7 @@ public class SongController {
     @PutMapping("/{id}")
     public ResponseEntity<Song> putUpdateSong(@RequestBody Song song
             , @PathVariable("id") Integer id) {
-        if (songService.findOne(id)!=null){
+        if (songService.findOne(id) != null) {
             song.setId(id);
             songService.save(song);
             return ResponseEntity.ok(song);
