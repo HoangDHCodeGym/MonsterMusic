@@ -17,6 +17,7 @@ public abstract class IdDeserializer<T> extends StdDeserializer<T> {
 
     private EntityManager entityManager;
 
+    //this annotation allow using entity manager without injection
     @PersistenceContext
     public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
