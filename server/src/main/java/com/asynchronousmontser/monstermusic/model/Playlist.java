@@ -1,9 +1,12 @@
 package com.asynchronousmontser.monstermusic.model;
 
 
+import com.asynchronousmontser.monstermusic.dataTransfer.deserializer.ListDeserializer.SongListDeserializer;
 import com.asynchronousmontser.monstermusic.dataTransfer.deserializer.idDeserializer.UserIdDeserializer;
+import com.asynchronousmontser.monstermusic.dataTransfer.serializer.ListSerializer;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
@@ -17,6 +20,9 @@ public class Playlist {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+
+    @JsonSerialize(using = ListSerializer.class)
+    @JsonDeserialize(using = SongListDeserializer.class)
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "playlist_song",

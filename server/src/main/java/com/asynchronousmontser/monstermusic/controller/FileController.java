@@ -25,8 +25,8 @@ public class FileController {
 
     /**
      * This method handle uploaded file in multipart request.
-     * file -> 1 File only
-     * files -> an array of files (multi file)
+     * "file" -> 1 File only
+     * "files" -> an array of files (multi file)
      * Return code 400 if both of them null or empty.
      * Return code 201 if method store called.
      **/

@@ -44,7 +44,10 @@ public abstract class ListDeserializer<T> extends StdDeserializer<List<T>> {
             mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
             Integer[] idArray = mapper.readValue(p, Integer[].class);
             for (Integer id : idArray) {
-                list.add(entityManager.find(entityClass, id));
+                T entity = entityManager.find(entityClass, id);
+                if (entity != null) {
+                    list.add(entity);
+                }
             }
         }
         return list;

@@ -1,7 +1,13 @@
 package com.asynchronousmontser.monstermusic.model;
 
 
+import com.asynchronousmontser.monstermusic.dataTransfer.deserializer.ListDeserializer.PlaylistListDeserializer;
+import com.asynchronousmontser.monstermusic.dataTransfer.deserializer.ListDeserializer.SingerListDeserializer;
+import com.asynchronousmontser.monstermusic.dataTransfer.deserializer.ListDeserializer.SongListDeserializer;
+import com.asynchronousmontser.monstermusic.dataTransfer.serializer.ListSerializer;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -14,15 +20,19 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonDeserialize(using = PlaylistListDeserializer.class)
+    @JsonSerialize(using = ListSerializer.class)
     @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL)
     private List<Playlist> playlistList;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+
+    @JsonDeserialize(using = SingerListDeserializer.class)
+    @JsonSerialize(using = ListSerializer.class)
     @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL)
     private List<Singer> singerList;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonDeserialize(using = SongListDeserializer.class)
+    @JsonSerialize(using = ListSerializer.class)
     @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL)
     private List<Song> songList;
 
@@ -34,6 +44,7 @@ public class User {
     private String name;
 
     private String username;
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
