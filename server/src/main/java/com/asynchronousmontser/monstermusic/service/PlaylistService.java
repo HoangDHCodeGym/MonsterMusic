@@ -18,4 +18,7 @@ public interface PlaylistService {
     List<Playlist> findAll(Sort sort);
 
     Playlist findOne(Integer id);
+
+    //=====================================================
+    Page<Playlist> findAllByCreator(Integer id, Pageable pageable);
 }

@@ -45,5 +45,20 @@ public class SongServiceImpl implements SongService {
     public Song findOne(Integer id) {
         return songRepo.findById(id).orElse(null);
     }
-    //=======================================================
+
+    //Constrain=======================================================
+    @Override
+    public Page<Song> findAllSongByPlaylist(Integer id, Pageable pageable) {
+        return songRepo.findAllByPlaylist(id, pageable);
+    }
+
+    @Override
+    public Page<Song> findAllBySinger(Integer id,Pageable pageable) {
+        return songRepo.findAllBySinger_Id(id,pageable);
+    }
+
+    @Override
+    public Page<Song> findAllByCreator(Integer id,Pageable pageable) {
+        return songRepo.findAllByCreator_Id(id,pageable);
+    }
 }

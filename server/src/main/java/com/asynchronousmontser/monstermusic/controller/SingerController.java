@@ -1,7 +1,10 @@
 package com.asynchronousmontser.monstermusic.controller;
 
 import com.asynchronousmontser.monstermusic.model.Singer;
+import com.asynchronousmontser.monstermusic.model.Singer;
+import com.asynchronousmontser.monstermusic.model.Song;
 import com.asynchronousmontser.monstermusic.service.SingerService;
+import com.asynchronousmontser.monstermusic.service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,10 +18,13 @@ import java.net.URI;
 @RequestMapping("api/singers")
 public class SingerController {
     private SingerService singerService;
+    private SongService songService;
 
     @Autowired
-    public void setUpSingerController(SingerService singerService) {
+    public void setUpSingerController(SingerService singerService,
+                                      SongService songService) {
         this.singerService = singerService;
+        this.songService = songService;
     }
 
     //Basic==================================================
@@ -67,6 +73,15 @@ public class SingerController {
         }
         return ResponseEntity.notFound().build();
     }
-    //============================================
-
+    //Constrain============================================
+    @GetMapping("/{id}/songList")
+    public ResponseEntity<Page<Song>> getSongList(@PathVariable("id") Integer id,
+                                                  Pageable pageable) {
+        Singer singer = singerService.findOne(id);
+        if (singer != null) {
+            Page<Song> songPage = songService.findAllBySinger(id,pageable);
+            return ResponseEntity.ok(songPage);
+        }
+        return ResponseEntity.notFound().build();
+    }
 }

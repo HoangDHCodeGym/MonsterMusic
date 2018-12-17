@@ -1,24 +1,31 @@
 package com.asynchronousmontser.monstermusic.controller;
 
 import com.asynchronousmontser.monstermusic.model.Playlist;
+import com.asynchronousmontser.monstermusic.model.Song;
 import com.asynchronousmontser.monstermusic.service.PlaylistService;
+import com.asynchronousmontser.monstermusic.service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/playlists")
 public class PlaylistController {
     private PlaylistService playlistService;
+    private SongService songService;
 
     @Autowired
-    public void setUpPlaylistController(PlaylistService playlistService) {
+    public void setUpPlaylistController(PlaylistService playlistService,
+                                        SongService songService) {
         this.playlistService = playlistService;
+        this.songService = songService;
     }
 
     //Basic==================================================
@@ -67,6 +74,17 @@ public class PlaylistController {
         }
         return ResponseEntity.notFound().build();
     }
-    //============================================
 
+    //Constrain============================================
+    //TODO: this shit have unidirectional relationship error.
+    @GetMapping("/{id}/songList")
+    public ResponseEntity<Page<Song>> getSongList(@PathVariable("id") Integer id,
+                                                  Pageable pageable) {
+        Playlist playlist = playlistService.findOne(id);
+        if (playlist != null) {
+            Page<Song> songPage = songService.findAllSongByPlaylist(id,Pageable.unpaged());
+            return ResponseEntity.ok(songPage);
+        }
+        return ResponseEntity.notFound().build();
+    }
 }
