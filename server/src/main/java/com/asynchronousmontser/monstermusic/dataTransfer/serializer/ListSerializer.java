@@ -1,6 +1,5 @@
 package com.asynchronousmontser.monstermusic.dataTransfer.serializer;
 
-import com.asynchronousmontser.monstermusic.dataTransfer.deserializer.ListDeserializer;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
