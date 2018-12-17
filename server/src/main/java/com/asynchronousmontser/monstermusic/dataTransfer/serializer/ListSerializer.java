@@ -21,6 +21,6 @@ public class ListSerializer extends StdSerializer<List> {
 
     @Override
     public void serialize(List value, JsonGenerator gen, SerializerProvider provider) throws IOException {
-
+        gen.writeNumber(value.size());
     }
 }

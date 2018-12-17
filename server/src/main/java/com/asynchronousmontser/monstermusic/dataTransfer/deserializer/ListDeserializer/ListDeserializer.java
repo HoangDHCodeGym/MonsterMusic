@@ -4,11 +4,14 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class ListDeserializer<T> extends StdDeserializer<List<T>> {
@@ -34,8 +37,16 @@ public abstract class ListDeserializer<T> extends StdDeserializer<List<T>> {
 
     @Override
     public List<T> deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+        List<T> list = new ArrayList<>();
         JsonToken token = p.getCurrentToken();
-        if (token == JsonToken.)
-        return null;
+        if (token == JsonToken.START_ARRAY) {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+            Integer[] idArray = mapper.readValue(p, Integer[].class);
+            for (Integer id : idArray) {
+                list.add(entityManager.find(entityClass, id));
+            }
+        }
+        return list;
     }
 }
