@@ -1,7 +1,6 @@
 package com.asynchronousmontser.monstermusic.dataTransfer.jsonBinding.deserializer;
 
 
-import com.asynchronousmontser.monstermusic.model.User;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.JsonToken;
@@ -15,16 +14,16 @@ import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 
 @Component
-public class UserIdDeserializer<T> extends StdDeserializer<T> {
+public class IdDeserializer<T> extends StdDeserializer<T> {
 
     private Class<T> entityClass;
     private EntityManager entityManager;
 
-    public UserIdDeserializer() {
+    public IdDeserializer() {
         this(null);
     }
 
-    public UserIdDeserializer(Class<?> vc) {
+    public IdDeserializer(Class<?> vc) {
         super(vc);
         this.entityClass = (Class<T>)
                 ((ParameterizedType) getClass()
