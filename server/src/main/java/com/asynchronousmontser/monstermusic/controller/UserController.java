@@ -81,6 +81,12 @@ public class UserController {
         return ResponseEntity.notFound().build();
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<User> deleteUser(@PathVariable("id") Integer id) {
+        userService.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
     //Constrain============================================
     //TODO: remove duplicate code
     @GetMapping("/{id}/songList")

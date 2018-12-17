@@ -6,14 +6,12 @@ import com.asynchronousmontser.monstermusic.service.PlaylistService;
 import com.asynchronousmontser.monstermusic.service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("api/playlists")
@@ -75,6 +73,12 @@ public class PlaylistController {
         return ResponseEntity.notFound().build();
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Playlist> deleteUser(@PathVariable("id") Integer id) {
+        playlistService.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
     //Constrain============================================
     //TODO: this shit have unidirectional relationship error.
     @GetMapping("/{id}/songList")
@@ -82,7 +86,7 @@ public class PlaylistController {
                                                   Pageable pageable) {
         Playlist playlist = playlistService.findOne(id);
         if (playlist != null) {
-            Page<Song> songPage = songService.findAllSongByPlaylist(id,Pageable.unpaged());
+            Page<Song> songPage = songService.findAllSongByPlaylist(id, Pageable.unpaged());
             return ResponseEntity.ok(songPage);
         }
         return ResponseEntity.notFound().build();

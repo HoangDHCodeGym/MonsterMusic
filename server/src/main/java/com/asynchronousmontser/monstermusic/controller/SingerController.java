@@ -1,7 +1,6 @@
 package com.asynchronousmontser.monstermusic.controller;
 
 import com.asynchronousmontser.monstermusic.model.Singer;
-import com.asynchronousmontser.monstermusic.model.Singer;
 import com.asynchronousmontser.monstermusic.model.Song;
 import com.asynchronousmontser.monstermusic.service.SingerService;
 import com.asynchronousmontser.monstermusic.service.SongService;
@@ -73,13 +72,20 @@ public class SingerController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Singer> deleteUser(@PathVariable("id") Integer id) {
+        singerService.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
     //Constrain============================================
     @GetMapping("/{id}/songList")
     public ResponseEntity<Page<Song>> getSongList(@PathVariable("id") Integer id,
                                                   Pageable pageable) {
         Singer singer = singerService.findOne(id);
         if (singer != null) {
-            Page<Song> songPage = songService.findAllBySinger(id,pageable);
+            Page<Song> songPage = songService.findAllBySinger(id, pageable);
             return ResponseEntity.ok(songPage);
         }
         return ResponseEntity.notFound().build();

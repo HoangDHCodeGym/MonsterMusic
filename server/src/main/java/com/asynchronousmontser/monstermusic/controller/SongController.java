@@ -67,5 +67,11 @@ public class SongController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Song> deleteSong(@PathVariable("id") Integer id) {
+        songService.delete(id);
+        return ResponseEntity.ok().build();
+    }
     //============================================
 }
