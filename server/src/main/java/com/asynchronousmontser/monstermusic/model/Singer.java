@@ -1,6 +1,7 @@
 package com.asynchronousmontser.monstermusic.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -19,6 +20,7 @@ public class Singer {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
+    @JsonDeserialize
     private User creator;
 
     @Temporal(TemporalType.TIMESTAMP)

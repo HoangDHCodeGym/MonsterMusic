@@ -12,10 +12,12 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
 import java.io.IOException;
+import java.lang.reflect.ParameterizedType;
 
 @Component
-public class UserIdDeserializer extends StdDeserializer<User> {
+public class UserIdDeserializer<T> extends StdDeserializer<T> {
 
+    private Class<T> entityClass;
     private EntityManager entityManager;
 
     public UserIdDeserializer() {
@@ -24,6 +26,10 @@ public class UserIdDeserializer extends StdDeserializer<User> {
 
     public UserIdDeserializer(Class<?> vc) {
         super(vc);
+        this.entityClass = (Class<T>)
+                ((ParameterizedType) getClass()
+                        .getGenericSuperclass())
+                        .getActualTypeArguments()[0];
     }
 
     @Autowired
@@ -32,7 +38,7 @@ public class UserIdDeserializer extends StdDeserializer<User> {
     }
 
     @Override
-    public User deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+    public T deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
         JsonToken token = p.getCurrentToken();
         Integer id = null;
         if (token == JsonToken.VALUE_STRING) {
@@ -42,7 +48,7 @@ public class UserIdDeserializer extends StdDeserializer<User> {
             id = p.getNumberValue().intValue();
         }
         if (id != null) {
-            return entityManager.find(User.class, id);
+            return entityManager.find(entityClass, id);
         }
         return null;
     }
