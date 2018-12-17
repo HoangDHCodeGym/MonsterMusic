@@ -1,7 +1,9 @@
 package com.asynchronousmontser.monstermusic.model;
 
 
+import com.asynchronousmontser.monstermusic.dataTransfer.deserializer.idDeserializer.UserIdDeserializer;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
@@ -23,6 +25,7 @@ public class Playlist {
     )
     private List<Song> songList;
 
+    @JsonDeserialize(using = UserIdDeserializer.class)
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User creator;

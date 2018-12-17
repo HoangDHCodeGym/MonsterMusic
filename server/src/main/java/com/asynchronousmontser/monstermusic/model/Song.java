@@ -1,6 +1,9 @@
 package com.asynchronousmontser.monstermusic.model;
 
+import com.asynchronousmontser.monstermusic.dataTransfer.deserializer.idDeserializer.SingerIdDeserializer;
+import com.asynchronousmontser.monstermusic.dataTransfer.deserializer.idDeserializer.UserIdDeserializer;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,10 +15,13 @@ public class Song {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+
+    @JsonDeserialize(using = UserIdDeserializer.class)
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User creator;
 
+    @JsonDeserialize(using = SingerIdDeserializer.class)
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "singer_id")
     private Singer singer;

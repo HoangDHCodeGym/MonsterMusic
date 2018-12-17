@@ -1,6 +1,7 @@
-package com.asynchronousmontser.monstermusic.dataTransfer.jsonBinding.deserializer;
+package com.asynchronousmontser.monstermusic.dataTransfer.deserializer.idDeserializer;
 
 
+import com.asynchronousmontser.monstermusic.model.User;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.JsonToken;
@@ -11,24 +12,19 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
 import java.io.IOException;
-import java.lang.reflect.ParameterizedType;
 
 @Component
-public class IdDeserializer<T> extends StdDeserializer<T> {
+public class UserIdDeserializer extends StdDeserializer<User> {
 
-    private Class<T> entityClass;
     private EntityManager entityManager;
 
-    public IdDeserializer() {
+    public UserIdDeserializer() {
         this(null);
     }
 
-    public IdDeserializer(Class<?> vc) {
+    public UserIdDeserializer(Class<?> vc) {
         super(vc);
-        this.entityClass = (Class<T>)
-                ((ParameterizedType) getClass()
-                        .getGenericSuperclass())
-                        .getActualTypeArguments()[0];
+
     }
 
     @Autowired
@@ -37,7 +33,7 @@ public class IdDeserializer<T> extends StdDeserializer<T> {
     }
 
     @Override
-    public T deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+    public User deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
         JsonToken token = p.getCurrentToken();
         Integer id = null;
         if (token == JsonToken.VALUE_STRING) {
@@ -47,7 +43,7 @@ public class IdDeserializer<T> extends StdDeserializer<T> {
             id = p.getNumberValue().intValue();
         }
         if (id != null) {
-            return entityManager.find(entityClass, id);
+            return entityManager.find(User.class, id);
         }
         return null;
     }

@@ -1,5 +1,6 @@
 package com.asynchronousmontser.monstermusic.model;
 
+import com.asynchronousmontser.monstermusic.dataTransfer.deserializer.idDeserializer.UserIdDeserializer;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
@@ -18,9 +19,9 @@ public class Singer {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Song> songList;
 
+    @JsonDeserialize(using = UserIdDeserializer.class)
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
-    @JsonDeserialize
     private User creator;
 
     @Temporal(TemporalType.TIMESTAMP)
