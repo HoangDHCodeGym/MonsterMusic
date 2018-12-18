@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SongService } from 'src/service/song.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'client';
+  constructor(private songService: SongService){
+    this.songService.getSongs().subscribe(
+      resp => console.log(resp.content)
+    );
+  }
 }

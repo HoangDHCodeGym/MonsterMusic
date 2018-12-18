@@ -1,5 +1,5 @@
 /**  data form server **/
-interface Song {
+export interface Song {
   id: number,
   name: string,
   link: string,
@@ -70,4 +70,12 @@ interface UserForm {
   name: string,
   username: string,
   password: string,
+}
+
+export interface Page<T> {
+  content:T[],
+  number: number
+  size: number,
+  totalElements: number,
+  totalPages: number,
 }
