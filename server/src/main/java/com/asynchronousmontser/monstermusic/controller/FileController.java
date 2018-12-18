@@ -56,8 +56,11 @@ public class FileController {
 
     @DeleteMapping("/{fileName}")
     public ResponseEntity<Void> deleteFile(@PathVariable("fileName") String name) {
-        storageService.delete(name);
-        return new ResponseEntity<>(HttpStatus.OK);
+        if (Files.exists(storageService.load(name))) {
+            storageService.delete(name);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     //TODO: not tested yet
