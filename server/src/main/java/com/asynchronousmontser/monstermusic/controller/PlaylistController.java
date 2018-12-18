@@ -58,8 +58,10 @@ public class PlaylistController {
     public ResponseEntity<Playlist> getPlaylist(@PathVariable("id") Integer id) {
         Playlist playlist = playlistService.findOne(id);
         if (playlist != null) {
+            playlist.setViews((playlist.getViews() + 1));
+            Playlist viewedPlaylist = playlistService.save(playlist);
             return ResponseEntity
-                    .ok(playlist);
+                    .ok(viewedPlaylist);
         }
         return ResponseEntity.notFound().build();
     }
@@ -99,7 +101,7 @@ public class PlaylistController {
                             setter.invoke(origin, returnType.cast(returnValue));
                         }
                     } catch (Exception e) {
-                       //TODO:continue  and left the value null if exception occur
+                        //TODO:continue  and left the value null if exception occur
                         e.printStackTrace();
                     }
                 }

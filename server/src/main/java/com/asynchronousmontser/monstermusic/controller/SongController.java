@@ -54,8 +54,10 @@ public class SongController {
     public ResponseEntity<Song> getSong(@PathVariable("id") Integer id) {
         Song song = songService.findOne(id);
         if (song != null) {
+            song.setViews((song.getViews() + 1));
+            Song viewedSong = songService.save(song);
             return ResponseEntity
-                    .ok(song);
+                    .ok(viewedSong);
         }
         return ResponseEntity.notFound().build();
     }
