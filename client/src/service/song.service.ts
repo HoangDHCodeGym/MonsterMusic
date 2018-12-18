@@ -14,7 +14,7 @@ export class SongService{
   }
 
   getSongById(id: number): Observable<Song> {
-    const url = `${this.host}/song/${id}`;
+    const url = this.host+'/api/songs/'+id;
     return this.http.get<Song>(url);
   }
 

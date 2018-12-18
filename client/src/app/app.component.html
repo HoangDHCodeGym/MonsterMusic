@@ -1,21 +1,236 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<!-- navbar-header -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="/home"><i class="fas fa-home"> Home</i></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Link<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+      </ul>
+
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+      </form>
+      <div class="nav navbar-nav navbar-right">
+        <p class="navbar-text">
+          <a href="#" class="navbar-link" data-toggle="modal" data-target="#signin-modal">
+            <i class="fas fa-sign-in-alt"> Sign in</i></a></p>
+        <button type="button" class="btn btn-outline-light my-2" data-toggle="modal"
+                data-target="#signup-modal"><i class="fas fa-user-plus"> Sign up</i></button>
+        <button type="button" class="btn btn-outline-light my-2" data-toggle="modal"
+                data-target="#settings-modal"><i class="fas fa-cogs"></i></button>
+      </div>
+    </div>
+  </div>
+</nav>
+<!--end-navheader-->
 
 <router-outlet></router-outlet>
+
+<div class="clear"></div>
+
+<!-- Footer -->
+<footer class="page-footer font-small blue pt-4">
+  <!-- Footer Links -->
+  <div class="container-fluid text-center text-md-left">
+    <!-- Grid row -->
+    <div class="row">
+      <!-- Grid column -->
+      <div class="col-md-6 mt-md-0 mt-3">
+        <!-- Content -->
+        <h5 class="text-uppercase">Footer Content</h5>
+        <p>Here you can use rows and columns here to organize your footer content.</p>
+      </div>
+      <!--End Grid column -->
+
+      <hr class="clearfix w-100 d-md-none pb-3">
+
+      <!-- Grid column -->
+      <div class="col-md-3 mb-md-0 mb-3">
+        <!-- Links -->
+        <h5 class="text-uppercase">Links</h5>
+        <ul class="list-unstyled">
+          <li>
+            <a href="#!">Link 1</a>
+          </li>
+          <li>
+            <a href="#!">Link 2</a>
+          </li>
+          <li>
+            <a href="#!">Link 3</a>
+          </li>
+          <li>
+            <a href="#!">Link 4</a>
+          </li>
+        </ul>
+      </div>
+      <!--End Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-3 mb-md-0 mb-3">
+        <!-- Links -->
+        <h5 class="text-uppercase">Links</h5>
+        <ul class="list-unstyled">
+          <li>
+            <a href="#!">Link 1</a>
+          </li>
+          <li>
+            <a href="#!">Link 2</a>
+          </li>
+          <li>
+            <a href="#!">Link 3</a>
+          </li>
+          <li>
+            <a href="#!">Link 4</a>
+          </li>
+        </ul>
+      </div>
+      <!--End Grid column -->
+    </div>
+    <!--End Grid row -->
+  </div>
+  <!--End Footer Links -->
+
+  <!-- Copyright -->
+  <div class="ic-pointer text-center py-3">
+    <i class="fab fa-facebook-f" style="margin-right: 25px"></i>
+    <i class="fab fa-twitter" style="margin-right: 25px"></i>
+    <i class="fab fa-google-plus-g" style="margin-right: 25px"></i>
+    <i class="fab fa-linkedin-in" style="margin-right: 25px"></i>
+    <i class="fab fa-instagram" style="margin-right: 25px"></i>
+  </div>
+</footer>
+
+<!-- Settings-modal -->
+<div class="modal fade" id="settings-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">#Setting</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active">
+            <a href="#create" aria-controls="create" role="tab" data-toggle="tab">#Create</a>
+          </li>
+          <li role="presentation">
+            <a href="#upfiles" aria-controls="upfiles" role="tab" data-toggle="tab">#Upfiles</a>
+          </li>
+          <li role="presentation">
+            <a href="#view" aria-controls="view" role="tab" data-toggle="tab">#View</a>
+          </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="create">
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">New</button>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="upfiles">
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Upload</button>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="view">
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">OK</button>
+            </div>
+          </div>
+        </div>
+        <!-- End-tabpanes -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Signin-modal -->
+<div class="modal fade" id="signin-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">#Signin</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="username" class="control-label">User name:</label>
+            <input type="text" class="form-control" id="username">
+          </div>
+          <div class="form-group">
+            <label for="password" class="control-label">Password:</label>
+            <input type="password" class="form-control" id="password">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Signup-modal -->
+<div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">#Signup</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">Recipient:</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="control-label">Message:</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -9,8 +9,5 @@ import { SongService } from 'src/service/song.service';
 export class AppComponent {
   title = 'client';
   constructor(private songService: SongService){
-    this.songService.getSongs().subscribe(
-      resp => console.log(resp.content)
-    );
   }
 }

@@ -5,11 +5,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SongService } from 'src/service/song.service';
+import { HomeComponent } from './home/home.component';
+import { PlayerComponent } from './songs/player/player.component';
+import { ToplistComponent } from './songs/toplist/toplist.component';
+import { ListsingerComponent } from './listsinger/listsinger.component';
 
 const host = "http://192.168.2.97:8080";
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    PlayerComponent,
+    ToplistComponent,
+    ListsingerComponent
   ],
   imports: [
     BrowserModule,
