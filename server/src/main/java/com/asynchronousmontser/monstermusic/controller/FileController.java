@@ -33,8 +33,8 @@ public class FileController {
      * Return code 201 if method store called.
      **/
     @PostMapping
-    public ResponseEntity<List<String>> uploadFile(@RequestParam(name = "file", required = false) MultipartFile file,
-                                                   @RequestParam(name = "files", required = false) List<MultipartFile> files,
+    public ResponseEntity<List<String>> uploadFile(@RequestPart(name = "file", required = false) MultipartFile file,
+                                                   @RequestPart(name = "files", required = false) List<MultipartFile> files,
                                                    UriComponentsBuilder uriComponentsBuilder) {
         List<String> links = new ArrayList<>();
         if (files != null) {
@@ -72,7 +72,7 @@ public class FileController {
 
     //TODO: check uri.
     @PutMapping("/{fileName}")
-    public ResponseEntity<String> changeFile(@RequestParam(name = "file", required = false) MultipartFile file,
+    public ResponseEntity<String> changeFile(@RequestPart(name = "file", required = false) MultipartFile file,
                                              @PathVariable("fileName") String name,
                                              UriComponentsBuilder uriComponentsBuilder) {
         if (Files.exists(storageService.load(name))) {
