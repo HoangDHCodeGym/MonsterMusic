@@ -14,6 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.lang.reflect.Method;
 import java.net.URI;
 
+@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("api/playlists")
 public class PlaylistController {

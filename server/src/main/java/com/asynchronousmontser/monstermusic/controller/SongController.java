@@ -13,6 +13,7 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.net.URI;
 
+@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/api/songs")
 public class SongController {

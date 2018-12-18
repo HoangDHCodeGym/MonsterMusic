@@ -1,6 +1,8 @@
 package com.asynchronousmontser.monstermusic.controller;
 
+import com.asynchronousmontser.monstermusic.model.Song;
 import com.asynchronousmontser.monstermusic.storage.StorageService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.io.IOException;
 import java.net.URI;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -33,9 +36,9 @@ public class FileController {
      * Return code 201 if method store called.
      **/
     @PostMapping
-    public ResponseEntity<List<String>> uploadFile(@RequestPart(name = "file", required = false) MultipartFile file,
-                                                   @RequestPart(name = "files", required = false) List<MultipartFile> files,
-                                                   UriComponentsBuilder uriComponentsBuilder) {
+    public ResponseEntity<List<String>> uploadFile(@RequestParam(name = "file", required = false) MultipartFile file,
+                                                   @RequestParam(name = "files", required = false) List<MultipartFile> files,
+                                                   UriComponentsBuilder uriComponentsBuilder) throws IOException {
         List<String> links = new ArrayList<>();
         if (files != null) {
             if (!files.isEmpty()) {
@@ -72,7 +75,7 @@ public class FileController {
 
     //TODO: check uri.
     @PutMapping("/{fileName}")
-    public ResponseEntity<String> changeFile(@RequestPart(name = "file", required = false) MultipartFile file,
+    public ResponseEntity<String> changeFile(@RequestParam(name = "file", required = false) MultipartFile file,
                                              @PathVariable("fileName") String name,
                                              UriComponentsBuilder uriComponentsBuilder) {
         if (Files.exists(storageService.load(name))) {
