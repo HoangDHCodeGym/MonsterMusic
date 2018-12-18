@@ -115,7 +115,7 @@ public class PlaylistController {
                                                   Pageable pageable) {
         Playlist playlist = playlistService.findOne(id);
         if (playlist != null) {
-            Page<Song> songPage = songService.findAllSongByPlaylist(id, Pageable.unpaged());
+            Page<Song> songPage = songService.findAllSongByPlaylist(id, pageable);
             return ResponseEntity.ok(songPage);
         }
         return ResponseEntity.notFound().build();

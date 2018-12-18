@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,6 +58,34 @@ public class FileController {
     public ResponseEntity<Void> deleteFile(@PathVariable("fileName") String name) {
         storageService.delete(name);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    //TODO: not tested yet
+    @PutMapping("/{fileName}")
+    public ResponseEntity<List<String>> changeFile(@RequestParam(name = "file", required = false) MultipartFile file,
+                                                   @RequestParam(name = "files", required = false) List<MultipartFile> files,
+                                                   @PathVariable("fileName") String name) {
+        if (Files.exists(storageService.load(name))) {
+            List<String> links = new ArrayList<>();
+            if (files != null) {
+                if (!files.isEmpty()) {
+                    for (MultipartFile multipartFile : files) {
+                        if (!multipartFile.isEmpty()) storageService.store(multipartFile);
+                        links.add(multipartFile.getOriginalFilename());
+                    }
+                }
+            } else if (file != null) {
+                if (!file.isEmpty()) {
+                    storageService.store(file);
+                    links.add(file.getOriginalFilename());
+                }
+            } else {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            storageService.delete(name);
+            return new ResponseEntity<>(links,HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     //TODO: This is not streaming yet. Write a stream method.
