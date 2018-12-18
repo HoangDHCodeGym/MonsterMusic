@@ -43,6 +43,7 @@ public class Playlist {
 
     private String name;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Integer views = 0;
 
     public Playlist() {

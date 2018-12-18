@@ -36,6 +36,7 @@ public class Song {
 
     private String link;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Integer views = 0;
 
     public Song() {
