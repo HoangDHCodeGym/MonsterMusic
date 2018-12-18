@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.lang.reflect.Method;
 import java.net.URI;
 
 @RestController
@@ -71,8 +72,8 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> putUpdateUser(@RequestBody User user
-            , @PathVariable("id") Integer id) {
+    public ResponseEntity<User> putUpdateUser(@RequestBody User user,
+                                              @PathVariable("id") Integer id) {
         if (userService.findOne(id) != null) {
             user.setId(id);
             User updatedUser = userService.save(user);
@@ -85,6 +86,34 @@ public class UserController {
     public ResponseEntity<User> deleteUser(@PathVariable("id") Integer id) {
         userService.delete(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<User> patchUpdateUser(@PathVariable("id") Integer id,
+                                                @RequestBody User user) {
+        User origin = userService.findOne(id);
+        if (origin != null) {
+            user.setId(id);
+            for (Method getter : User.class.getDeclaredMethods()) {
+                if (getter.getName().matches("^get\\w+$")) {
+                    String fieldName = getter.getName().substring(3);
+                    Class<?> returnType = getter.getReturnType();
+                    try {
+                        Object returnValue = getter.invoke(user);
+                        if (returnValue != null) {
+                            Method setter = User.class.getDeclaredMethod("set" + fieldName, returnType);
+                            setter.invoke(origin, returnType.cast(returnValue));
+                        }
+                    } catch (Exception e) {
+                        //TODO:continue  and left the value null if exception occur
+                        e.printStackTrace();
+                    }
+                }
+            }
+            User updatedOrigin = userService.save(origin);
+            return ResponseEntity.ok(updatedOrigin);
+        }
+        return ResponseEntity.notFound().build();
     }
 
     //Constrain============================================

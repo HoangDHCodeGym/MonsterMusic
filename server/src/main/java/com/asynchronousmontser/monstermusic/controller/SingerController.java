@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.lang.reflect.Method;
 import java.net.URI;
 
 @RestController
@@ -63,8 +64,8 @@ public class SingerController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Singer> putUpdateSinger(@RequestBody Singer singer
-            , @PathVariable("id") Integer id) {
+    public ResponseEntity<Singer> putUpdateSinger(@RequestBody Singer singer,
+                                                  @PathVariable("id") Integer id) {
         if (singerService.findOne(id) != null) {
             singer.setId(id);
             Singer updatedSinger = singerService.save(singer);
@@ -77,6 +78,34 @@ public class SingerController {
     public ResponseEntity<Singer> deleteUser(@PathVariable("id") Integer id) {
         singerService.delete(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Singer> patchUpdateSinger(@PathVariable("id") Integer id,
+                                                    @RequestBody Singer singer) {
+        Singer origin = singerService.findOne(id);
+        if (origin != null) {
+            singer.setId(id);
+            for (Method getter : Singer.class.getDeclaredMethods()) {
+                if (getter.getName().matches("^get\\w+$")) {
+                    String fieldName = getter.getName().substring(3);
+                    Class<?> returnType = getter.getReturnType();
+                    try {
+                        Object returnValue = getter.invoke(singer);
+                        if (returnValue != null) {
+                            Method setter = Singer.class.getDeclaredMethod("set" + fieldName, returnType);
+                            setter.invoke(origin, returnType.cast(returnValue));
+                        }
+                    } catch (Exception e) {
+                       //TODO:continue  and left the value null if exception occur
+                        e.printStackTrace();
+                    }
+                }
+            }
+            Singer updatedOrigin = singerService.save(origin);
+            return ResponseEntity.ok(updatedOrigin);
+        }
+        return ResponseEntity.notFound().build();
     }
 
     //Constrain============================================

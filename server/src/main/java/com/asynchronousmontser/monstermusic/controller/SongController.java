@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.Method;
 import java.net.URI;
 
 @RestController
@@ -58,8 +60,8 @@ public class SongController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Song> putUpdateSong(@RequestBody Song song
-            , @PathVariable("id") Integer id) {
+    public ResponseEntity<Song> putUpdateSong(@RequestBody Song song,
+                                              @PathVariable("id") Integer id) {
         if (songService.findOne(id) != null) {
             song.setId(id);
             Song updatedSong = songService.save(song);
@@ -72,6 +74,34 @@ public class SongController {
     public ResponseEntity<Song> deleteSong(@PathVariable("id") Integer id) {
         songService.delete(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Song> patchUpdateSong(@PathVariable("id") Integer id,
+                                                @RequestBody Song song) {
+        Song origin = songService.findOne(id);
+        if (origin != null) {
+            song.setId(id);
+            for (Method getter : Song.class.getDeclaredMethods()) {
+                if (getter.getName().matches("^get\\w+$")) {
+                    String fieldName = getter.getName().substring(3);
+                    Class<?> returnType = getter.getReturnType();
+                    try {
+                        Object returnValue = getter.invoke(song);
+                        if (returnValue != null) {
+                            Method setter = Song.class.getDeclaredMethod("set" + fieldName, returnType);
+                            setter.invoke(origin, returnType.cast(returnValue));
+                        }
+                    } catch (Exception e) {
+                        //TODO:continue  and left the value null if exception occur
+                        e.printStackTrace();
+                    }
+                }
+            }
+            Song updatedOrigin = songService.save(origin);
+            return ResponseEntity.ok(updatedOrigin);
+        }
+        return ResponseEntity.notFound().build();
     }
     //============================================
 }

@@ -1,6 +1,5 @@
 package com.asynchronousmontser.monstermusic.dataTransfer.deserializer.idDeserializer;
 
-import com.asynchronousmontser.monstermusic.model.Playlist;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.JsonToken;

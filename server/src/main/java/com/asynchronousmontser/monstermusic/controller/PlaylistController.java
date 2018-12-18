@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.lang.reflect.Method;
 import java.net.URI;
 
 @RestController
@@ -63,8 +64,8 @@ public class PlaylistController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Playlist> putUpdatePlaylist(@RequestBody Playlist playlist
-            , @PathVariable("id") Integer id) {
+    public ResponseEntity<Playlist> putUpdatePlaylist(@RequestBody Playlist playlist,
+                                                      @PathVariable("id") Integer id) {
         if (playlistService.findOne(id) != null) {
             playlist.setId(id);
             Playlist updatedPlaylist = playlistService.save(playlist);
@@ -77,6 +78,34 @@ public class PlaylistController {
     public ResponseEntity<Playlist> deleteUser(@PathVariable("id") Integer id) {
         playlistService.delete(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Playlist> patchUpdatePlaylist(@PathVariable("id") Integer id,
+                                                        @RequestBody Playlist playlist) {
+        Playlist origin = playlistService.findOne(id);
+        if (origin != null) {
+            playlist.setId(id);
+            for (Method getter : Playlist.class.getDeclaredMethods()) {
+                if (getter.getName().matches("^get\\w+$")) {
+                    String fieldName = getter.getName().substring(3);
+                    Class<?> returnType = getter.getReturnType();
+                    try {
+                        Object returnValue = getter.invoke(playlist);
+                        if (returnValue != null) {
+                            Method setter = Playlist.class.getDeclaredMethod("set" + fieldName, returnType);
+                            setter.invoke(origin, returnType.cast(returnValue));
+                        }
+                    } catch (Exception e) {
+                       //TODO:continue  and left the value null if exception occur
+                        e.printStackTrace();
+                    }
+                }
+            }
+            Playlist updatedOrigin = playlistService.save(origin);
+            return ResponseEntity.ok(updatedOrigin);
+        }
+        return ResponseEntity.notFound().build();
     }
 
     //Constrain============================================
