@@ -80,6 +80,7 @@ public class PlaylistController {
         return ResponseEntity.ok().build();
     }
 
+    //TODO this patch cannot handle list.
     @PatchMapping("/{id}")
     public ResponseEntity<Playlist> patchUpdatePlaylist(@PathVariable("id") Integer id,
                                                         @RequestBody Playlist playlist) {
