@@ -41,7 +41,7 @@
         <button type="button" class="btn btn-outline-light my-2" data-toggle="modal"
                 data-target="#signup-modal"><i class="fas fa-user-plus"> Sign up</i></button>
         <button type="button" class="btn btn-outline-light my-2" data-toggle="modal"
-                data-target="#settings-modal"><i class="fas fa-cogs"></i></button>
+                data-target="#settings-modal"><i class="fas fa-cog fa-spin"></i></button>
       </div>
     </div>
   </div>
@@ -135,38 +135,27 @@
         </button>
       </div>
       <div class="modal-body">
+        <h2 class="title">#Top</h2>
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="active">
-            <a href="#create" aria-controls="create" role="tab" data-toggle="tab">#Create</a>
+          <li role="presentation" class="nav-item active">
+            <a class="nav-link active" href="#create" aria-controls="home" role="tab" data-toggle="tab">#Create</a>
           </li>
-          <li role="presentation">
-            <a href="#upfiles" aria-controls="upfiles" role="tab" data-toggle="tab">#Upfiles</a>
+          <li role="presentation" class="nav-item">
+            <a class="nav-link" href="#profile" aria-controls="profile" role="tab" data-toggle="tab">#KPOP</a>
           </li>
-          <li role="presentation">
-            <a href="#view" aria-controls="view" role="tab" data-toggle="tab">#View</a>
+          <li role="presentation" class="nav-item">
+            <a class="nav-link" href="#messages" aria-controls="messages" role="tab" data-toggle="tab">#Classic</a>
           </li>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="create">
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">New</button>
-            </div>
+
           </div>
-          <div role="tabpanel" class="tab-pane" id="upfiles">
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Upload</button>
-            </div>
-          </div>
-          <div role="tabpanel" class="tab-pane" id="view">
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">OK</button>
-            </div>
-          </div>
+          <div role="tabpanel" class="tab-pane" id="profile">...</div>
+          <div role="tabpanel" class="tab-pane" id="messages">...</div>
+          <div role="tabpanel" class="tab-pane" id="settings">...</div>
         </div>
         <!-- End-tabpanes -->
       </div>
