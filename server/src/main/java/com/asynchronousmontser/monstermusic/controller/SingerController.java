@@ -81,30 +81,16 @@ public class SingerController {
         return ResponseEntity.ok().build();
     }
 
+    //TODO this patch cannot handle list.
     @PatchMapping("/{id}")
     public ResponseEntity<Singer> patchUpdateSinger(@PathVariable("id") Integer id,
                                                     @RequestBody Singer singer) {
         Singer origin = singerService.findOne(id);
         if (origin != null) {
-            singer.setId(id);
-            for (Method getter : Singer.class.getDeclaredMethods()) {
-                if (getter.getName().matches("^get\\w+$")) {
-                    String fieldName = getter.getName().substring(3);
-                    Class<?> returnType = getter.getReturnType();
-                    try {
-                        Object returnValue = getter.invoke(singer);
-                        if (returnValue != null) {
-                            Method setter = Singer.class.getDeclaredMethod("set" + fieldName, returnType);
-                            setter.invoke(origin, returnType.cast(returnValue));
-                        }
-                    } catch (Exception e) {
-                       //TODO:continue  and left the value null if exception occur
-                        e.printStackTrace();
-                    }
-                }
-            }
-            Singer updatedOrigin = singerService.save(origin);
-            return ResponseEntity.ok(updatedOrigin);
+            Singer patchedOrigin = PatchHandler.patch(singer, origin);
+            patchedOrigin.setId(id);
+            patchedOrigin = singerService.save(patchedOrigin);
+            return ResponseEntity.ok(patchedOrigin);
         }
         return ResponseEntity.notFound().build();
     }

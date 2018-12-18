@@ -89,30 +89,16 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
+    //TODO this patch cannot handle list.
     @PatchMapping("/{id}")
     public ResponseEntity<User> patchUpdateUser(@PathVariable("id") Integer id,
                                                 @RequestBody User user) {
         User origin = userService.findOne(id);
         if (origin != null) {
-            user.setId(id);
-            for (Method getter : User.class.getDeclaredMethods()) {
-                if (getter.getName().matches("^get\\w+$")) {
-                    String fieldName = getter.getName().substring(3);
-                    Class<?> returnType = getter.getReturnType();
-                    try {
-                        Object returnValue = getter.invoke(user);
-                        if (returnValue != null) {
-                            Method setter = User.class.getDeclaredMethod("set" + fieldName, returnType);
-                            setter.invoke(origin, returnType.cast(returnValue));
-                        }
-                    } catch (Exception e) {
-                        //TODO:continue  and left the value null if exception occur
-                        e.printStackTrace();
-                    }
-                }
-            }
-            User updatedOrigin = userService.save(origin);
-            return ResponseEntity.ok(updatedOrigin);
+            User patchedOrigin = PatchHandler.patch(user, origin);
+            patchedOrigin.setId(id);
+            patchedOrigin = userService.save(patchedOrigin);
+            return ResponseEntity.ok(patchedOrigin);
         }
         return ResponseEntity.notFound().build();
     }

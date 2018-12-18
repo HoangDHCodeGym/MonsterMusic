@@ -2,6 +2,7 @@ package com.asynchronousmontser.monstermusic.controller;
 
 import com.asynchronousmontser.monstermusic.model.Song;
 import com.asynchronousmontser.monstermusic.service.SongService;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.beans.PropertyDescriptor;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.URI;
 
@@ -84,25 +86,10 @@ public class SongController {
                                                 @RequestBody Song song) {
         Song origin = songService.findOne(id);
         if (origin != null) {
-            song.setId(id);
-            for (Method getter : Song.class.getDeclaredMethods()) {
-                if (getter.getName().matches("^get\\w+$")) {
-                    String fieldName = getter.getName().substring(3);
-                    Class<?> returnType = getter.getReturnType();
-                    try {
-                        Object returnValue = getter.invoke(song);
-                        if (returnValue != null) {
-                            Method setter = Song.class.getDeclaredMethod("set" + fieldName, returnType);
-                            setter.invoke(origin, returnType.cast(returnValue));
-                        }
-                    } catch (Exception e) {
-                        //TODO:continue  and left the value null if exception occur
-                        e.printStackTrace();
-                    }
-                }
-            }
-            Song updatedOrigin = songService.save(origin);
-            return ResponseEntity.ok(updatedOrigin);
+            Song patchedOrigin = PatchHandler.patch(song, origin);
+            patchedOrigin.setId(id);
+            patchedOrigin = songService.save(patchedOrigin);
+            return ResponseEntity.ok(patchedOrigin);
         }
         return ResponseEntity.notFound().build();
     }
