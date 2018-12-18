@@ -1,47 +1,18 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {FormsModule} from "@angular/forms";
-import {ReactiveFormsModule} from "@angular/forms";
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
-import {AppRoutingModule} from './app-routing.module';
-import {AppComponent} from './app.component';
-import {HttpClientModule} from "@angular/common/http";
-import {UploadSongComponent} from './songs/upload-song/upload-song.component';
-import {UpdateSongComponent} from './songs/update-song/updateSong.component';
-import {StreamSongComponent} from './songs/stream-song/stream-song.component';
-import { HomeComponent } from './home/home.component';
-import { ToplistComponent } from './toplist/toplist.component';
-import { ListsingersComponent } from './listsingers/listsingers.component';
-
-
-const host: string = 'http://localhost:8080' || window.location.protocol + "//" + window.location.host;
-console.log(host);
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    UploadSongComponent,
-    UpdateSongComponent,
-    StreamSongComponent,
-    HomeComponent,
-    ToplistComponent,
-    ListsingersComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    FormsModule
+    AppRoutingModule
   ],
-  providers: [
-    {provide: 'PLAYLIST_API', useValue: host + '/api/playlists'},
-    {provide: 'SONG_API', useValue: host + '/api/songs'},
-    {provide: 'USER_API', useValue: host + '/api/users'},
-    {provide: 'SINGER_API', useValue: host + '/api/users'},
-    {provide: 'HOST_URL', useValue: host}
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule { }
