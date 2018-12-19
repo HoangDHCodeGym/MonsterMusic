@@ -43,7 +43,6 @@ public class Song {
     @JsonSerialize(using = ListSerializer.class)
     @JsonDeserialize(using = PlaylistListDeserializer.class)
     @ManyToMany(mappedBy = "songList")
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private List<Playlist> playlistList;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)

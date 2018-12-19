@@ -88,6 +88,10 @@ public class SongController {
         if (origin != null) {
             Song patchedOrigin = PatchHandler.patch(song, origin);
             patchedOrigin.setId(id);
+            patchedOrigin.setPlaylistList(
+                    PatchHandler.patchList(origin.getPlaylistList(),
+                            song.getPlaylistList())
+            );
             patchedOrigin = songService.save(patchedOrigin);
             return ResponseEntity.ok(patchedOrigin);
         }
