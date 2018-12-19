@@ -37,7 +37,7 @@ public abstract class ListDeserializer<T> extends StdDeserializer<List<T>> {
 
     @Override
     public List<T> deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-        List<T> list = new ArrayList<T>();
+        List<T> list = new ArrayList<>();
         JsonToken token = p.getCurrentToken();
         if (token == JsonToken.START_ARRAY) {
             ObjectMapper mapper = new ObjectMapper();

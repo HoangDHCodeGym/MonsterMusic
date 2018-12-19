@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 class PatchHandler {
     static <T> T patch(T patch, T origin) {
@@ -27,4 +29,18 @@ class PatchHandler {
         }
         return origin;
     }
+
+    static <T> List<T> patchList(List<T> origin, List<T> patch) {
+        if (patch == null) {
+            return origin;
+        }
+        if (origin == null) {
+            return patch;
+        }
+        List<T> patchedList = new ArrayList<>();
+        patchedList.addAll(origin);
+        patchedList.addAll(patch);
+        return patchedList;
+    }
+
 }
