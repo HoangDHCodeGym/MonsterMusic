@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
 export class ToplistComponent implements OnInit {
   private songlist: Song[];
   private downloadSongURL: string = '';
-  private countRank = 1;
+
   constructor(private songService: SongService, @Inject('HOST') private host:string,
               private router:Router) { }
 
@@ -29,12 +29,5 @@ export class ToplistComponent implements OnInit {
     this.router.navigate(['music/'+id])
   }
 
-  getFommatOfRankNumber(n: number): string{
-    this.countRank++;
-    if (n < 9){
-      return '0'+n;
-    }else {
-      return ''+n;
-    }
-  }
+
 }
