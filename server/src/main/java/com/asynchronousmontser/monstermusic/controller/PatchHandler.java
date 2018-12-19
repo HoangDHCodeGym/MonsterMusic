@@ -15,7 +15,7 @@ class PatchHandler {
                 Class<?> returnedType = getter.getReturnType();
                 Method setter = descriptor.getWriteMethod();
                 JsonProperty property = field.getAnnotation(JsonProperty.class);
-                if (property.access() != JsonProperty.Access.READ_ONLY) {
+                if (property == null || property.access() != JsonProperty.Access.READ_ONLY) {
                     Object returnObject = getter.invoke(patch);
                     if (returnObject != null) {
                         setter.invoke(origin, returnedType.cast(returnObject));
