@@ -4,7 +4,3 @@ ALTER TABLE song
   ADD views INT(20) DEFAULT 0,
   ADD favor INT(11) DEFAULT 0,
   ADD created_date DATETIME;
-
-ALTER TABLE gene
- ADD name NVARCHAR(128),
- ADD description NVARCHAR(512);
