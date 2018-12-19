@@ -10,7 +10,7 @@ import { PlayerComponent } from './songs/player/player.component';
 import { ToplistComponent } from './songs/toplist/toplist.component';
 import { ListsingerComponent } from './listsinger/listsinger.component';
 
-const host = "http://192.168.2.97:8080";
+const host = "http://45.32.123.20:8080";
 @NgModule({
   declarations: [
     AppComponent,

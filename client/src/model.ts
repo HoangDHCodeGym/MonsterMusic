@@ -1,13 +1,13 @@
 /**  data form server **/
 export interface Song {
-  id: number,
-  name: string,
-  link: string,
+  id: number;
+  name: string;
+  link: string;
 
-  creator: User,
-  Singer: Singer,
+  creator: User;
+  Singer: Singer;
 
-  views: number,
+  views: number;
   createdDate: string //maybe Date, not sure
 }
 
