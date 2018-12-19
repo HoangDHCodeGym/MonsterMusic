@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { PlayerComponent } from './songs/player/player.component';
 import { ToplistComponent } from './songs/toplist/toplist.component';
 import { ListsingerComponent } from './listsinger/listsinger.component';
+import { CreatesongComponent } from './songs/createsong/createsong.component';
 
 const host = "http://45.32.123.20:8080";
 @NgModule({
@@ -17,7 +18,8 @@ const host = "http://45.32.123.20:8080";
     HomeComponent,
     PlayerComponent,
     ToplistComponent,
-    ListsingerComponent
+    ListsingerComponent,
+    CreatesongComponent
   ],
   imports: [
     BrowserModule,

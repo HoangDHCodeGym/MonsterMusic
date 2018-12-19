@@ -1,13 +1,15 @@
 /**  data form server **/
-export interface Song {
-  id: number;
-  name: string;
-  link: string;
+interface Song {
+  id: number,
+  name: string,
+  link: string,
+  favor: number,
 
-  creator: User;
-  Singer: Singer;
+  gene: Gene,
+  creator: User,
+  Singer: Singer,
 
-  views: number;
+  views: number,
   createdDate: string //maybe Date, not sure
 }
 
@@ -15,6 +17,9 @@ interface Singer {
   id: number
   name: string,
   songList: number //the length of song list
+  age: number,
+  favor: number,
+  description: string,
 
   creator: User,
 
@@ -25,6 +30,8 @@ interface Playlist {
   id: number,
   name: number,
   songList: number,//the length of the song list
+  favor: number,
+  description: string,
 
   creator: User,
 
@@ -36,6 +43,8 @@ interface User {
   id: number,
   username: string,
   name: string,
+  email:string,
+  age:number,
 
   songList: number,     //the length of the list
   playlistList: number,//the length of the list
@@ -49,18 +58,22 @@ interface SongForm {
   name: string,
   link: string,
 
+  gene: number,
   creator: number, //user id
   singer: number, //singer id
 }
 
 interface SingerForm {
   name: string,
+  age: number,
+  description: string,
 
   creator: number,
 }
 
 interface PlaylistForm {
   name: string,
+  description: string,
 
   creator: number,
   songList: number[], // array of songId
@@ -70,12 +83,12 @@ interface UserForm {
   name: string,
   username: string,
   password: string,
+  email:string,
+  age:number,
 }
 
-export interface Page<T> {
-  content:T[],
-  number: number
-  size: number,
-  totalElements: number,
-  totalPages: number,
+interface Gene {
+  id: number,
+  name: string,
+  description: string
 }
