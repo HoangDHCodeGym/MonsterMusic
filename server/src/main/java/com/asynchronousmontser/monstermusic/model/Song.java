@@ -1,12 +1,16 @@
 package com.asynchronousmontser.monstermusic.model;
 
+import com.asynchronousmontser.monstermusic.dataTransfer.deserializer.ListDeserializer.PlaylistListDeserializer;
 import com.asynchronousmontser.monstermusic.dataTransfer.deserializer.idDeserializer.SingerIdDeserializer;
 import com.asynchronousmontser.monstermusic.dataTransfer.deserializer.idDeserializer.UserIdDeserializer;
+import com.asynchronousmontser.monstermusic.dataTransfer.serializer.ListSerializer;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "song")
@@ -31,6 +35,11 @@ public class Song {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Date createdDate = new Date();
 
+    @JsonSerialize(using = ListSerializer.class)
+    @JsonDeserialize(using = PlaylistListDeserializer.class)
+    @ManyToMany(mappedBy = "songList")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private List<Playlist> playlistList;
 
     private String name;
 
@@ -96,5 +105,13 @@ public class Song {
 
     public void setViews(Integer views) {
         this.views = views;
+    }
+
+    public List<Playlist> getPlaylistList() {
+        return playlistList;
+    }
+
+    public void setPlaylistList(List<Playlist> playlistList) {
+        this.playlistList = playlistList;
     }
 }
