@@ -6,6 +6,7 @@ import com.asynchronousmontser.monstermusic.dataTransfer.serializer.ListSerializ
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -20,11 +21,11 @@ public class Singer {
 
     @JsonSerialize(using = ListSerializer.class)
     @JsonDeserialize(using = SongListDeserializer.class)
-    @OneToMany(mappedBy = "singer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "singer")
     private List<Song> songList;
 
     @JsonDeserialize(using = UserIdDeserializer.class)
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User creator;
 

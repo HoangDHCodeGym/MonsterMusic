@@ -17,12 +17,12 @@ public class Song {
 
 
     @JsonDeserialize(using = UserIdDeserializer.class)
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User creator;
 
     @JsonDeserialize(using = SingerIdDeserializer.class)
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "singer_id")
     private Singer singer;
 

@@ -23,7 +23,7 @@ public class Playlist {
 
     @JsonSerialize(using = ListSerializer.class)
     @JsonDeserialize(using = SongListDeserializer.class)
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(
             name = "playlist_song",
             joinColumns = @JoinColumn(name = "playlist_id"),
@@ -32,7 +32,7 @@ public class Playlist {
     private List<Song> songList;
 
     @JsonDeserialize(using = UserIdDeserializer.class)
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User creator;
 

@@ -22,18 +22,18 @@ public class User {
 
     @JsonDeserialize(using = PlaylistListDeserializer.class)
     @JsonSerialize(using = ListSerializer.class)
-    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "creator", orphanRemoval = true)
     private List<Playlist> playlistList;
 
 
     @JsonDeserialize(using = SingerListDeserializer.class)
     @JsonSerialize(using = ListSerializer.class)
-    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "creator", orphanRemoval = true)
     private List<Singer> singerList;
 
     @JsonDeserialize(using = SongListDeserializer.class)
     @JsonSerialize(using = ListSerializer.class)
-    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "creator", orphanRemoval = true)
     private List<Song> songList;
 
     @Temporal(TemporalType.TIMESTAMP)
