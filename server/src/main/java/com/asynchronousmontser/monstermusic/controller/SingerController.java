@@ -81,7 +81,7 @@ public class SingerController {
         return ResponseEntity.ok().build();
     }
 
-    //TODO this patch cannot handle list.
+    //no need to handle list.
     @PatchMapping("/{id}")
     public ResponseEntity<Singer> patchUpdateSinger(@PathVariable("id") Integer id,
                                                     @RequestBody Singer singer) {

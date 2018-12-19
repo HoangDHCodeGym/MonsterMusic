@@ -6,6 +6,7 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 class PatchHandler {
@@ -40,7 +41,8 @@ class PatchHandler {
         List<T> patchedList = new ArrayList<>();
         patchedList.addAll(origin);
         patchedList.addAll(patch);
-        return patchedList;
+        //removed duplicate in list.
+        return new ArrayList<>(new HashSet<>(patchedList));
     }
 
 }

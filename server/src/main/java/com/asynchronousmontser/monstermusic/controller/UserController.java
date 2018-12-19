@@ -89,7 +89,7 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    //TODO this patch cannot handle list.
+    //no need to handle list.
     @PatchMapping("/{id}")
     public ResponseEntity<User> patchUpdateUser(@PathVariable("id") Integer id,
                                                 @RequestBody User user) {

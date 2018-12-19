@@ -86,7 +86,6 @@ public class PlaylistController {
         return ResponseEntity.ok().build();
     }
 
-    //TODO this patch cannot handle list.
     @PatchMapping("/{id}")
     public ResponseEntity<Playlist> patchUpdatePlaylist(@PathVariable("id") Integer id,
                                                         @RequestBody Playlist playlist) {
@@ -94,6 +93,10 @@ public class PlaylistController {
         if (origin != null) {
             Playlist patchedOrigin = PatchHandler.patch(playlist, origin);
             patchedOrigin.setId(id);
+            patchedOrigin.setSongList(PatchHandler.patchList(
+                    origin.getSongList(),
+                    playlist.getSongList()
+            ));
             patchedOrigin = playlistService.save(patchedOrigin);
             return ResponseEntity.ok(patchedOrigin);
         }

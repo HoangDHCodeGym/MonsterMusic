@@ -81,6 +81,15 @@ public class SongController {
         return ResponseEntity.ok().build();
     }
 
+    /* This now CAN handle list
+    but due to hibernate's way to handle relationship, this is mean less
+    only entity which own the relationship can affect constraint.
+
+    songList in singer, playlist, user can only affected by song.
+    playlistList, singerList in user can only affected by playlist, singer
+
+    songList in playlist can only affected by playlist.
+    * */
     @PatchMapping("/{id}")
     public ResponseEntity<Song> patchUpdateSong(@PathVariable("id") Integer id,
                                                 @RequestBody Song song) {
@@ -88,6 +97,10 @@ public class SongController {
         if (origin != null) {
             Song patchedOrigin = PatchHandler.patch(song, origin);
             patchedOrigin.setId(id);
+            patchedOrigin.setPlaylistList(PatchHandler.patchList(
+                    origin.getPlaylistList(),
+                    song.getPlaylistList()
+            ));
             patchedOrigin = songService.save(patchedOrigin);
             return ResponseEntity.ok(patchedOrigin);
         }
