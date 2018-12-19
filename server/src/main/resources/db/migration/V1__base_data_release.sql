@@ -39,8 +39,8 @@ CREATE TABLE playlist_song
   playlist_id INT(11) NOT NULL,
   song_id     INT(11) NOT NULL,
   PRIMARY KEY (playlist_id, song_id),
-  FOREIGN KEY (playlist_id) REFERENCES playlist (id) ON DELETE SET NULL ,
-  FOREIGN KEY (song_id) REFERENCES song (id) ON DELETE SET NULL
+  FOREIGN KEY (playlist_id) REFERENCES playlist (id),
+  FOREIGN KEY (song_id) REFERENCES song (id)
 )
   CHARACTER SET utf8
   COLLATE utf8_unicode_ci;
