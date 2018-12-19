@@ -46,6 +46,7 @@ public class Song {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private List<Playlist> playlistList;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Integer favor = 0;
 
     private String name;

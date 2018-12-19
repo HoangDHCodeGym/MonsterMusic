@@ -22,6 +22,7 @@ public class Singer {
     @JsonSerialize(using = ListSerializer.class)
     @JsonDeserialize(using = SongListDeserializer.class)
     @OneToMany(mappedBy = "singer")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private List<Song> songList;
 
     @JsonDeserialize(using = UserIdDeserializer.class)
@@ -38,6 +39,7 @@ public class Singer {
 
     private Integer age;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Integer favor = 0;
 
     private String description;

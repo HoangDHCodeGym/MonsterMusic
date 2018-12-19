@@ -23,17 +23,20 @@ public class User {
     @JsonDeserialize(using = PlaylistListDeserializer.class)
     @JsonSerialize(using = ListSerializer.class)
     @OneToMany(mappedBy = "creator")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private List<Playlist> playlistList;
 
 
     @JsonDeserialize(using = SingerListDeserializer.class)
     @JsonSerialize(using = ListSerializer.class)
     @OneToMany(mappedBy = "creator")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private List<Singer> singerList;
 
     @JsonDeserialize(using = SongListDeserializer.class)
     @JsonSerialize(using = ListSerializer.class)
     @OneToMany(mappedBy = "creator")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private List<Song> songList;
 
     @Temporal(TemporalType.TIMESTAMP)
