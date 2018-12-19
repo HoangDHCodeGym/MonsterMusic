@@ -1,6 +1,7 @@
 package com.asynchronousmontser.monstermusic.service.impl;
 
 import com.asynchronousmontser.monstermusic.model.Playlist;
+import com.asynchronousmontser.monstermusic.model.Song;
 import com.asynchronousmontser.monstermusic.repository.PlaylistRepository;
 import com.asynchronousmontser.monstermusic.service.PlaylistService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +47,10 @@ public class PlaylistServiceImpl implements PlaylistService {
     public Playlist findOne(Integer id) {
         return playlistRepo.findById(id).orElse(null);
     }
-    //=======================================================
+
+    //Constrain=======================================================
+    @Override
+    public Page<Playlist> findAllByCreator(Integer id, Pageable pageable) {
+        return playlistRepo.findAllByCreator_Id(id, pageable);
+    }
 }

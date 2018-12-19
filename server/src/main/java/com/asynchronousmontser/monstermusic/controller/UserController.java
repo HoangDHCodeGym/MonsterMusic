@@ -1,6 +1,10 @@
 package com.asynchronousmontser.monstermusic.controller;
 
+import com.asynchronousmontser.monstermusic.model.*;
 import com.asynchronousmontser.monstermusic.model.User;
+import com.asynchronousmontser.monstermusic.service.PlaylistService;
+import com.asynchronousmontser.monstermusic.service.SingerService;
+import com.asynchronousmontser.monstermusic.service.SongService;
 import com.asynchronousmontser.monstermusic.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,16 +13,27 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.lang.reflect.Method;
 import java.net.URI;
 
+@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
     private UserService userService;
+    private SongService songService;
+    private PlaylistService playlistService;
+    private SingerService singerService;
 
     @Autowired
-    public void setUpUserController(UserService userService) {
+    public void setUpUserController(UserService userService,
+                                    SongService songService,
+                                    SingerService singerService,
+                                    PlaylistService playlistService) {
         this.userService = userService;
+        this.songService = songService;
+        this.playlistService = playlistService;
+        this.singerService = singerService;
     }
 
     //Basic==================================================
@@ -58,8 +73,8 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> putUpdateUser(@RequestBody User user
-            , @PathVariable("id") Integer id) {
+    public ResponseEntity<User> putUpdateUser(@RequestBody User user,
+                                              @PathVariable("id") Integer id) {
         if (userService.findOne(id) != null) {
             user.setId(id);
             User updatedUser = userService.save(user);
@@ -67,5 +82,56 @@ public class UserController {
         }
         return ResponseEntity.notFound().build();
     }
-    //============================================
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<User> deleteUser(@PathVariable("id") Integer id) {
+        userService.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
+    //no need to handle list.
+    @PatchMapping("/{id}")
+    public ResponseEntity<User> patchUpdateUser(@PathVariable("id") Integer id,
+                                                @RequestBody User user) {
+        User origin = userService.findOne(id);
+        if (origin != null) {
+            User patchedOrigin = PatchHandler.patch(user, origin);
+            patchedOrigin.setId(id);
+            patchedOrigin = userService.save(patchedOrigin);
+            return ResponseEntity.ok(patchedOrigin);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    //Constrain============================================
+    //TODO: remove duplicate code
+    @GetMapping("/{id}/songList")
+    public ResponseEntity<Page<Song>> getSongList(@PathVariable("id") Integer id,
+                                                  Pageable pageable) {
+        if (userService.findOne(id) != null) {
+            Page<Song> songPage = songService.findAllByCreator(id, pageable);
+            return ResponseEntity.ok(songPage);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/{id}/playlistList")
+    public ResponseEntity<Page<Playlist>> getPlaylistList(@PathVariable("id") Integer id,
+                                                          Pageable pageable) {
+        if (userService.findOne(id) != null) {
+            Page<Playlist> playlistPage = playlistService.findAllByCreator(id, pageable);
+            return ResponseEntity.ok(playlistPage);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/{id}/singerList")
+    public ResponseEntity<Page<Singer>> getSingerList(@PathVariable("id") Integer id,
+                                                      Pageable pageable) {
+        if (userService.findOne(id) != null) {
+            Page<Singer> singerPage = singerService.findAllByCreator(id, pageable);
+            return ResponseEntity.ok(singerPage);
+        }
+        return ResponseEntity.notFound().build();
+    }
 }

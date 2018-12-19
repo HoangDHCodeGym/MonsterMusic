@@ -1,0 +1,3 @@
+ALTER TABLE gene
+ ADD name NVARCHAR(128),
+ ADD description NVARCHAR(512);

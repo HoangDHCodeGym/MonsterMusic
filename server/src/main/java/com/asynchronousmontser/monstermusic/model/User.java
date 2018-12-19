@@ -1,7 +1,13 @@
 package com.asynchronousmontser.monstermusic.model;
 
 
+import com.asynchronousmontser.monstermusic.dataTransfer.deserializer.ListDeserializer.PlaylistListDeserializer;
+import com.asynchronousmontser.monstermusic.dataTransfer.deserializer.ListDeserializer.SingerListDeserializer;
+import com.asynchronousmontser.monstermusic.dataTransfer.deserializer.ListDeserializer.SongListDeserializer;
+import com.asynchronousmontser.monstermusic.dataTransfer.serializer.ListSerializer;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -14,16 +20,23 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL)
+    @JsonDeserialize(using = PlaylistListDeserializer.class)
+    @JsonSerialize(using = ListSerializer.class)
+    @OneToMany(mappedBy = "creator")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private List<Playlist> playlistList;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL)
+
+    @JsonDeserialize(using = SingerListDeserializer.class)
+    @JsonSerialize(using = ListSerializer.class)
+    @OneToMany(mappedBy = "creator")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private List<Singer> singerList;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL)
+    @JsonDeserialize(using = SongListDeserializer.class)
+    @JsonSerialize(using = ListSerializer.class)
+    @OneToMany(mappedBy = "creator")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private List<Song> songList;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -33,7 +46,12 @@ public class User {
 
     private String name;
 
+    private String email;
+
+    private Integer age;
+
     private String username;
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
@@ -102,5 +120,21 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 }

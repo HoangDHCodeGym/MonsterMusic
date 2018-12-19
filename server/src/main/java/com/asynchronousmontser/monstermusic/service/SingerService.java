@@ -17,4 +17,8 @@ public interface SingerService {
     List<Singer> findAll(Sort sort);
 
     Singer findOne(Integer id);
+
+    //=================================================
+    Page<Singer> findAllByCreator(Integer id, Pageable pageable);
+
 }

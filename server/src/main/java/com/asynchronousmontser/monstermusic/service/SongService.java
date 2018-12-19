@@ -17,4 +17,11 @@ public interface SongService {
     List<Song> findAll(Sort sort);
 
     Song findOne(Integer id);
+
+    //==================================================================
+    Page<Song> findAllSongByPlaylist(Integer id, Pageable pageable);
+
+    Page<Song> findAllBySinger(Integer id, Pageable pageable);
+
+    Page<Song> findAllByCreator(Integer id, Pageable pageable);
 }

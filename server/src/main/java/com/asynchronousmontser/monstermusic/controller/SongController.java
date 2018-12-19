@@ -2,6 +2,7 @@ package com.asynchronousmontser.monstermusic.controller;
 
 import com.asynchronousmontser.monstermusic.model.Song;
 import com.asynchronousmontser.monstermusic.service.SongService;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,8 +10,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.net.URI;
 
+@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/api/songs")
 public class SongController {
@@ -51,19 +56,53 @@ public class SongController {
     public ResponseEntity<Song> getSong(@PathVariable("id") Integer id) {
         Song song = songService.findOne(id);
         if (song != null) {
+            song.setViews((song.getViews() + 1));
+            Song viewedSong = songService.save(song);
             return ResponseEntity
-                    .ok(song);
+                    .ok(viewedSong);
         }
         return ResponseEntity.notFound().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Song> putUpdateSong(@RequestBody Song song
-            , @PathVariable("id") Integer id) {
+    public ResponseEntity<Song> putUpdateSong(@RequestBody Song song,
+                                              @PathVariable("id") Integer id) {
         if (songService.findOne(id) != null) {
             song.setId(id);
             Song updatedSong = songService.save(song);
             return ResponseEntity.ok(updatedSong);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Song> deleteSong(@PathVariable("id") Integer id) {
+        songService.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
+    /* This now CAN handle list
+    but due to hibernate's way to handle relationship, this is mean less
+    only entity which own the relationship can affect constraint.
+
+    songList in singer, playlist, user can only affected by song.
+    playlistList, singerList in user can only affected by playlist, singer
+
+    songList in playlist can only affected by playlist.
+    * */
+    @PatchMapping("/{id}")
+    public ResponseEntity<Song> patchUpdateSong(@PathVariable("id") Integer id,
+                                                @RequestBody Song song) {
+        Song origin = songService.findOne(id);
+        if (origin != null) {
+            Song patchedOrigin = PatchHandler.patch(song, origin);
+            patchedOrigin.setId(id);
+            patchedOrigin.setPlaylistList(PatchHandler.patchList(
+                    origin.getPlaylistList(),
+                    song.getPlaylistList()
+            ));
+            patchedOrigin = songService.save(patchedOrigin);
+            return ResponseEntity.ok(patchedOrigin);
         }
         return ResponseEntity.notFound().build();
     }
