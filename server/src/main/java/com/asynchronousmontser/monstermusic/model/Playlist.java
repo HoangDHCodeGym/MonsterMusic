@@ -9,7 +9,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -42,6 +41,10 @@ public class Playlist {
     private Date createdDate = new Date();
 
     private String name;
+
+    private String description;
+
+    private Integer favor = 0;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Integer views = 0;
@@ -95,5 +98,21 @@ public class Playlist {
 
     public void setViews(Integer views) {
         this.views = views;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Integer getFavor() {
+        return favor;
+    }
+
+    public void setFavor(Integer favor) {
+        this.favor = favor;
     }
 }

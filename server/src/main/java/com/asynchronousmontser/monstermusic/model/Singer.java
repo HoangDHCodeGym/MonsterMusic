@@ -36,6 +36,12 @@ public class Singer {
 
     private String name;
 
+    private Integer age;
+
+    private Integer favor = 0;
+
+    private String description;
+
     public Singer() {
     }
 
@@ -77,5 +83,29 @@ public class Singer {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public Integer getFavor() {
+        return favor;
+    }
+
+    public void setFavor(Integer favor) {
+        this.favor = favor;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

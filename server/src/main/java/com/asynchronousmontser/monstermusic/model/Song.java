@@ -1,6 +1,7 @@
 package com.asynchronousmontser.monstermusic.model;
 
 import com.asynchronousmontser.monstermusic.dataTransfer.deserializer.ListDeserializer.PlaylistListDeserializer;
+import com.asynchronousmontser.monstermusic.dataTransfer.deserializer.idDeserializer.GeneIdDeserializer;
 import com.asynchronousmontser.monstermusic.dataTransfer.deserializer.idDeserializer.SingerIdDeserializer;
 import com.asynchronousmontser.monstermusic.dataTransfer.deserializer.idDeserializer.UserIdDeserializer;
 import com.asynchronousmontser.monstermusic.dataTransfer.serializer.ListSerializer;
@@ -19,6 +20,10 @@ public class Song {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @JsonDeserialize(using = GeneIdDeserializer.class)
+    @ManyToOne
+    @JoinColumn(name = "gene_id")
+    private Gene gene;
 
     @JsonDeserialize(using = UserIdDeserializer.class)
     @ManyToOne
@@ -40,6 +45,8 @@ public class Song {
     @ManyToMany(mappedBy = "songList")
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private List<Playlist> playlistList;
+
+    private Integer favor = 0;
 
     private String name;
 
@@ -113,5 +120,21 @@ public class Song {
 
     public void setPlaylistList(List<Playlist> playlistList) {
         this.playlistList = playlistList;
+    }
+
+    public Integer getFavor() {
+        return favor;
+    }
+
+    public void setFavor(Integer favor) {
+        this.favor = favor;
+    }
+
+    public Gene getGene() {
+        return gene;
+    }
+
+    public void setGene(Gene gene) {
+        this.gene = gene;
     }
 }
