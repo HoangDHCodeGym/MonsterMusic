@@ -9,25 +9,31 @@ import {Router} from "@angular/router";
   styleUrls: ['./toplist.component.css']
 })
 export class ToplistComponent implements OnInit {
-  private songlist: Song[];
+  songlist: Song[]=[];
+  kPopSongList: Song[]=[];
+  vPopSongList: Song[]=[];
+  usAndUkSongList: Song[]=[];
   private downloadSongURL: string = '';
 
-  constructor(private songService: SongService, @Inject('HOST') private host:string,
-              private router:Router) { }
+  constructor(private songService: SongService, @Inject('HOST') private host: string,
+              private router: Router) {
+  }
 
   ngOnInit() {
-    this.getSongList();
-    this.downloadSongURL = this.host+'/api/files/';
+    this.getAllSongList();
+    this.downloadSongURL = this.host + '/api/files/';
     console.log(this.downloadSongURL);
   }
 
-  public getSongList(){
-    this.songService.getSongsAndSortByDESC(5).subscribe(res => {this.songlist = res.content
-    for (let e of res.content){console.log(e.singer.name)} });
+  public getAllSongList() {
+    this.songService.getSongsAndSortByDESC(5).subscribe(res => this.songlist = res.content);
+    this.songService.getSongByGene(1, 5).subscribe(res => {if(res!=null){this.kPopSongList = res.content}});
+    this.songService.getSongByGene(2, 5).subscribe(res => {if(res!=null){this.vPopSongList = res.content}});
+    this.songService.getSongByGene(3, 5).subscribe(res => {if(res!=null){this.usAndUkSongList = res.content}});
   }
 
-  toMusicPage(id:number){
-    this.router.navigate(['music/'+id])
+  toMusicPage(id: number) {
+    this.router.navigate(['music/' + id])
   }
 
 

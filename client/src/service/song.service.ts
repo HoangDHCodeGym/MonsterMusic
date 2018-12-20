@@ -27,6 +27,9 @@ export class SongService{
     return from(this.http
       .get<Page<Song>>(this.host+'/api/songs?sort=views,desc&size='+size+'&page='+page));
   }
+  getSongByGene(id:number,size: number,page:number = 0):Observable<Page<Song>>{
+    return this.http.get<Page<Song>>(this.host+'/api/songs/search/gene?q='+id+'&sort=views,desc&size='+size+'&page='+page)
+  }
 
   uploadSong(song:SongForm,file:File):Observable<Song>{
     const header:HttpHeaders = new HttpHeaders();

@@ -15,7 +15,7 @@
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="vpop">
       <!-- sub-element -->
-      <div class="tab-view" *ngFor="let song of songlist; index as i">
+      <div class="tab-view" *ngFor="let song of vPopSongList; index as i">
         <h1 class="titlev">0{{i+1}}</h1>
         <div class="contentv">
           <span class="boldT">#{{song.name}}</span><br>
@@ -38,7 +38,7 @@
     </div>
     <div role="tabpanel" class="tab-pane" id="kpop" >
       <!-- sub-element -->
-      <div class="tab-view" *ngFor="let song of songlist; index as i">
+      <div class="tab-view" *ngFor="let song of kPopSongList; index as i">
         <h1 class="titlev">0{{i+1}}</h1>
         <div class="contentv">
           <span class="boldT">#{{song.name}}</span><br>
@@ -61,7 +61,7 @@
     </div>
     <div role="tabpanel" class="tab-pane" id="uk">
       <!-- sub-element -->
-      <div class="tab-view"  *ngFor="let song of songlist; index as i" >
+      <div class="tab-view"  *ngFor="let song of usAndUkSongList; index as i" >
         <h1 class="titlev">0{{i+1}}</h1>
         <div class="contentv">
           <span class="boldT">#{{song.name}}</span><br>
