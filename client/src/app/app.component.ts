@@ -11,8 +11,4 @@ export class AppComponent {
   title = 'client';
   constructor(private router:Router){
   }
-  toHome(evt:Event){
-    evt.preventDefault();
-    this.router.navigate(['home'])
-  }
 }
