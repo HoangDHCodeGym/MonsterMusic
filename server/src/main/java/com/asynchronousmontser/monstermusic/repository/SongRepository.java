@@ -25,6 +25,7 @@ public interface SongRepository extends PagingAndSortingRepository<Song, Integer
 
     Page<Song> findAllByCreator_Id(Integer id, Pageable pageable);
 
+    Page<Song> findAllByGene_Id(Integer id, Pageable pageable);
     //Search========================================
     Page<Song> findAllByNameContains(String name, Pageable pageable);
 }

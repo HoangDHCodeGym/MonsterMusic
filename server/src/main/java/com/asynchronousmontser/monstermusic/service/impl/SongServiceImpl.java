@@ -62,6 +62,11 @@ public class SongServiceImpl implements SongService {
         return songRepo.findAllByCreator_Id(id, pageable);
     }
 
+    @Override
+    public Page<Song> findByGene(Integer id, Pageable pageable) {
+        return songRepo.findAllByGene_Id(id,pageable);
+    }
+
     //Search========================================
     @Override
     public Page<Song> findByName(String name, Pageable pageable) {

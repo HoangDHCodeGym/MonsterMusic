@@ -25,6 +25,7 @@ public interface SongService {
 
     Page<Song> findAllByCreator(Integer id, Pageable pageable);
 
+    Page<Song> findByGene(Integer id,Pageable pageable);
     //====================================================================
     Page<Song> findByName(String name, Pageable pageable);
 }

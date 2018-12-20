@@ -103,6 +103,18 @@ public class SongController {
     public ResponseEntity<Page<Song>> findByName(@RequestParam("q") String query,
                                                  Pageable pageable) {
         Page<Song> songPage = songService.findByName(query, pageable);
+        return getPageResponseEntity(songPage);
+    }
+
+    @GetMapping("/search/gene")
+    public ResponseEntity<Page<Song>> findByGene(@RequestParam("q") String query,
+                                                 Pageable pageable) {
+        Integer queryId = Integer.parseInt(query);
+        Page<Song> songPage = songService.findByGene(queryId, pageable);
+        return getPageResponseEntity(songPage);
+    }
+
+    private ResponseEntity<Page<Song>> getPageResponseEntity(Page<Song> songPage) {
         if (songPage != null) {
             if (songPage.isEmpty()) {
                 return ResponseEntity.noContent().build();
