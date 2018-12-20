@@ -1,10 +1,13 @@
 package com.asynchronousmontser.monstermusic.repository;
 
 import com.asynchronousmontser.monstermusic.model.Playlist;
+import com.asynchronousmontser.monstermusic.model.Song;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -17,4 +20,8 @@ public interface PlaylistRepository extends PagingAndSortingRepository<Playlist,
 
     //==================================================
     Page<Playlist> findAllByCreator_Id(Integer id, Pageable pageable);
+
+    @Query("select p.songList from Playlist p where p.id =:id")
+    Page<Song> findAllSongList(@Param("id") Integer id, Pageable pageable);
+
 }
