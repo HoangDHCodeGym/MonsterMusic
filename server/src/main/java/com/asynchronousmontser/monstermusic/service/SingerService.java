@@ -21,4 +21,5 @@ public interface SingerService {
     //=================================================
     Page<Singer> findAllByCreator(Integer id, Pageable pageable);
 
+    Page<Singer> findByName(String name,Pageable pageable);
 }

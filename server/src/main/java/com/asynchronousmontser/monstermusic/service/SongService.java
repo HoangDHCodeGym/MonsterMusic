@@ -18,10 +18,13 @@ public interface SongService {
 
     Song findOne(Integer id);
 
-    //==================================================================
+    //constrain===========================================================
     Page<Song> findAllSongByPlaylist(Integer id, Pageable pageable);
 
     Page<Song> findAllBySinger(Integer id, Pageable pageable);
 
     Page<Song> findAllByCreator(Integer id, Pageable pageable);
+
+    //====================================================================
+    Page<Song> findByName(String name, Pageable pageable);
 }

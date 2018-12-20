@@ -97,5 +97,18 @@ public class SongController {
         }
         return ResponseEntity.notFound().build();
     }
-    //============================================
+
+    //Search=======================================
+    @GetMapping("/search/name")
+    public ResponseEntity<Page<Song>> findByName(@RequestParam("q") String query,
+                                                 Pageable pageable) {
+        Page<Song> songPage = songService.findByName(query, pageable);
+        if (songPage != null) {
+            if (songPage.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            }
+            return ResponseEntity.ok(songPage);
+        }
+        return ResponseEntity.notFound().build();
+    }
 }
