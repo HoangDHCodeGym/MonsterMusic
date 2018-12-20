@@ -53,12 +53,23 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
-    public Page<Song> findAllBySinger(Integer id,Pageable pageable) {
-        return songRepo.findAllBySinger_Id(id,pageable);
+    public Page<Song> findAllBySinger(Integer id, Pageable pageable) {
+        return songRepo.findAllBySinger_Id(id, pageable);
     }
 
     @Override
-    public Page<Song> findAllByCreator(Integer id,Pageable pageable) {
-        return songRepo.findAllByCreator_Id(id,pageable);
+    public Page<Song> findAllByCreator(Integer id, Pageable pageable) {
+        return songRepo.findAllByCreator_Id(id, pageable);
+    }
+
+    @Override
+    public Page<Song> findByGene(Integer id, Pageable pageable) {
+        return songRepo.findAllByGene_Id(id,pageable);
+    }
+
+    //Search========================================
+    @Override
+    public Page<Song> findByName(String name, Pageable pageable) {
+        return songRepo.findAllByNameContains(name,pageable);
     }
 }

@@ -17,4 +17,6 @@ public interface SingerRepository extends PagingAndSortingRepository<Singer, Int
 
     //========================================================
     Page<Singer> findAllByCreator_Id(Integer id, Pageable pageable);
+
+    Page<Singer> findAllByNameContains(String name, Pageable pageable);
 }

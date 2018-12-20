@@ -49,6 +49,11 @@ public class SingerServiceImpl implements SingerService {
     //======================================================
     @Override
     public Page<Singer> findAllByCreator(Integer id, Pageable pageable) {
-        return singerRepo.findAllByCreator_Id(id,pageable);
+        return singerRepo.findAllByCreator_Id(id, pageable);
+    }
+
+    @Override
+    public Page<Singer> findByName(String name, Pageable pageable) {
+        return singerRepo.findAllByNameContains(name, pageable);
     }
 }

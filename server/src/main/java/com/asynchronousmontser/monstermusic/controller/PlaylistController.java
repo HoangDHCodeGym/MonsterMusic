@@ -2,6 +2,7 @@ package com.asynchronousmontser.monstermusic.controller;
 
 import com.asynchronousmontser.monstermusic.model.Playlist;
 import com.asynchronousmontser.monstermusic.model.Song;
+import com.asynchronousmontser.monstermusic.repository.PlaylistRepository;
 import com.asynchronousmontser.monstermusic.service.PlaylistService;
 import com.asynchronousmontser.monstermusic.service.SongService;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -21,6 +22,8 @@ import java.net.URI;
 @RestController
 @RequestMapping("api/playlists")
 public class PlaylistController {
+    @Autowired
+    private PlaylistRepository playlistRepository;
     private PlaylistService playlistService;
     private SongService songService;
 
@@ -105,12 +108,13 @@ public class PlaylistController {
 
     //Constrain============================================
     //TODO: this shit have unidirectional relationship error.
+    //return a page without paging and sorting
     @GetMapping("/{id}/songList")
     public ResponseEntity<Page<Song>> getSongList(@PathVariable("id") Integer id,
                                                   Pageable pageable) {
         Playlist playlist = playlistService.findOne(id);
         if (playlist != null) {
-            Page<Song> songPage = songService.findAllSongByPlaylist(id, pageable);
+            Page<Song> songPage = playlistRepository.findAllSongList(id,pageable);
             return ResponseEntity.ok(songPage);
         }
         return ResponseEntity.notFound().build();

@@ -17,11 +17,16 @@ public interface SongRepository extends PagingAndSortingRepository<Song, Integer
     @Override
     List<Song> findAll(Sort sort);
 
-    //====================================================================
-    @Query("select s from Song s inner join fetch Playlist p where p.id = :id")
+    //Constrain===============================================================
+    //handle get song by playlist to return a page, not working
+    @Query("select s from Song s join Playlist p where p.id = :id")
     Page<Song> findAllByPlaylist(@Param("id") Integer id, Pageable pageable);
 
     Page<Song> findAllBySinger_Id(Integer id, Pageable pageable);
 
     Page<Song> findAllByCreator_Id(Integer id, Pageable pageable);
+
+    Page<Song> findAllByGene_Id(Integer id, Pageable pageable);
+    //Search========================================
+    Page<Song> findAllByNameContains(String name, Pageable pageable);
 }
