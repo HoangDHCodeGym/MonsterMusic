@@ -23,10 +23,15 @@ export class SongService{
     return this.http.get<Page<Song>>(this.host+'/api/songs');
   }
 
+  getSongsByName(name: string, size: number): Observable<Page<Song>>{
+    return this.http.get<Page<Song>>(this.host+'/api/songs/search/name?q='+name+'&size='+size+'&page=0&sort=name');
+  }
+
   getSongsAndSortByDESC(size: number,page:number = 0): Observable<Page<Song>>{
     return from(this.http
       .get<Page<Song>>(this.host+'/api/songs?sort=views,desc&size='+size+'&page='+page));
   }
+
   getSongByGene(id:number,size: number,page:number = 0):Observable<Page<Song>>{
     return this.http.get<Page<Song>>(this.host+'/api/songs/search/gene?q='+id+'&sort=views,desc&size='+size+'&page='+page)
   }

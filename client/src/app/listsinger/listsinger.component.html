@@ -1,17 +1,5 @@
 <h2 class="title">#List singers</h2>
-<div class="box">
-  <img src="./assets/images/pic2.jpg" alt="">
-  <h5 class="card-title"> #singer name</h5>
-</div>
-<div class="box">
-  <img src="./assets/images/pic3.jpg" alt="">
-  <h5 class="card-title"> #singer name</h5>
-</div>
-<div class="box">
-  <img src="./assets/images/pic1.jpg" alt="">
-  <h5 class="card-title"> #singer name</h5>
-</div>
-<div class="box">
-  <img src="./assets/images/pic4.jpg" alt="">
-  <h5 class="card-title"> #singer name</h5>
+<div class="box" *ngFor="let singer of singerList;index as i">
+  <img [src]="'./assets/images/pic'+(i+1)+'.jpg'" alt="">
+  <h5 class="card-title"> #{{singer.name}}</h5>
 </div>

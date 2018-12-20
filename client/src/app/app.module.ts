@@ -12,8 +12,9 @@ import { ListsingerComponent } from './listsinger/listsinger.component';
 import { CreatesongComponent } from './songs/createsong/createsong.component';
 import {FormsModule} from "@angular/forms";
 import {SingerService} from "../service/singer.service";
+import { SearchComponent } from './search/search.component';
 
-const host = "http://192.168.2.97:8080";
+const host = "http://45.32.123.20:8080";
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,8 @@ const host = "http://192.168.2.97:8080";
     PlayerComponent,
     ToplistComponent,
     ListsingerComponent,
-    CreatesongComponent
+    CreatesongComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

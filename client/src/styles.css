@@ -469,7 +469,8 @@ a.twitter {
 }
 
 .ic-pointer{
-  background-color: #556688;
+  background-color: #343a40!important;
+  color: #FFFFFF;
 }
 .btn{
   margin-left: 10px;

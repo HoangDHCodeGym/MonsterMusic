@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Singer, Song, SongForm} from "../../../model";
 import {SongService} from "../../../service/song.service";
 import {SingerService} from "../../../service/singer.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-createsong',
@@ -19,10 +20,11 @@ export class CreatesongComponent implements OnInit {
   currentSinger:string ='';
   srcFile: File;
   singerList: Singer[];
-  constructor(private songService: SongService, private singerService: SingerService) { }
+  constructor(private songService: SongService,
+              private singerService: SingerService,
+              private router:Router) { }
 
   ngOnInit() {
-
   }
 
   onSubmit(songForm){
@@ -30,7 +32,9 @@ export class CreatesongComponent implements OnInit {
     // console.log(this.newSong.singer)
     console.log(this.newSong.gene);
     console.log(this.srcFile);
-    this.songService.uploadSong(this.newSong,this.srcFile).subscribe(res => console.log(res));
+    this.songService.uploadSong(this.newSong,this.srcFile).subscribe(res => {
+      if (res != null) {
+      }    });
   }
   appendFile(files:FileList){
     this.srcFile = files.item(0);

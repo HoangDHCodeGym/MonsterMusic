@@ -16,6 +16,11 @@ export class SingerService{
   getSingers(singerName:string,size: number,page = 0): Observable<Page<Singer>>{
     return this.http
       .get<Page<Singer>>(this.host+'/api/singers/search/name?q='+singerName+'&size='+size+'&page='+page+'&sort=name')
+  }
+
+  getAllSinger(size: number,page = 0):Observable<Page<Singer>>{
+    return this.http
+    .get<Page<Singer>>(this.host+'/api/singers?size='+size+'&page='+page+'&sort=name')
 
   }
 }
