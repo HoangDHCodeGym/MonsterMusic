@@ -22,7 +22,8 @@ export class ToplistComponent implements OnInit {
   }
 
   public getSongList(){
-    this.songService.getSongsAndSortByDESC(5).subscribe(res => this.songlist = res.content);
+    this.songService.getSongsAndSortByDESC(5).subscribe(res => {this.songlist = res.content
+    for (let e of res.content){console.log(e.singer.name)} });
   }
 
   toMusicPage(id:number){

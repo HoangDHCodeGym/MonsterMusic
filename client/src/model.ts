@@ -1,5 +1,5 @@
 /**  data form server **/
-interface Song {
+export interface Song {
   id: number,
   name: string,
   link: string,
@@ -7,13 +7,13 @@ interface Song {
 
   gene: Gene,
   creator: User,
-  Singer: Singer,
+  singer: Singer,
 
   views: number,
   createdDate: string //maybe Date, not sure
 }
 
-interface Singer {
+export interface Singer {
   id: number
   name: string,
   songList: number //the length of song list
@@ -54,7 +54,7 @@ interface User {
 }
 
 /** data to server **/
-interface SongForm {
+export interface SongForm {
   name: string,
   link: string,
 
@@ -63,7 +63,7 @@ interface SongForm {
   singer: number, //singer id
 }
 
-interface SingerForm {
+export interface SingerForm {
   name: string,
   age: number,
   description: string,
@@ -85,6 +85,14 @@ interface UserForm {
   password: string,
   email:string,
   age:number,
+}
+
+export interface Page<T> {
+  content:T[],
+  number: number
+  size: number,
+  totalElements: number,
+  totalPages: number,
 }
 
 interface Gene {

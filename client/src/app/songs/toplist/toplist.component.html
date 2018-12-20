@@ -19,7 +19,7 @@
         <h1 class="titlev">0{{i+1}}</h1>
         <div class="contentv">
           <span class="boldT">#{{song.name}}</span><br>
-          <span><i class="blurT">#singer</i></span>
+          <span><i class="blurT">#{{song.singer.name}}</i></span>
         </div>
         <div class="sub-content">
           <div class="view">
@@ -36,13 +36,36 @@
       <!-- end-sub-element -->
 
     </div>
-    <div role="tabpanel" class="tab-pane" id="kpop">
+    <div role="tabpanel" class="tab-pane" id="kpop" >
       <!-- sub-element -->
       <div class="tab-view" *ngFor="let song of songlist; index as i">
         <h1 class="titlev">0{{i+1}}</h1>
         <div class="contentv">
           <span class="boldT">#{{song.name}}</span><br>
-          <span><i class="blurT">#singer</i></span>
+          <span><i class="blurT">#{{song.singer.name}}</i></span>
+        </div>
+        <div class="sub-content">
+          <div class="view">
+				    				<span>
+				    					<i class="blurT views">{{song.views}} views</i><br>
+                      <a (click)="toMusicPage(song.id)"><i class="fas fa-play"></i></a> |
+				    					<a href="{{downloadSongURL+song.link}}"><i class="fas fa-cloud-download-alt"></i></a>
+				    				</span>
+
+          </div>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <!-- end-sub-element -->
+
+    </div>
+    <div role="tabpanel" class="tab-pane" id="uk">
+      <!-- sub-element -->
+      <div class="tab-view"  *ngFor="let song of songlist; index as i" >
+        <h1 class="titlev">0{{i+1}}</h1>
+        <div class="contentv">
+          <span class="boldT">#{{song.name}}</span><br>
+          <span><i class="blurT">#{{song.singer.name}}</i></span>
         </div>
         <div class="sub-content">
           <div class="view">
@@ -58,6 +81,5 @@
       </div>
       <!-- end-sub-element -->
     </div>
-    <div role="tabpanel" class="tab-pane" id="uk">...</div>
   </div>
   <!-- End-tabpanes -->
