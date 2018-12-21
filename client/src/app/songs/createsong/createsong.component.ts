@@ -17,17 +17,22 @@ export class CreatesongComponent implements OnInit {
     name: '',
     singer: null
   };
+  isLoading: boolean = false;
   currentSinger:string ='';
   srcFile: File;
   singerList: Singer[];
+  creMessage: string = '';
   constructor(private songService: SongService,
               private singerService: SingerService,
               private router:Router) { }
 
   ngOnInit() {
+    this.creMessage = '';
   }
 
   onSubmit(songForm){
+    this.isLoading = true;
+    this.creMessage = '';
     console.log(songForm);
     // console.log(this.newSong.singer)
     console.log(this.newSong.gene);
@@ -36,6 +41,8 @@ export class CreatesongComponent implements OnInit {
       if (res != null) {
       }
     });
+    this.isLoading = false;
+    this.creMessage = "success!!"
   }
   appendFile(files:FileList){
     this.srcFile = files.item(0);
