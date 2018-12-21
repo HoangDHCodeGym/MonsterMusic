@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {SongService} from "../../../service/song.service";
 import * as $ from 'jquery';
-import {Song} from "../../../model";
+import {Song, SongForm} from "../../../model";
 
 @Component({
   selector: 'app-player',
@@ -10,8 +10,8 @@ import {Song} from "../../../model";
   styleUrls: ['./player.component.css']
 })
 export class PlayerComponent implements OnInit {
-
   songId:number;
+  songViews:number;
   songDate: string;
   songTitle: string;
   songSinger: string;
@@ -47,6 +47,7 @@ export class PlayerComponent implements OnInit {
         this.songDate = song.createdDate;
         this.songTitle = song.name;
         this.songSinger = (song.singer.name != null) ? song.singer.name : '';
+        this.songViews = song.views;
         this.getSongList(this.songSinger);
       })
   }

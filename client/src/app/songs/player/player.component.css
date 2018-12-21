@@ -1,6 +1,6 @@
 @import url(//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css);
 .container {
-  background: seashell;
+  /*background: seashell;*/
 }
 .row {
   font-family: 'Josefin Sans', sans-serif !important;
@@ -14,7 +14,7 @@
   margin: 0 ;
   background: #402457;
   height: 15rem;
-  width: 40rem;
+  width: 100%;
   -webkit-box-shadow: 10px 0px 20px -6px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 10px 7px 20px -6px rgba(0, 0, 0, 0.75);
   box-shadow: 10px 0px 20px -6px rgba(0, 0, 0, 0.75);
@@ -45,7 +45,7 @@
 .music_player .controllers {
   background: #260F39;
   height: 2.5rem;
-  width: 21.4rem;
+  width: 58%;
   position: absolute;
   right: 0;
   bottom: 0;
@@ -62,7 +62,7 @@
   top: 0;
   right: 0;
   height: 2.5rem;
-  width: 21.4rem;
+  width: 58%;
   position: absolute;
   background: #260F39;
   text-align: center;
@@ -81,12 +81,13 @@
 .music_player .now_playing p {
   text-transform: uppercase;
   font-size: 12px;
+  line-height: 2.3rem;
 }
 .music_info {
   top: 2rem;
   right: 0;
   position: absolute;
-  width: 21rem;
+  width: 58%;
 }
 .music_info h2 {
   color: red;
@@ -301,7 +302,7 @@ i:hover {
 .songmusic{
   /*border: 1px solid black;*/
   /*width: 80%;*/
-  height: 100px;
+  height: auto;
   /*margin-top: 12%;*/
 }
 .singer{
@@ -318,8 +319,36 @@ i:hover {
   /*color: #16599c;*/
 /*}*/
 .button{
-  margin-left: 41%;
-  color: #16599c;
-  margin-top: .8rem;
+  text-align: center;
+}
+.button a{
+  font-size: 20px;
+  margin-right: 12px;
+}
+.card-deck{
+  height: 280px;
+  width: 680px;
+}
+
+/*===============================madebytien-detailsInfo=======================*/
+
+.details-info{
+  width: 100%;
+}
+
+.details-info .m-title{
+  width: 55%;
+  display: inline-block;
+}
+
+.details-info .m-views{
+  width: 35%;
+  display: inline-block;
   float: right;
 }
+
+.details-info .m-views h2{
+  float: right;
+  margin: 20px 25px;
+}
+
