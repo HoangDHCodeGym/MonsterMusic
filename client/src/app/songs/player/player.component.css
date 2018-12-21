@@ -1,8 +1,10 @@
 @import url(//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css);
+.container {
+  background: seashell;
+}
 .row {
   font-family: 'Josefin Sans', sans-serif !important;
-  margin: 5rem 0 5rem 0;
-  background: seashell;
+  margin: 2rem 0 2rem 0;
   font-family: tahoma;
   width: 100%;
   display: inline-block;
@@ -293,4 +295,31 @@ i:hover {
 .toplist{
   width: 100%;
   display: inline-block;
+}
+
+/*Danh sach bai hat*/
+.songmusic{
+  /*border: 1px solid black;*/
+  /*width: 80%;*/
+  height: 100px;
+  /*margin-top: 12%;*/
+}
+.singer{
+  width: 100%;
+  margin-top: 4rem;
+}
+.mb-3{
+  border-bottom: 1px solid #f9f8eb;
+  font-size: 23px;
+}
+/*.buttonplay{*/
+  /*margin-left: 25%;*/
+  /*margin-top: .8rem ;*/
+  /*color: #16599c;*/
+/*}*/
+.button{
+  margin-left: 41%;
+  color: #16599c;
+  margin-top: .8rem;
+  float: right;
 }

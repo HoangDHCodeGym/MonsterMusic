@@ -2,6 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {SongService} from "../../../service/song.service";
 import * as $ from 'jquery';
+import {Song} from "../../../model";
 
 @Component({
   selector: 'app-player',
@@ -11,7 +12,11 @@ import * as $ from 'jquery';
 export class PlayerComponent implements OnInit {
 
   songId:number;
+  songDate: string;
+  songTitle: string;
+  songSinger: string;
   currentSongURL: string = '';
+  songList: Array<Song>;
   audio: HTMLAudioElement;
   interval;
 
@@ -39,7 +44,21 @@ export class PlayerComponent implements OnInit {
       .subscribe((song)=>{
         this.currentSongURL = this.host+'/api/files/'+song.link;
         this.audio = new Audio(this.currentSongURL);
+        this.songDate = song.createdDate;
+        this.songTitle = song.name;
+        this.songSinger = (song.singer.name != null) ? song.singer.name : '';
+        this.getSongList(this.songSinger);
       })
+  }
+
+  getSongList(singerName: string): void {
+    this.songService.getSongs().subscribe((songPage) => {
+      this.songList = songPage.content;
+      while (this.songList.length > 5) {
+        this.songList.pop();
+      }
+      }
+    );
   }
 
   clickPlayBtn(): void {
