@@ -11,6 +11,7 @@ import {Song, SongForm} from "../../../model";
 })
 export class PlayerComponent implements OnInit {
   songId:number;
+  songGene:string;
   songViews:number;
   songDate: string;
   songTitle: string;
@@ -51,6 +52,7 @@ export class PlayerComponent implements OnInit {
         this.songTitle = song.name;
         this.songSinger = (song.singer.name != null) ? song.singer.name : '';
         this.songViews = song.views;
+        this.songGene = song.gene.name;
         this.getSongList(this.songSinger);
       })
   }
