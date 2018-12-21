@@ -90,8 +90,8 @@
               </td>
               <td>
                 <div class="button">
-                  <a href="#"> <i class="fa fa-play"></i></a>
-                  <a href="#"> <i class="fa fa-download"></i></a>
+                  <a (click)="toMusicPage(song.id)"> <i class="fa fa-play"></i></a>
+                  <a href="{{downloadSongURL + song.link}}"> <i class="fa fa-download"></i></a>
                   <a href="#"> <i class="fa fa-plus"></i></a>
                 </div>
               </td>

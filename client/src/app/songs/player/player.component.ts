@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {ActivatedRoute, ParamMap} from "@angular/router";
+import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {SongService} from "../../../service/song.service";
 import * as $ from 'jquery';
 import {Song, SongForm} from "../../../model";
@@ -16,6 +16,7 @@ export class PlayerComponent implements OnInit {
   songTitle: string;
   songSinger: string;
   currentSongURL: string = '';
+  downloadSongURL: string = '';
   songList: Array<Song>;
   audio: HTMLAudioElement;
   interval;
@@ -27,11 +28,13 @@ export class PlayerComponent implements OnInit {
   }
 
   constructor(private router: ActivatedRoute,
+              private routerL: Router,
               @Inject('HOST') private host,
               private songService :SongService) {
   }
 
   ngOnInit() {
+    this.downloadSongURL = this.host + '/api/files/';
     this.router.paramMap.subscribe((paramMap:ParamMap)=>{
       this.songId = Number(paramMap.get('id'));
       this.resolveSongResourceUrl();
@@ -96,6 +99,10 @@ export class PlayerComponent implements OnInit {
     clearInterval(this.interval);
     this.setCounter();
     this.audio.play();
+  }
+
+  toMusicPage(id: number){
+    this.routerL.navigate(['/music/'+id]);
   }
 
 }
