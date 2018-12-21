@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {SongService} from "../../service/song.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-search',
@@ -9,7 +10,8 @@ import {SongService} from "../../service/song.service";
 export class SearchComponent implements OnInit {
   private searchResult;
 
-  constructor(private songService: SongService) { }
+  constructor(private songService: SongService,
+              private router: Router) { }
 
   ngOnInit() {
   }
@@ -23,4 +25,8 @@ export class SearchComponent implements OnInit {
     }
   }
 
+  toMusicPage(id: number) {
+    this.searchResult = [];
+    this.router.navigate(['music/' + id])
+  }
 }

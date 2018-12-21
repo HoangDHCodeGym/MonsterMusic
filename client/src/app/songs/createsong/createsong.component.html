@@ -23,6 +23,7 @@
     <label for="filecontrol">Add your file (mp3)</label>
     <input type="file" class="form-control-file" id="filecontrol" name="file" ngModel (change)="appendFile(uploadFile.files)" #uploadFile>
   </div>
+  <i class="fas fa-sync fa-spin" style="text-align: center"></i>
   <div class="modal-footer">
     <button type="submit" class="btn btn-primary">Create</button>
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

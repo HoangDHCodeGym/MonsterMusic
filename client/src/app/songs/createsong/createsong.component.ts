@@ -34,7 +34,8 @@ export class CreatesongComponent implements OnInit {
     console.log(this.srcFile);
     this.songService.uploadSong(this.newSong,this.srcFile).subscribe(res => {
       if (res != null) {
-      }    });
+      }
+    });
   }
   appendFile(files:FileList){
     this.srcFile = files.item(0);
