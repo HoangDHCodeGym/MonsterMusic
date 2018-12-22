@@ -3,8 +3,6 @@ import {Singer, Song, SongForm} from "../../../model";
 import {SongService} from "../../../service/song.service";
 import {SingerService} from "../../../service/singer.service";
 import {Router} from "@angular/router";
-import * as $ from 'jquery';
-
 
 @Component({
   selector: 'app-createsong',
@@ -22,6 +20,7 @@ export class CreatesongComponent implements OnInit {
   isLoading: boolean = false;
   currentSongId:number = null;
   currentSinger:string ='';
+  currentUrlToMusicPage: string = '';
   srcFile: File;
   singerList: Singer[];
   creMessage: string = '';
@@ -43,6 +42,7 @@ export class CreatesongComponent implements OnInit {
     this.songService.uploadSong(this.newSong,this.srcFile).subscribe(res => {
       if (res != null) {
         this.currentSongId = res.id;
+        this.currentUrlToMusicPage = '/music/' + this.currentSongId;
       }
       this.isLoading = false;
       this.creMessage = "success!!";
@@ -76,13 +76,4 @@ export class CreatesongComponent implements OnInit {
     this.currentSinger = singer.name;
   }
 
-  toMusicPage(){
-    this.creMessage = '';
-    this.songService.getSongsByName(this.newSong.name,1).subscribe(
-      resp => {
-        this.router.navigate(['/music/' + this.currentSongId]);
-      }
-    );
-    // $('#settings-modal').modal('hide');
-  }
 }
