@@ -84,10 +84,11 @@
   line-height: 2.3rem;
 }
 .music_info {
+  padding-top: 1rem;
   top: 2rem;
   right: 0;
   position: absolute;
-  width: 58%;
+  width: 52%;
 }
 .music_info h2 {
   color: red;

@@ -50,7 +50,7 @@ export class PlayerComponent implements OnInit {
         this.reset();
         this.currentSongURL = this.host+'/api/files/'+song.link;
         this.audio = new Audio(this.currentSongURL);
-        this.songDate = song.createdDate;
+        this.songDate = song.createdDate.slice(0,10);
         this.songTitle = song.name;
         this.songSinger = (song.singer.name != null) ? song.singer.name : '';
         this.songViews = song.views;
