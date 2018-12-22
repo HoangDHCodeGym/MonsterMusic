@@ -3,7 +3,8 @@ import {Singer, Song, SongForm} from "../../../model";
 import {SongService} from "../../../service/song.service";
 import {SingerService} from "../../../service/singer.service";
 import {Router} from "@angular/router";
-import {$} from "protractor";
+import * as $ from 'jquery';
+
 
 @Component({
   selector: 'app-createsong',
@@ -19,7 +20,7 @@ export class CreatesongComponent implements OnInit {
     singer: null
   };
   isLoading: boolean = false;
-  currentSongId: number;
+  currentSongId:number = null;
   currentSinger:string ='';
   srcFile: File;
   singerList: Singer[];
@@ -41,10 +42,12 @@ export class CreatesongComponent implements OnInit {
     console.log(this.srcFile);
     this.songService.uploadSong(this.newSong,this.srcFile).subscribe(res => {
       if (res != null) {
+        this.currentSongId = res.id;
       }
+      this.isLoading = false;
+      this.creMessage = "success!!";
     });
-    this.isLoading = false;
-    this.creMessage = "success!!"
+
   }
 
   appendFile(files:FileList){
@@ -77,10 +80,9 @@ export class CreatesongComponent implements OnInit {
     this.creMessage = '';
     this.songService.getSongsByName(this.newSong.name,1).subscribe(
       resp => {
-        // $('#settings').modal('hide');
-        this.router.navigate(['/music/' + resp.content[0].id]);
+        this.router.navigate(['/music/' + this.currentSongId]);
       }
     );
-
+    // $('#settings-modal').modal('hide');
   }
 }

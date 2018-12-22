@@ -46,6 +46,7 @@ export class PlayerComponent implements OnInit {
     this.songService
       .getSongById(this.songId)
       .subscribe((song)=>{
+        this.reset();
         this.currentSongURL = this.host+'/api/files/'+song.link;
         this.audio = new Audio(this.currentSongURL);
         this.songDate = song.createdDate;
@@ -54,6 +55,7 @@ export class PlayerComponent implements OnInit {
         this.songViews = song.views;
         this.songGene = song.gene.name;
         this.getSongList(this.songSinger);
+        this.clickPlayBtn();
       })
   }
 
@@ -73,7 +75,6 @@ export class PlayerComponent implements OnInit {
       this.audio.play();
       playBtn.addClass('fa-pause');
       playBtn.removeClass('fa-play');
-      $('#song_duration').text(PlayerComponent.timeConverter(this.audio.duration));
       this.setCounter();
     } else {
       this.audio.pause();
@@ -105,6 +106,21 @@ export class PlayerComponent implements OnInit {
 
   toMusicPage(id: number){
     this.routerL.navigate(['/music/'+id]);
+    window.scroll(0,0);
+  }
+
+  downloadSong(link: string) {
+    window.location.href = this.host + '/api/files/' + link;
+  }
+
+  reset(): void {
+    const playBtn = $('#playBtn');
+    if(this.audio) this.audio.pause();
+    clearInterval(this.interval);
+    playBtn.addClass('fa-play');
+    playBtn.removeClass('fa-pause');
+    $("#timeLine").val(0);
+    $('#running_time').text('0.00');
   }
 
 }

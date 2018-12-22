@@ -34,6 +34,7 @@ export class ToplistComponent implements OnInit {
 
   toMusicPage(id: number) {
     this.router.navigate(['music/' + id])
+    window.scroll(0,0);
   }
 
 

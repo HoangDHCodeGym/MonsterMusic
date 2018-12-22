@@ -15,7 +15,6 @@
           <div class="time_slider">
             <span id="running_time">0:00</span>
             <input id="timeLine" #timeLine type="range" value="0" min="0" max="100" (click)="skipTo(timeLine.value)">
-            <span id="song_duration">0:00</span>
           </div>
           <div class="now_playing">
             <i class="fa fa-refresh" aria-hidden="true"></i>
@@ -84,7 +83,7 @@
                   <img src="assets/images/adeles.png" alt="" class="img-fluid">
                 </figure>
                 <div class="text">
-                  <a href="#"><h3 class="heading font-weight-light">{{song.name}}</h3></a>
+                  <a (click)="toMusicPage(song.id)" class="playlist_title"><h3 class="heading font-weight-light">{{song.name}}</h3></a>
                   <a href="#"><small class="text-muted">{{song.views}} <i class="fas fa-headphones"></i></small></a><br>
                   <a href="#"><small class="text-muted">{{song.singer?.name ||  "Unknown"}}</small></a>
                 </div>

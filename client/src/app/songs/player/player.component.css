@@ -351,4 +351,8 @@ i:hover {
   float: right;
   margin: 20px 25px;
 }
+.playlist_title :hover{
+  color: #4264AA;
+  cursor: pointer;
+}
 
