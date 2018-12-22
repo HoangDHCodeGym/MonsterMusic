@@ -66,33 +66,34 @@
           <h3 class="footer-heading mb-4">List Song</h3>
             <ul class="list-unstyled" *ngFor="let song of songList">
               <li class="mb-3">
-                <a href="#" class="d-flex">
-                  <figure class="image mr-4">
+                <div class="d-flex">
+                  <figure class="image mr-4 playlist_image">
                     <img src="assets/images/pic1.jpg" alt="" class="img-fluid">
                   </figure>
-                  <div class="text">
+                  <div class="text playlist_title" (click)="toMusicPage(song.id)">
                     <h3 class="heading font-weight-light">{{song.name}}</h3>
                     <small class="text-muted">{{song.singer?.name ||  "Unknown"}}</small>
                   </div>
-                  <div class="button">
-                    <i class="fa fa-play"></i>
-                    <i class="fa fa-download"></i>
+                  <div class="button playlist_button">
+                    <a (click)="toMusicPage(song.id)"><i class="fa fa-play"></i></a>
+                    <a (click)="downloadSong(song.link)"><i class="fa fa-download"></i></a>
                     <i class="fa fa-plus"></i>
                   </div>
-                </a>
+                </div>
               </li>
             </ul>
-
       </div>
 
-
-      <!-- Other songs column -->
-
-      <div class="md-col-4">
-
-      </div>
 
     </div>
+
+
+    <!-- Other songs column -->
+
+      <div class="col-4">
+
+      </div>
+
   </div>
 
   <div class="row">

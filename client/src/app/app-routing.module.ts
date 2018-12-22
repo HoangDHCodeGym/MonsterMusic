@@ -6,7 +6,7 @@ import {HomeComponent} from "./home/home.component";
 const routes: Routes = [
   {path: 'music/:id', component: PlayerComponent},
   {path: 'home', component: HomeComponent},
-  {path:'',redirectTo:'home',pathMatch:'full'}
+  {path:'',redirectTo:'home', pathMatch:'full'}
 ];
 
 @NgModule({

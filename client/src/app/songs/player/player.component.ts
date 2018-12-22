@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {ActivatedRoute, ParamMap} from "@angular/router";
+import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {SongService} from "../../../service/song.service";
 import * as $ from 'jquery';
 import {Song} from "../../../model";
@@ -27,6 +27,7 @@ export class PlayerComponent implements OnInit {
   }
 
   constructor(private router: ActivatedRoute,
+              private route: Router,
               @Inject('HOST') private host,
               private songService :SongService) {
   }
@@ -97,4 +98,12 @@ export class PlayerComponent implements OnInit {
     this.audio.play();
   }
 
+  toMusicPage(id: number) {
+    this.route.navigate(['music/' + id]);
+    window.scroll(0,0);
+  }
+
+  downloadSong(link: string) {
+    window.location.href = this.host + '/api/files/' + link;
+  }
 }

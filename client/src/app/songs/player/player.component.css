@@ -262,7 +262,6 @@ i:hover {
 
 .song_list {
   background: #402457;
-  /*position: absolute;*/
   margin: 0 ;
   width: 40rem;
   height: 5rem;
@@ -299,10 +298,7 @@ i:hover {
 
 /*Danh sach bai hat*/
 .songmusic{
-  /*border: 1px solid black;*/
-  /*width: 80%;*/
   height: 100px;
-  /*margin-top: 12%;*/
 }
 .singer{
   width: 100%;
@@ -312,14 +308,23 @@ i:hover {
   border-bottom: 1px solid #f9f8eb;
   font-size: 23px;
 }
-/*.buttonplay{*/
-  /*margin-left: 25%;*/
-  /*margin-top: .8rem ;*/
-  /*color: #16599c;*/
-/*}*/
+
 .button{
-  margin-left: 41%;
+  padding-left: 4rem;
   color: #16599c;
   margin-top: .8rem;
-  float: right;
+  /*float: right;*/
+}
+.playlist_image {
+  width: 30%
+}
+.playlist_title {
+  width: 50%
+}
+.playlist_button {
+  width: 30%
+}
+.playlist_title:hover {
+  color: #16599c;
+  cursor: pointer;
 }
