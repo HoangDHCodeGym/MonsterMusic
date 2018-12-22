@@ -13,8 +13,11 @@ import { CreatesongComponent } from './songs/createsong/createsong.component';
 import {FormsModule} from "@angular/forms";
 import {SingerService} from "../service/singer.service";
 import { SearchComponent } from './search/search.component';
+import {AuthService} from "../service/auth.service";
+import {TokenService} from "../service/token.service";
 
-const host = "http://45.32.123.20:8080";
+// const host = "http://45.32.123.20:8080";
+const host = "http://localhost:8080";
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +34,7 @@ const host = "http://45.32.123.20:8080";
     HttpClientModule,
     FormsModule
   ],
-  providers: [{provide: "HOST",useValue:host}, SongService, SingerService],
+  providers: [{provide: "HOST", useValue:host}, SongService, SingerService, AuthService, TokenService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
