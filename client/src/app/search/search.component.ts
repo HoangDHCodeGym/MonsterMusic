@@ -20,7 +20,9 @@ export class SearchComponent implements OnInit {
     this.searchResult = [];
     if(e!=''||e.length!=0){
       this.songService.getSongsByName(e,4).subscribe(resp => {
-        this.searchResult = resp.content;
+        if (resp != null){
+          this.searchResult = resp.content;
+        }
       })
     }
   }
