@@ -16,6 +16,7 @@ export class PlayerComponent implements OnInit {
   songDate: string;
   songTitle: string;
   songSinger: string;
+  songDuration: string = '0:00';
   currentSongURL: string = '';
   downloadSongURL: string = '';
   songList: Array<Song>;
@@ -87,6 +88,7 @@ export class PlayerComponent implements OnInit {
     const audio = this.audio;
     const self = this;
     this.interval = setInterval(function() {
+      self.songDuration = PlayerComponent.timeConverter(audio.duration);
       $('#running_time').text(PlayerComponent.timeConverter(audio.currentTime));
       $('#timeLine').val(Math.floor(audio.currentTime / audio.duration * 100));
       if (audio.currentTime === audio.duration) {
