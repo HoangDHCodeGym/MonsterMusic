@@ -12,4 +12,5 @@ import org.springframework.web.bind.annotation.CrossOrigin;
         path = "users"
 )
 public interface UserRepository extends PagingAndSortingRepository<User, Integer> {
+    User findAllByUsername(String username);
 }
