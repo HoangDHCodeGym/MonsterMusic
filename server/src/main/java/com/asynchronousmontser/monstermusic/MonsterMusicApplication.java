@@ -1,5 +1,7 @@
 package com.asynchronousmontser.monstermusic;
 
+import com.asynchronousmontser.monstermusic.model.User;
+import com.asynchronousmontser.monstermusic.repository.UserRepository;
 import com.asynchronousmontser.monstermusic.storage.StorageProperties;
 import com.asynchronousmontser.monstermusic.storage.StorageService;
 import org.springframework.boot.CommandLineRunner;
@@ -18,9 +20,14 @@ public class MonsterMusicApplication {
     }
 
     @Bean
-    CommandLineRunner init(StorageService storageService) {
+    CommandLineRunner init(StorageService storageService, UserRepository userRepository) {
         return (args) -> {
             storageService.init();
+//            User user = new User();
+//            user.setName("Hoang");
+//            user.setUsername("hoangdh");
+//            user.setPassword("admin");
+//            userRepository.save(user);
         };
     }
 }
