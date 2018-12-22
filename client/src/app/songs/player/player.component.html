@@ -3,14 +3,14 @@
   <!-- Music Player -->
   <div class="row">
     <!-- Main player column -->
-    <div class="col-8">
+    <div class="col-7" style="float: left;">
 
       <!-- Start player -->
       <div class="row">
         <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
         <div class="music_player">
           <div class="artist_img">
-            <img src="assets/images/pic1.jpg">
+            <img src="assets/images/adele1.jpg">
           </div>
           <div class="time_slider">
             <span id="running_time">0:00</span>
@@ -59,50 +59,61 @@
           </div>
         </div>
       </div>
+
+      <div class="details-info">
+        <div class="m-title">
+          <h2 class="title">{{songTitle}}</h2>
+          <small>gene </small><a>{{songGene}} </a><br>
+          <small>by </small><a>{{songSinger}} </a><i class="fas fa-microphone"></i><br>
+          <small>at </small><a>{{songDate}} </a><i class="fas fa-calendar"></i>
+        </div>
+        <div class="m-views">
+          <h2>{{songViews}} <i class="fas fa-headphones"></i></h2>
+        </div>
+      </div>
+
       <!-- End player -->
 
       <div class="songmusic row">
-
-          <h3 class="footer-heading mb-4">List Song</h3>
-            <ul class="list-unstyled" *ngFor="let song of songList">
-              <li class="mb-3">
-                <div class="d-flex">
-                  <figure class="image mr-4 playlist_image">
-                    <img src="assets/images/pic1.jpg" alt="" class="img-fluid">
-                  </figure>
-                  <div class="text playlist_title" (click)="toMusicPage(song.id)">
-                    <h3 class="heading font-weight-light">{{song.name}}</h3>
-                    <small class="text-muted">{{song.singer?.name ||  "Unknown"}}</small>
-                  </div>
-                  <div class="button playlist_button">
-                    <a (click)="toMusicPage(song.id)"><i class="fa fa-play"></i></a>
-                    <a (click)="downloadSong(song.link)"><i class="fa fa-download"></i></a>
-                    <i class="fa fa-plus"></i>
-                  </div>
+        <h3 class="footer-heading md-4">List Song</h3>
+        <div class="table-responsive-md">
+          <table class="table">
+            <tr *ngFor="let song of songList">
+              <td class="d-flex">
+                <figure class="image mr-4">
+                  <img src="assets/images/adeles.png" alt="" class="img-fluid">
+                </figure>
+                <div class="text">
+                  <a href="#"><h3 class="heading font-weight-light">{{song.name}}</h3></a>
+                  <a href="#"><small class="text-muted">{{song.views}} <i class="fas fa-headphones"></i></small></a><br>
+                  <a href="#"><small class="text-muted">{{song.singer?.name ||  "Unknown"}}</small></a>
                 </div>
-              </li>
-            </ul>
+              </td>
+              <td>
+                <div class="button">
+                  <a (click)="toMusicPage(song.id)"> <i class="fa fa-play"></i></a>
+                  <a href="{{downloadSongURL + song.link}}"> <i class="fa fa-download"></i></a>
+                  <a href="#"> <i class="fa fa-plus"></i></a>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
-
 
     </div>
-
-
-    <!-- Other songs column -->
-
-      <div class="col-4">
-
+      <div class="sidebar">
+        <app-toplist></app-toplist>
       </div>
-
   </div>
-
+  <div class="clear"></div>
   <div class="row">
     <!-- Singer list -->
     <div class=" singer">
       <h2 class="title-section fs18"> Play List</h2>
       <div class="card-deck">
         <div class="card">
-          <img class="card-img-top" src="assets/images/4.jpg" alt="Card image cap">
+          <img class="card-img-top" src="assets/images/giangsinh.jpg" alt="Card image cap">
 
           <div class="card-body">
             <h5 class="card-title">Giang Sinh</h5>
@@ -110,14 +121,14 @@
           </div>
         </div>
         <div class="card">
-          <img class="card-img-top" src="assets/images/4.jpg" alt="Card image cap">
+          <img class="card-img-top" src="assets/images/muadong.jpg" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title">Mua Dong</h5>
             <p class="card-text">Mua le hoi</p>
           </div>
         </div>
         <div class="card">
-          <img class="card-img-top" src="assets/images/4.jpg" alt="Card image cap">
+          <img class="card-img-top" src="assets/images/giangsinh.jpg" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title">Nam moi</h5>
             <p class="card-text">Mua yeu thuong</p>
@@ -127,7 +138,7 @@
       <br>
       <div class="card-deck">
         <div class="card">
-          <img class="card-img-top" src="assets/images/4.jpg" alt="Card image cap">
+          <img class="card-img-top" src="assets/images/giangsinh.jpg" alt="Card image cap">
 
           <div class="card-body">
             <h5 class="card-title">Giang Sinh</h5>
@@ -135,14 +146,14 @@
           </div>
         </div>
         <div class="card">
-          <img class="card-img-top" src="assets/images/4.jpg" alt="Card image cap">
+          <img class="card-img-top" src="assets/images/muadong.jpg" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title">Mua Dong</h5>
             <p class="card-text">Mua le hoi</p>
           </div>
         </div>
         <div class="card">
-          <img class="card-img-top" src="assets/images/4.jpg" alt="Card image cap">
+          <img class="card-img-top" src="assets/images/giangsinh.jpg" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title">Nam moi</h5>
             <p class="card-text">Mua yeu thuong</p>

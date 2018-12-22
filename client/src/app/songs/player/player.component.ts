@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {SongService} from "../../../service/song.service";
 import * as $ from 'jquery';
-import {Song} from "../../../model";
+import {Song, SongForm} from "../../../model";
 
 @Component({
   selector: 'app-player',
@@ -10,12 +10,14 @@ import {Song} from "../../../model";
   styleUrls: ['./player.component.css']
 })
 export class PlayerComponent implements OnInit {
-
   songId:number;
+  songGene:string;
+  songViews:number;
   songDate: string;
   songTitle: string;
   songSinger: string;
   currentSongURL: string = '';
+  downloadSongURL: string = '';
   songList: Array<Song>;
   audio: HTMLAudioElement;
   interval;
@@ -27,12 +29,13 @@ export class PlayerComponent implements OnInit {
   }
 
   constructor(private router: ActivatedRoute,
-              private route: Router,
+              private routerL: Router,
               @Inject('HOST') private host,
               private songService :SongService) {
   }
 
   ngOnInit() {
+    this.downloadSongURL = this.host + '/api/files/';
     this.router.paramMap.subscribe((paramMap:ParamMap)=>{
       this.songId = Number(paramMap.get('id'));
       this.resolveSongResourceUrl();
@@ -48,6 +51,8 @@ export class PlayerComponent implements OnInit {
         this.songDate = song.createdDate;
         this.songTitle = song.name;
         this.songSinger = (song.singer.name != null) ? song.singer.name : '';
+        this.songViews = song.views;
+        this.songGene = song.gene.name;
         this.getSongList(this.songSinger);
       })
   }
@@ -98,12 +103,8 @@ export class PlayerComponent implements OnInit {
     this.audio.play();
   }
 
-  toMusicPage(id: number) {
-    this.route.navigate(['music/' + id]);
-    window.scroll(0,0);
+  toMusicPage(id: number){
+    this.routerL.navigate(['/music/'+id]);
   }
 
-  downloadSong(link: string) {
-    window.location.href = this.host + '/api/files/' + link;
-  }
 }
