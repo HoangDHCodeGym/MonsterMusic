@@ -1,0 +1,70 @@
+<!--playmusic-->
+<div class="container">
+  <div class="row">
+    <!-- Main player column -->
+    <div class="col-7" style="float: left;">
+      <div class="songmusic row">
+        <h3 class="footer-heading md-4 title">#Song List</h3>
+        <div class="table-responsive-md">
+          <table class="table" *ngIf="songPage?.content">
+            <tr *ngFor="let song of songPage.content">
+              <td class="d-flex">
+                <figure class="image mr-4">
+                  <img src="assets/images/default.png" alt="" class="img-fluid">
+                </figure>
+                <div class="text">
+                  <a (click)="toMusicPage(song.id)" class="playlist_title"><h3
+                    class="heading font-weight-light">{{song.name}}</h3></a>
+                  <a href="#">
+                    <small class="text-muted">{{song.views}} <i class="fas fa-headphones"></i></small>
+                  </a><br>
+                  <a href="#">
+                    <small class="text-muted">{{song.singer?.name || "Unknown"}}</small>
+                  </a>
+                </div>
+              </td>
+              <td>
+                <div class="button">
+                  <a (click)="toMusicPage(song.id)"> <i class="fa fa-play"></i></a>
+                  <a href="{{downloadSongURL + song.link}}"> <i class="fa fa-download"></i></a>
+                  <a data-toggle="modal" data-target="#choose-playlist-modal"
+                     (click)="addToPlayList(song.id)">
+                    <i class="fa fa-plus"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar">
+      <app-toplist
+        [choose-playlist-input]="songForPlaylist">
+      </app-toplist>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="content col-7">
+    <app-listsinger [singerName]="query"></app-listsinger>
+  </div>
+  <br>
+  <div class="row">
+    <!-- playlist list -->
+    <div class=" singer">
+      <h2 class="title-section fs18 title">#Playlist</h2>
+      <hr>
+      <div class="card-deck" *ngIf="playlistPage!=null">
+        <div class="card" *ngFor="let playlist of playlistPage.content;index as i">
+          <img class="card-img-top" [src]="'assets/images/playlist'+(i+1)+'.jpg'" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{playlist.name}}</h5>
+            <p class="card-text">{{playlist.description.substring(0, 20)}}...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Playlist list -->
+  <br>
+</div>
