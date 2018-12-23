@@ -9,12 +9,11 @@ import {Router} from "@angular/router";
   styleUrls: ['./toplist.component.css']
 })
 export class ToplistComponent implements OnInit {
-  songlist: Song[]=[];
-  kPopSongList: Song[]=[];
-  vPopSongList: Song[]=[];
-  usAndUkSongList: Song[]=[];
+  songlist: Song[] = [];
+  kPopSongList: Song[] = [];
+  vPopSongList: Song[] = [];
+  usAndUkSongList: Song[] = [];
   downloadSongURL: string = '';
-  songForPlaylist:number;
 
   constructor(private songService: SongService, @Inject('HOST') private host: string,
               private router: Router) {
@@ -27,19 +26,43 @@ export class ToplistComponent implements OnInit {
   }
 
   public getAllSongList() {
-    this.songService.getSongsAndSortByDESC(5).subscribe(res => {if(res!=null){this.songlist = res.content}});
-    this.songService.getSongByGene(1, 5).subscribe(res => {if(res!=null){this.kPopSongList = res.content}});
-    this.songService.getSongByGene(2, 5).subscribe(res => {if(res!=null){this.vPopSongList = res.content}});
-    this.songService.getSongByGene(3, 5).subscribe(res => {if(res!=null){this.usAndUkSongList = res.content}});
+    this.songService.getSongsAndSortByDESC(5).subscribe(res => {
+      if (res != null) {
+        this.songlist = res.content
+      }
+    });
+    this.songService.getSongByGene(1, 5).subscribe(res => {
+      if (res != null) {
+        this.kPopSongList = res.content
+      }
+    });
+    this.songService.getSongByGene(2, 5).subscribe(res => {
+      if (res != null) {
+        this.vPopSongList = res.content
+      }
+    });
+    this.songService.getSongByGene(3, 5).subscribe(res => {
+      if (res != null) {
+        this.usAndUkSongList = res.content
+      }
+    });
   }
 
   toMusicPage(id: number) {
-    this.router.navigate(['music/' + id])
-    window.scroll(0,0);
+    this.router.navigate(['music/' + id]);
+    window.scroll(0, 0);
   }
 
-  addToPlayList(songId:number){
-    this.songForPlaylist = songId;
+  /** playlist stuff **/
+
+  songForPlaylist: number;
+
+  addToPlayList(songId: number) {
+    if (this.songForPlaylist == songId) {
+      this.songForPlaylist = 0;
+    } else {
+      this.songForPlaylist = songId
+    }
   }
 
 

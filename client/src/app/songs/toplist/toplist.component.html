@@ -31,7 +31,8 @@
 				    					<i class="blurT views">{{song.views}} views</i><br>
                       <a (click)="toMusicPage(song.id)"><i class="fas fa-play"></i></a> |
 				    					<a href="{{downloadSongURL+song.link}}"><i class="fas fa-download"></i></a> |
-                      <a data-toggle="modal" data-target="#choose-playlist-modal">
+                      <a data-toggle="modal" data-target="#choose-playlist-modal"
+                         (click)="addToPlayList(song.id)">
                         <i class="fas fa-plus"></i>
                       </a>
                     </span>
@@ -58,7 +59,8 @@
 				    					<i class="blurT views">{{song.views}} views</i><br>
                       <a (click)="toMusicPage(song.id)"><i class="fas fa-play"></i></a> |
 				    					<a href="{{downloadSongURL+song.link}}"><i class="fas fa-download"></i></a> |
-                      <a data-toggle="modal" data-target="#choose-playlist-modal">
+                      <a data-toggle="modal" data-target="#choose-playlist-modal"
+                         (click)="addToPlayList(song.id)">
                         <i class="fas fa-plus"></i>
                       </a>
 				    				</span>
@@ -84,7 +86,8 @@
 				    					<i class="blurT views">{{song.views}} views</i><br>
                       <a (click)="toMusicPage(song.id)"><i class="fas fa-play"></i></a> |
 				    					<a href="{{downloadSongURL+song.link}}"><i class="fas fa-download"></i></a> |
-                      <a data-toggle="modal" data-target="#choose-playlist-modal">
+                      <a data-toggle="modal" data-target="#choose-playlist-modal"
+                         (click)="addToPlayList(song.id)">
                         <i class="fas fa-plus"></i>
                       </a>
 				    				</span>
@@ -111,7 +114,7 @@
                       <a (click)="toMusicPage(song.id)"><i class="fas fa-play"></i></a> |
 				    					<a href="{{downloadSongURL+song.link}}"><i class="fas fa-download"></i></a> |
                       <a data-toggle="modal" data-target="#choose-playlist-modal"
-                      (click)="addToPlayList(song.id)">
+                         (click)="addToPlayList(song.id)">
                         <i class="fas fa-plus"></i>
                       </a>
 				    				</span>

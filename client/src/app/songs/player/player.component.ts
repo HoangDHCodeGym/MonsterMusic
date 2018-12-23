@@ -3,6 +3,7 @@ import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {SongService} from "../../../service/song.service";
 import * as $ from 'jquery';
 import {Song, SongForm} from "../../../model";
+import {PlaylistService} from "../../../service/playlist.service";
 
 @Component({
   selector: 'app-player',
@@ -32,7 +33,8 @@ export class PlayerComponent implements OnInit {
   constructor(private router: ActivatedRoute,
               private routerL: Router,
               @Inject('HOST') private host,
-              private songService :SongService) {
+              private songService :SongService,
+              private playlistService:PlaylistService) {
   }
 
   ngOnInit() {
@@ -123,6 +125,17 @@ export class PlayerComponent implements OnInit {
     playBtn.removeClass('fa-pause');
     $("#timeLine").val(0);
     $('#running_time').text('0.00');
+  }
+
+  /** this is playlist stuff**/
+  songForPlaylist: number;
+
+  addToPlayList(songId: number) {
+    if (this.songForPlaylist == songId) {
+      this.songForPlaylist = 0;
+    } else {
+      this.songForPlaylist = songId
+    }
   }
 
 }
