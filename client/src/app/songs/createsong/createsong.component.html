@@ -40,7 +40,7 @@
     <button type="submit" class="btn btn-primary" *ngIf="isFailed||creMessage.length==0">Create</button>
     <a type="button" class="btn btn-success" *ngIf="(creMessage.length!=0 && !isFailed)"
        [routerLink]="currentUrlToMusicPage"
-       data-dismiss="modal">
+       data-dismiss="modal" (click)="refresh()">
       <i class="far fa-play-circle"></i> Play
     </a>
     <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="refresh()">Close</button>
