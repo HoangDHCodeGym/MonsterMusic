@@ -7,7 +7,7 @@
         <h3 class="footer-heading md-4 title">#Song List</h3>
         <hr>
         <div class="table-responsive-md">
-          <div *ngIf="songPage==null">
+          <div *ngIf="songPage==null&&songLoaded">
             <div class="alert alert-danger" style="text-align: center">no song found</div>
           </div>
           <table class="table" *ngIf="songPage?.content">
@@ -56,7 +56,7 @@
     <div class=" singer">
       <h2 class="title-section fs18 title">#Playlist</h2>
       <hr>
-      <div *ngIf="playlistPage==null">
+      <div *ngIf="playlistPage==null&&playlistLoaded">
         <div class="alert alert-danger" style="text-align: center">no song found</div>
       </div>
       <div class="card-deck" *ngIf="playlistPage!=null">

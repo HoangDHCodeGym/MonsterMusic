@@ -10,6 +10,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./listsinger.component.css']
 })
 export class ListsingerComponent implements OnInit {
+  singerLoaded: boolean = false;
   private _singerName;
   @Input()
   set singerName(singerName: string) {
@@ -37,15 +38,18 @@ export class ListsingerComponent implements OnInit {
   }
 
   getAllSingers() {
+    this.singerLoaded = false;
     this.singerService
       .getAllSinger(5)
       .subscribe(resp => {
-        this.singerList = resp.content
+        this.singerList = resp.content;
+        this.singerLoaded = true;
       })
 
   }
 
   getSingerByName(singerName: string) {
+    this.singerLoaded = false;
     this.singerService
       .getSingers(singerName, 5)
       .subscribe(resp => {
@@ -54,6 +58,7 @@ export class ListsingerComponent implements OnInit {
         } else {
           this.singerList = [];
         }
+        this.singerLoaded = true;
       })
   }
 

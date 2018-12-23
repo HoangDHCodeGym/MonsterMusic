@@ -10,6 +10,8 @@ import {SongService} from "../../../service/song.service";
   styleUrls: ['./search-list.component.css']
 })
 export class SearchListComponent implements OnInit {
+  songLoaded: boolean = false;
+  playlistLoaded: boolean = false;
   query: string = '';
   downloadSongURL: string = this.host + '/api/files/';
 
@@ -24,20 +26,23 @@ export class SearchListComponent implements OnInit {
     this.router
       .paramMap
       .subscribe((param: ParamMap) => {
+        this.songLoaded = false;
+        this.playlistLoaded = false;
         this.query = param.get('q');
         if (this.query != null || this.query != '') {
           this.songService
             .getSongsByName(this.query, 6)
             .subscribe(resp => {
-              this.songPage = resp
+              this.songPage = resp;
+              this.songLoaded = true;
             });
           this.playlistService
           //.getAllPlaylist(3)
             .getPlaylistByName(this.query, 3)
             .subscribe(resp => {
-              this.playlistPage = resp
-
-            })
+              this.playlistPage = resp;
+              this.playlistLoaded = true;
+            });
         }
       })
   }
