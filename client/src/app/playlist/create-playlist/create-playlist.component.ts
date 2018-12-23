@@ -28,7 +28,7 @@ export class CreatePlaylistComponent implements OnInit {
         .createPlaylist(this.newPlaylist)
         .subscribe((playlist) => {
           if (playlist != null) {
-            this.creMessage = 'success';
+            this.creMessage = 'successfully created '+playlist.name;
             this.status = 1;
             playlistForm.reset()
           } else {
