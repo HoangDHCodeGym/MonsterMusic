@@ -26,7 +26,7 @@ export interface Singer {
   createdDate: string //maybe Date, not sure
 }
 
-interface Playlist {
+export interface Playlist {
   id: number,
   name: number,
   songList: number,//the length of the song list
@@ -71,7 +71,7 @@ export interface SingerForm {
   creator: number,
 }
 
-interface PlaylistForm {
+export interface PlaylistForm {
   name: string,
   description: string,
 
