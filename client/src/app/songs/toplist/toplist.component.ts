@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnInit} from '@angular/core';
 import {SongService} from "../../../service/song.service";
 import {Song} from "../../../model";
 import {Router} from "@angular/router";
@@ -55,7 +55,7 @@ export class ToplistComponent implements OnInit {
 
   /** playlist stuff **/
 
-  songForPlaylist: number;
+  @Input('choose-playlist-input') songForPlaylist: number;
 
   addToPlayList(songId: number) {
     if (this.songForPlaylist == songId) {
