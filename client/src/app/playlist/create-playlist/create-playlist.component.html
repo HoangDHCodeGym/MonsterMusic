@@ -1,3 +1,22 @@
-<p>
-  create-playlist works!
-</p>
+<form #playlistForm="ngForm" (ngSubmit)="onSubmit(playlistForm)">
+  <div class="form-group">
+    <label for="playlistName">playlist's name</label>
+    <input type="text" class="form-control" id="playlistName" placeholder="Enter name" name="name"
+           [(ngModel)]="newPlaylist.name" required="required" #name="ngModel">
+    <i style="color: red" *ngIf="name?.errors && name.touched">* Playlist name required</i>
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea rows="4" type="text" class="form-control" id="description" placeholder="Enter something about your playlist" name="description"
+              [(ngModel)]="newPlaylist.description"></textarea>
+  </div>
+  <div class="alert alert-success" *ngIf="status>0">{{creMessage}}</div>
+  <div class="alert alert-danger" *ngIf="status<0">{{creMessage}}</div>
+  <div class="modal-footer">
+    <!--<button type="submit" class="btn btn-primary" *ngIf="status<=0">Create</button>-->
+    <!--<a type="button" class="btn btn-success" *ngIf="status>0" [href]="">-->
+       <!--Return-->
+    <!--</a>-->
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  </div>
+</form>
