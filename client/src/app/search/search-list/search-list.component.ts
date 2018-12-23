@@ -35,14 +35,14 @@ export class SearchListComponent implements OnInit {
             .subscribe(resp => {
               this.songPage = resp;
               this.songLoaded = true;
-            });
+            },()=>{this.songLoaded = true;});
           this.playlistService
           //.getAllPlaylist(3)
             .getPlaylistByName(this.query, 3)
             .subscribe(resp => {
               this.playlistPage = resp;
               this.playlistLoaded = true;
-            });
+            },()=>{this.playlistLoaded = true;});
         }
       })
   }

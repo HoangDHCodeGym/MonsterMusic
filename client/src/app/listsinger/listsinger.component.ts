@@ -44,7 +44,7 @@ export class ListsingerComponent implements OnInit {
       .subscribe(resp => {
         this.singerList = resp.content;
         this.singerLoaded = true;
-      })
+      },()=>{this.singerLoaded = true;})
 
   }
 
@@ -59,7 +59,7 @@ export class ListsingerComponent implements OnInit {
           this.singerList = [];
         }
         this.singerLoaded = true;
-      })
+      },()=>{this.singerLoaded = true;})
   }
 
   toSingerSong(singerId: number) {
