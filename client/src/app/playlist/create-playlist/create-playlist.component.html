@@ -15,7 +15,7 @@
   <div class="alert alert-danger" *ngIf="status<0">{{creMessage}}</div>
   <div class="modal-footer">
     <button type="submit" class="btn btn-primary" *ngIf="status<=0">Create</button>
-    <button type="button" [ngClass]="{'btn btn-secondary': (status<=0),'btn btn-primary':(status>0)}" class=""
+    <button type="button" [ngClass]="{'btn':true,'btn-secondary': (status<=0),'btn-primary':(status>0)}" (click)="refresh()"
             data-dismiss="modal">Close
     </button>
   </div>
