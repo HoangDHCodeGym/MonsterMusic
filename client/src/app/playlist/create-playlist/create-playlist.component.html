@@ -13,10 +13,6 @@
   <div class="alert alert-success" *ngIf="status>0">{{creMessage}}</div>
   <div class="alert alert-danger" *ngIf="status<0">{{creMessage}}</div>
   <div class="modal-footer">
-    <!--<button type="submit" class="btn btn-primary" *ngIf="status<=0">Create</button>-->
-    <!--<a type="button" class="btn btn-success" *ngIf="status>0" [href]="">-->
-       <!--Return-->
-    <!--</a>-->
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="button" [ngClass]="{'btn btn-secondary': status<=0,'btn btn-primary':status>0}" class="" data-dismiss="modal">Close</button>
   </div>
 </form>
