@@ -31,9 +31,9 @@
   <div class="alert alert-success" *ngIf="creMessage.length!=0">{{creMessage}}</div>
   <div class="modal-footer">
     <button type="submit" class="btn btn-primary" *ngIf="creMessage.length==0" [disabled]="isLoading">Create</button>
-    <a type="button" class="btn btn-success" *ngIf="creMessage.length!=0" [href]="currentUrlToMusicPage">
+    <button type="button" class="btn btn-success" data-dismiss="modal" *ngIf="creMessage.length!=0" [routerLink]="currentUrlToMusicPage">
       <i class="far fa-play-circle"></i> Play
-    </a>
+    </button>
     <button type="button" class="btn btn-secondary" data-dismiss="modal" [disabled]="isLoading">Close</button>
   </div>
 </form>
