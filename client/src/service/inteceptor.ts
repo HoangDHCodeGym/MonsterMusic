@@ -11,6 +11,7 @@ import {
 import {Router} from "@angular/router";
 import {TokenService} from "./token.service";
 import {Observable} from "rxjs";
+import {tap} from "rxjs/operators";
 
 const TOKEN_HEADER_KEY = 'Authorization';
 
@@ -25,17 +26,19 @@ export class Interceptor implements HttpInterceptor {
     if (this.token.getToken() != null) {
       authReq = req.clone({ headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + this.token.getToken())});
     }
-    return next.handle(authReq).do(
+    return next.handle(authReq).pipe(tap (
       (err: any) => {
         if (err instanceof HttpErrorResponse) {
           console.log(err);
           console.log('req url :: ' + req.url);
           if (err.status === 401) {
-            this.router.navigate(['user']);
+            this.router.navigate(['home']);
           }
         }
       }
+      )
     );
   }
 
 }
+
