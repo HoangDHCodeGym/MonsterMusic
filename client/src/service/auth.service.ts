@@ -14,9 +14,6 @@ export class AuthService {
   attemptAuth(username: string, password: string): Observable<any> {
     const url = this.host + "/oauth/token";
     let headersContent: HttpHeaders = new HttpHeaders({Authorization: 'Basic ' + window.btoa('devglan-client:devglan-secret')});
-    // let headersContent: HttpHeaders = new HttpHeaders()
-    //   .set('Authorization', 'Basic ' + window.btoa('devglan-client:devglan-secret'))
-    //   .set('Content-Type', 'application/x-www-form-urlencoded');
     console.log(headersContent);
     const body = new HttpParams()
       .set('username', "admin")

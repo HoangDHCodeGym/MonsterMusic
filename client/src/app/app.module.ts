@@ -15,6 +15,7 @@ import {SingerService} from "../service/singer.service";
 import { SearchComponent } from './search/search.component';
 import {AuthService} from "../service/auth.service";
 import {TokenService} from "../service/token.service";
+import { UserComponent } from './user/user.component';
 
 // const host = "http://45.32.123.20:8080";
 const host = "http://localhost:8080";
@@ -26,7 +27,8 @@ const host = "http://localhost:8080";
     ToplistComponent,
     ListsingerComponent,
     CreatesongComponent,
-    SearchComponent
+    SearchComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
