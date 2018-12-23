@@ -4,7 +4,6 @@ import {SongService} from "../../../service/song.service";
 import * as $ from 'jquery';
 import {Page, Playlist, Song, SongForm} from "../../../model";
 import {PlaylistService} from "../../../service/playlist.service";
-import {SingerService} from "../../../service/singer.service";
 
 @Component({
   selector: 'app-player',
