@@ -2,7 +2,7 @@ import {Inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
-import {Page, Playlist, PlaylistForm} from "../model";
+import {Page, Playlist, PlaylistForm, Singer} from "../model";
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +46,9 @@ export class PlaylistService {
         }
         return null;
       }))
+  }
+  getPlaylistByName(name: string, size: number): Observable<Page<Playlist>> {
+    return this.httpClient.get<Page<Playlist>>(this.host + '/api/playlists/search/name?q=' + name + '&size=' + size + '&page=0&sort=name');
   }
 
   constructor(@Inject('HOST') private host: string,

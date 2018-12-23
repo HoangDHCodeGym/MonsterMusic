@@ -1,4 +1,5 @@
 <h2 class="title">#List singers</h2>
+<hr>
 <div class="box" *ngFor="let singer of singerList;index as i">
   <img [src]="'./assets/images/pic'+(i+1)+'.jpg'" alt="">
   <h5 class="card-title"> #{{singer.name}}</h5>

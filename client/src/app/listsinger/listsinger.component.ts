@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {SingerService} from "../../service/singer.service";
 import {Singer} from "../../model";
 
@@ -8,19 +8,48 @@ import {Singer} from "../../model";
   styleUrls: ['./listsinger.component.css']
 })
 export class ListsingerComponent implements OnInit {
-  singerList: Singer[]=[];
+  private _singerName;
+  @Input()
+  set singerName(singerName: string) {
+    this._singerName = singerName;
+    this.getSingerByName(singerName)
+  }
 
-  constructor(private singerService:SingerService) { }
+  get singerName() {
+    return this._singerName
+  }
+
+  singerList: Singer[] = [];
+
+  constructor(private singerService: SingerService) {
+  }
 
   ngOnInit() {
-    this.getAllSingers();
+    if (this.singerName) {
+      this.getSingerByName(this.singerName)
+    } else {
+      this.getAllSingers();
+    }
   }
-  getAllSingers(){
+
+  getAllSingers() {
     this.singerService
       .getAllSinger(5)
-      .subscribe(resp=>{
-        this.singerList=resp.content})
+      .subscribe(resp => {
+        this.singerList = resp.content
+      })
 
+  }
+
+  getSingerByName(singerName: string) {
+    this.singerService
+      .getSingers(singerName, 5)
+      .subscribe(resp => {
+        if (resp != null) {
+          this.singerList = resp.content
+        }
+        this.singerList=[];
+      })
   }
 
 }
