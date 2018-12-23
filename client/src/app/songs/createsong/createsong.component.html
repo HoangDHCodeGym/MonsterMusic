@@ -1,14 +1,17 @@
 <form #songForm="ngForm" (ngSubmit)="onSubmit(songForm)">
   <div class="form-group">
     <label for="name">Song's name</label>
-    <input type="text" class="form-control" id="name"  placeholder="Enter name" name="name" [(ngModel)]="newSong.name">
+    <input type="text" class="form-control" id="name" #name='ngModel' placeholder="Enter name" name="name" [(ngModel)]="newSong.name" required="required">
+    <i style="color: red" *ngIf="name?.errors && name.touched">* Song name required</i>
   </div>
   <div class="form-group">
     <label for="singer">Singer</label>
-    <input type="search" class="form-control" id="singer" placeholder="Enter singer" name="singer" (keyup)="onChange(singer.value)" #singer [ngModel]="currentSinger">
+    <input type="search" class="form-control" id="singer" placeholder="Enter singer" name="singer"
+           (keyup)="onChange(singer.value)" #singer [ngModel]="currentSinger">
     <ul class="list-group" *ngIf="singerList">
-      <li style="cursor: pointer" class="list-group-item" *ngFor="let singer of singerList; index as i" (click)="getSinger(singer)"
-      [style.color]="i == 0? '#007bff': 'black' ">{{singer.name}}</li>
+      <li style="cursor: pointer" class="list-group-item" *ngFor="let singer of singerList; index as i"
+          (click)="getSinger(singer)"
+          [style.color]="i == 0? '#007bff': 'black' ">{{singer.name}}</li>
     </ul>
   </div>
   <div class="form-group">
@@ -21,20 +24,26 @@
   </div>
   <div class="form-group">
     <label for="filecontrol">Add your file (mp3)</label>
-    <input type="file" class="form-control-file" id="filecontrol" name="file" ngModel (change)="appendFile(uploadFile.files)" #uploadFile>
+    <input type="file" class="form-control-file" id="filecontrol" name="file" ngModel
+           (change)="appendFile(uploadFile.files)" #uploadFile #validFile="ngModel">
+    <i style="color: red" *ngIf="uploadFile.files.length == 0 && validFile.touched">* must have a song</i>
   </div>
   <div class="form-group" *ngIf="isLoading" style="text-align: center">
-    <i class="fas fa-sync fa-spin" style="text-align: center" ></i>
-    <br><small>Please wait</small>
+    <i class="fas fa-sync fa-spin" style="text-align: center"></i>
+    <br>
+    <small>Please wait</small>
   </div>
 
-  <div class="alert alert-success" *ngIf="creMessage.length!=0">{{creMessage}}</div>
+  <div [ngClass]="{'alert':true,'alert-success':(!isFailed),'alert-danger':isFailed}"
+       *ngIf="creMessage.length!=0">{{creMessage}}</div>
   <div class="modal-footer">
-    <button type="submit" class="btn btn-primary" *ngIf="creMessage.length==0">Create</button>
-    <a type="button" class="btn btn-success" *ngIf="creMessage.length!=0" [href]="currentUrlToMusicPage">
+    <button type="submit" class="btn btn-primary" *ngIf="isFailed||creMessage.length==0">Create</button>
+    <a type="button" class="btn btn-success" *ngIf="(creMessage.length!=0 && !isFailed)"
+       [routerLink]="currentUrlToMusicPage"
+       data-dismiss="modal">
       <i class="far fa-play-circle"></i> Play
     </a>
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="refresh()">Close</button>
   </div>
 </form>
 
