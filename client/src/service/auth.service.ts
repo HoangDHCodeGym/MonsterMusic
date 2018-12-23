@@ -1,6 +1,6 @@
 import {Inject, Injectable} from '@angular/core';
 import {Observable} from "rxjs";
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +11,9 @@ export class AuthService {
   }
 
   attemptAuth(username: string, password: string): Observable<any> {
-    const headers = {
-      'Authorization': 'Basic ' + btoa('devglan-client:devglan-secret'),
-      'Content-type': 'application/x-www-form-urlencoded'
-    };
+    let headersContent = new HttpHeaders();
+    headersContent.append('Content-Type', 'application/x-www-form-urlencoded');
+    headersContent.append('Authorization', 'Basic ' + window.btoa('devglan-client:devglan-secret'));
 
     const body = new HttpParams()
       .set('username', username)
@@ -22,6 +21,6 @@ export class AuthService {
       .set('grant_type', 'password');
 
     console.log('attempAuth ::');
-    return this.http.post<any>(this.host, body, {headers});
+    return this.http.post<any>(this.host, body, {headers: headersContent});
   }
 }
