@@ -1,0 +1,1 @@
+INSERT INTO `user` VALUES (3,'Hoang','hoangdh','$2a$10$thOh02xjKDICX2vf36iml.adesaW9x6fuxrjKP/k2nVMGfe7DM90.','2018-12-22 14:39:00'),(4,'lana','admin','$2a$10$2OKDeCYsGPv2Z//eRliTD.cpZMqq8Hb59CLQ7q3xrXafaJiRfm.ka','2018-12-22 14:39:21');
