@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {SingerService} from "../../service/singer.service";
 import {Singer} from "../../model";
+import {SongService} from "../../service/song.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-listsinger',
@@ -21,7 +23,9 @@ export class ListsingerComponent implements OnInit {
 
   singerList: Singer[] = [];
 
-  constructor(private singerService: SingerService) {
+  constructor(private singerService: SingerService,
+              private songService: SongService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -51,6 +55,18 @@ export class ListsingerComponent implements OnInit {
           this.singerList = [];
         }
       })
+  }
+
+  toSingerSong(singerId: number) {
+    this.songService
+      .getSongsBySinger_Id(singerId, 1)
+      .subscribe(resp => {
+        if (resp != null) {
+          this.router
+            .navigate(['music/' + resp.content[0].id])
+        }
+      })
+
   }
 
 }

@@ -29,12 +29,13 @@ export class SearchListComponent implements OnInit {
           this.songService
             .getSongsByName(this.query, 6)
             .subscribe(resp => {
-                this.songPage = resp
+              this.songPage = resp
             });
           this.playlistService
-            .getAllPlaylist(3)
+          //.getAllPlaylist(3)
+            .getPlaylistByName(this.query, 3)
             .subscribe(resp => {
-                this.playlistPage = resp
+              this.playlistPage = resp
 
             })
         }
