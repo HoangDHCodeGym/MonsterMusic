@@ -38,7 +38,7 @@ export class CreatePlaylistComponent implements OnInit {
         })
     } else {
       this.status = -1;
-      this.creMessage = 'Not Valid'
+      this.creMessage = 'Please Enter all field'
     }
   }
 

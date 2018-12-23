@@ -3,6 +3,7 @@ import {Singer, Song, SongForm} from "../../../model";
 import {SongService} from "../../../service/song.service";
 import {SingerService} from "../../../service/singer.service";
 import {NgForm} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-createsong',
@@ -27,15 +28,24 @@ export class CreatesongComponent implements OnInit {
   creMessage: string = '';
 
   constructor(private songService: SongService,
-              private singerService: SingerService) {
+              private singerService: SingerService,
+              private router: Router) {
   }
 
   ngOnInit() {
     this.creMessage = '';
+    this.router.events.subscribe(
+      () => {
+         this.refresh();
+         document
+           .getElementById('close-play-tab')
+           .click();
+      }
+    )
   }
 
   onSubmit(songForm: NgForm) {
-    if (songForm.valid) {
+    if (songForm.valid && this.srcFile != null) {
       this.isLoading = true;
       this.creMessage = '';
       console.log(songForm);
@@ -55,6 +65,9 @@ export class CreatesongComponent implements OnInit {
           this.creMessage = 'Failed, please try again !'
         }
       });
+    } else {
+      this.isFailed = true;
+      this.creMessage = 'Please enter all field'
     }
   }
 

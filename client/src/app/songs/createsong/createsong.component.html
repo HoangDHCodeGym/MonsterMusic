@@ -1,7 +1,8 @@
 <form #songForm="ngForm" (ngSubmit)="onSubmit(songForm)">
   <div class="form-group">
     <label for="name">Song's name</label>
-    <input type="text" class="form-control" id="name" #name='ngModel' placeholder="Enter name" name="name" [(ngModel)]="newSong.name" required="required">
+    <input type="text" class="form-control" id="name" #name='ngModel' placeholder="Enter name" name="name"
+           [(ngModel)]="newSong.name" required="required">
     <i style="color: red" *ngIf="name?.errors && name.touched">* Song name required</i>
   </div>
   <div class="form-group">
@@ -38,12 +39,11 @@
        *ngIf="creMessage.length!=0">{{creMessage}}</div>
   <div class="modal-footer">
     <button type="submit" class="btn btn-primary" *ngIf="isFailed||creMessage.length==0">Create</button>
-    <a type="button" class="btn btn-success" *ngIf="(creMessage.length!=0 && !isFailed)"
-       [routerLink]="currentUrlToMusicPage"
-       data-dismiss="modal" (click)="refresh()">
-      <i class="far fa-play-circle"></i> Play
-    </a>
-    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="refresh()">Close</button>
+    <button type="button" class="btn btn-success" *ngIf="(creMessage.length!=0 && !isFailed)"
+            data-dismiss="modal"
+            [routerLink]="currentUrlToMusicPage"><i class="far fa-play-circle"></i> Play
+    </button>
+    <button id="close-play-tab" type="button" class="btn btn-secondary" data-dismiss="modal" (click)="refresh()">Close</button>
   </div>
 </form>
 
