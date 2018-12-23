@@ -13,7 +13,8 @@ export class ToplistComponent implements OnInit {
   kPopSongList: Song[]=[];
   vPopSongList: Song[]=[];
   usAndUkSongList: Song[]=[];
-  private downloadSongURL: string = '';
+  downloadSongURL: string = '';
+  songForPlaylist:number;
 
   constructor(private songService: SongService, @Inject('HOST') private host: string,
               private router: Router) {
@@ -35,6 +36,10 @@ export class ToplistComponent implements OnInit {
   toMusicPage(id: number) {
     this.router.navigate(['music/' + id])
     window.scroll(0,0);
+  }
+
+  addToPlayList(songId:number){
+    this.songForPlaylist = songId;
   }
 
 

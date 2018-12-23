@@ -37,6 +37,16 @@ export class PlaylistService {
       }))
   }
 
+  getUserPlaylist(userId:number,size: number = 5, page: number = 0): Observable<Page<Playlist>> {
+    return this.httpClient
+      .get(this.host + '/api/users/'+userId+'/playlistList?sort=views,desc&size=' + size + '&page=' + page, {observe: 'response'})
+      .pipe(map(response => {
+        if (response.status == 200) {
+          return response.body as Page<Playlist>;
+        }
+        return null;
+      }))
+  }
 
   constructor(@Inject('HOST') private host: string,
               private httpClient: HttpClient) {

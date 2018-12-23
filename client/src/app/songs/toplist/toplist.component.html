@@ -1,113 +1,128 @@
-  <h2 class="title">#Top</h2>
-  <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="nav-item active">
-      <a class="nav-link active" href="#all" aria-controls="all" role="tab" data-toggle="tab">#All</a>
-    </li>
-    <li role="presentation" class="nav-item">
-      <a class="nav-link" href="#vpop" aria-controls="vpop" role="tab" data-toggle="tab">#VPOP</a>
-    </li>
-    <li role="presentation" class="nav-item">
-      <a class="nav-link" href="#kpop" aria-controls="kpop" role="tab" data-toggle="tab">#KPOP</a>
-    </li>
-    <li role="presentation" class="nav-item">
-      <a class="nav-link" href="#uk" aria-controls="uk" role="tab" data-toggle="tab">#Uk&Us</a>
-    </li>
-  </ul>
-  <!-- Tab panes -->
-  <div class="tab-content">
+<h2 class="title">#Top</h2>
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+  <li role="presentation" class="nav-item active">
+    <a class="nav-link active" href="#all" aria-controls="all" role="tab" data-toggle="tab">#All</a>
+  </li>
+  <li role="presentation" class="nav-item">
+    <a class="nav-link" href="#vpop" aria-controls="vpop" role="tab" data-toggle="tab">#VPOP</a>
+  </li>
+  <li role="presentation" class="nav-item">
+    <a class="nav-link" href="#kpop" aria-controls="kpop" role="tab" data-toggle="tab">#KPOP</a>
+  </li>
+  <li role="presentation" class="nav-item">
+    <a class="nav-link" href="#uk" aria-controls="uk" role="tab" data-toggle="tab">#Uk&Us</a>
+  </li>
+</ul>
+<!-- Tab panes -->
+<div class="tab-content">
 
-    <div role="tabpanel" class="tab-pane active" id="all">
-      <!-- sub-element -->
-      <div class="tab-view" *ngFor="let song of songlist; index as i">
-        <h1 class="titlev">0{{i+1}}</h1>
-        <div class="contentv">
-          <span class="boldT">#{{song.name}}</span><br>
-          <span><i class="blurT">#{{song.singer?.name|| 'unknown'}}</i></span>
-        </div>
-        <div class="sub-content">
-          <div class="view">
+  <div role="tabpanel" class="tab-pane active" id="all">
+    <!-- sub-element -->
+    <div class="tab-view" *ngFor="let song of songlist; index as i">
+      <h1 class="titlev">0{{i + 1}}</h1>
+      <div class="contentv">
+        <span class="boldT">#{{song.name}}</span><br>
+        <span><i class="blurT">#{{song.singer?.name || 'unknown'}}</i></span>
+      </div>
+      <div class="sub-content">
+        <div class="view">
 				    				<span>
 				    					<i class="blurT views">{{song.views}} views</i><br>
                       <a (click)="toMusicPage(song.id)"><i class="fas fa-play"></i></a> |
-				    					<a href="{{downloadSongURL+song.link}}"><i class="fas fa-download"></i></a>
-				    				</span>
+				    					<a href="{{downloadSongURL+song.link}}"><i class="fas fa-download"></i></a> |
+                      <a data-toggle="modal" data-target="#choose-playlist-modal">
+                        <i class="fas fa-plus"></i>
+                      </a>
+                    </span>
 
-          </div>
         </div>
-        <div class="clear"></div>
       </div>
-      <!-- end-sub-element -->
-
+      <div class="clear"></div>
     </div>
+    <!-- end-sub-element -->
 
-    <div role="tabpanel" class="tab-pane" id="vpop">
-      <!-- sub-element -->
-      <div class="tab-view" *ngFor="let song of vPopSongList; index as i">
-        <h1 class="titlev">0{{i+1}}</h1>
-        <div class="contentv">
-          <span class="boldT">#{{song.name}}</span><br>
-          <span><i class="blurT">#{{song.singer?.name|| 'unknown'}}</i></span>
-        </div>
-        <div class="sub-content">
-          <div class="view">
-				    				<span>
-				    					<i class="blurT views">{{song.views}} views</i><br>
-                      <a (click)="toMusicPage(song.id)"><i class="fas fa-play"></i></a> |
-				    					<a href="{{downloadSongURL+song.link}}"><i class="fas fa-download"></i></a>
-				    				</span>
-
-          </div>
-        </div>
-        <div class="clear"></div>
-      </div>
-      <!-- end-sub-element -->
-
-    </div>
-    <div role="tabpanel" class="tab-pane" id="kpop" >
-      <!-- sub-element -->
-      <div class="tab-view" *ngFor="let song of kPopSongList; index as i">
-        <h1 class="titlev">0{{i+1}}</h1>
-        <div class="contentv">
-          <span class="boldT">#{{song.name}}</span><br>
-          <span><i class="blurT">#{{song.singer?.name|| 'unknown'}}</i></span>
-        </div>
-        <div class="sub-content">
-          <div class="view">
-				    				<span>
-				    					<i class="blurT views">{{song.views}} views</i><br>
-                      <a (click)="toMusicPage(song.id)"><i class="fas fa-play"></i></a> |
-				    					<a href="{{downloadSongURL+song.link}}"><i class="fas fa-download"></i></a>
-				    				</span>
-
-          </div>
-        </div>
-        <div class="clear"></div>
-      </div>
-      <!-- end-sub-element -->
-
-    </div>
-    <div role="tabpanel" class="tab-pane" id="uk">
-      <!-- sub-element -->
-      <div class="tab-view"  *ngFor="let song of usAndUkSongList; index as i" >
-        <h1 class="titlev">0{{i+1}}</h1>
-        <div class="contentv">
-          <span class="boldT">#{{song.name}}</span><br>
-          <span><i class="blurT">#{{song.singer?.name|| 'unknown'}}</i></span>
-        </div>
-        <div class="sub-content">
-          <div class="view">
-				    				<span>
-				    					<i class="blurT views">{{song.views}} views</i><br>
-                      <a (click)="toMusicPage(song.id)"><i class="fas fa-play"></i></a> |
-				    					<a href="{{downloadSongURL+song.link}}"><i class="fas fa-download"></i></a>
-				    				</span>
-
-          </div>
-        </div>
-        <div class="clear"></div>
-      </div>
-      <!-- end-sub-element -->
-    </div>
   </div>
-  <!-- End-tabpanes -->
+
+  <div role="tabpanel" class="tab-pane" id="vpop">
+    <!-- sub-element -->
+    <div class="tab-view" *ngFor="let song of vPopSongList; index as i">
+      <h1 class="titlev">0{{i + 1}}</h1>
+      <div class="contentv">
+        <span class="boldT">#{{song.name}}</span><br>
+        <span><i class="blurT">#{{song.singer?.name || 'unknown'}}</i></span>
+      </div>
+      <div class="sub-content">
+        <div class="view">
+				    				<span>
+				    					<i class="blurT views">{{song.views}} views</i><br>
+                      <a (click)="toMusicPage(song.id)"><i class="fas fa-play"></i></a> |
+				    					<a href="{{downloadSongURL+song.link}}"><i class="fas fa-download"></i></a> |
+                      <a data-toggle="modal" data-target="#choose-playlist-modal">
+                        <i class="fas fa-plus"></i>
+                      </a>
+				    				</span>
+
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <!-- end-sub-element -->
+
+  </div>
+  <div role="tabpanel" class="tab-pane" id="kpop">
+    <!-- sub-element -->
+    <div class="tab-view" *ngFor="let song of kPopSongList; index as i">
+      <h1 class="titlev">0{{i + 1}}</h1>
+      <div class="contentv">
+        <span class="boldT">#{{song.name}}</span><br>
+        <span><i class="blurT">#{{song.singer?.name || 'unknown'}}</i></span>
+      </div>
+      <div class="sub-content">
+        <div class="view">
+				    				<span>
+				    					<i class="blurT views">{{song.views}} views</i><br>
+                      <a (click)="toMusicPage(song.id)"><i class="fas fa-play"></i></a> |
+				    					<a href="{{downloadSongURL+song.link}}"><i class="fas fa-download"></i></a> |
+                      <a data-toggle="modal" data-target="#choose-playlist-modal">
+                        <i class="fas fa-plus"></i>
+                      </a>
+				    				</span>
+
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <!-- end-sub-element -->
+
+  </div>
+  <div role="tabpanel" class="tab-pane" id="uk">
+    <!-- sub-element -->
+    <div class="tab-view" *ngFor="let song of usAndUkSongList; index as i">
+      <h1 class="titlev">0{{i + 1}}</h1>
+      <div class="contentv">
+        <span class="boldT">#{{song.name}}</span><br>
+        <span><i class="blurT">#{{song.singer?.name || 'unknown'}}</i></span>
+      </div>
+      <div class="sub-content">
+        <div class="view">
+				    				<span>
+				    					<i class="blurT views">{{song.views}} views</i><br>
+                      <a (click)="toMusicPage(song.id)"><i class="fas fa-play"></i></a> |
+				    					<a href="{{downloadSongURL+song.link}}"><i class="fas fa-download"></i></a> |
+                      <a data-toggle="modal" data-target="#choose-playlist-modal"
+                      (click)="addToPlayList(song.id)">
+                        <i class="fas fa-plus"></i>
+                      </a>
+				    				</span>
+
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <!-- end-sub-element -->
+  </div>
+</div>
+<!-- End-tabpanes -->
+<!--for pop-up when add song to playlist-->
+<app-choose-playlist [songId]="songForPlaylist"></app-choose-playlist>
