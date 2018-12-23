@@ -17,10 +17,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 
 //Spring Security Config
 @Configuration
@@ -48,23 +50,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public FilterRegistrationBean corsFilter() {
+    public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
         config.addAllowedOrigin("*");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
+        config.setExposedHeaders(Arrays.asList("x-auth-token", "Authorization"));
         source.registerCorsConfiguration("/**", config);
-        FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
-        bean.setOrder(0);
-        return bean;
+        return new CorsFilter(source);
     }
 
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().anonymous().disable().cors().and().authorizeRequests().anyRequest().authenticated();
+        http.csrf().disable()
+                .anonymous().disable()
+                .cors()
+                .and()
+                .authorizeRequests().anyRequest().authenticated();
     }
 
     @Override

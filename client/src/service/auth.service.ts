@@ -14,7 +14,7 @@ export class AuthService {
     const headers = {
       'Authorization': 'Basic ' + btoa('devglan-client:devglan-secret'),
       'Content-type': 'application/x-www-form-urlencoded'
-    }
+    };
 
     const body = new HttpParams()
       .set('username', username)
