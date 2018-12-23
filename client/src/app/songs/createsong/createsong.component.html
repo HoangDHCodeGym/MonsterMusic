@@ -23,14 +23,18 @@
     <label for="filecontrol">Add your file (mp3)</label>
     <input type="file" class="form-control-file" id="filecontrol" name="file" ngModel (change)="appendFile(uploadFile.files)" #uploadFile>
   </div>
-  <i class="fas fa-sync fa-spin" style="text-align: center" *ngIf="isLoading"></i>
+  <div class="form-group" *ngIf="isLoading" style="text-align: center">
+    <i class="fas fa-sync fa-spin" style="text-align: center" ></i>
+    <br><small>Please wait</small>
+  </div>
+
   <div class="alert alert-success" *ngIf="creMessage.length!=0">{{creMessage}}</div>
   <div class="modal-footer">
-    <button type="submit" class="btn btn-primary" *ngIf="creMessage.length==0">Create</button>
-    <button type="button" class="btn btn-success" *ngIf="creMessage.length!=0" (click)="toMusicPage()">
+    <button type="submit" class="btn btn-primary" *ngIf="creMessage.length==0" [disabled]="isLoading">Create</button>
+    <a type="button" class="btn btn-success" *ngIf="creMessage.length!=0" [href]="currentUrlToMusicPage">
       <i class="far fa-play-circle"></i> Play
-    </button>
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    </a>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" [disabled]="isLoading">Close</button>
   </div>
 </form>
 
