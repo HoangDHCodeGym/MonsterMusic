@@ -8,12 +8,23 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="list-group search-result" *ngFor="let playlist of playlistList.content,index as i">
-          <a class="list-group-item list-group-item-action" (click)="append()">{{playlist.name}}</a>
+        <div *ngFor="let playlist of playlistList.content,index as i">
+          <div *ngIf="playlist != null">
+            <div class="list-group search-result">
+              <a class="list-group-item list-group-item-action" (click)="append(i)">{{playlist.name}}
+              </a>
+            </div>
+            <br>
+          </div>
         </div>
+        <div class="form-group" *ngIf="isLoading" style="text-align: center">
+          <i class="fas fa-sync fa-spin" style="text-align: center"></i>
+        </div>
+        <div class="alert alert-success" *ngIf="(!isLoading && success>0)">{{message}}</div>
+        <div class="alert alert-danger" *ngIf="(!isLoading && !success<0)">{{message}}</div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="refresh()">Close</button>
       </div>
     </div>
   </div>

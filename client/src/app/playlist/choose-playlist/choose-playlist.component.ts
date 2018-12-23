@@ -8,12 +8,16 @@ import {PlaylistService} from "../../../service/playlist.service";
   styleUrls: ['./choose-playlist.component.css']
 })
 export class ChoosePlaylistComponent implements OnInit {
+  isLoading: boolean = false;
+  success: number = 0;
+  message: string = '';
   private _songId: number;
   @Input()
-  set songId(songId: number){
+  set songId(songId: number) {
     this.listPlaylist();
-    this._songId = songId;
-    console.log(songId)
+    if (songId > 0) {
+      this._songId = songId;
+    }
   }
 
   get songId(): number {
@@ -48,7 +52,36 @@ export class ChoosePlaylistComponent implements OnInit {
   }
 
   append(pos: number) {
+    if (!this.isLoading) {
+      this.isLoading = true;
+      this.playlistService
+        .addSong(this.songId, this.playlistList.content[pos].id)
+        .subscribe(
+          status => {
+            if (status == 200) {
+              this.isLoading = false;
+              this.message = 'successfully added to '
+                + this.playlistList.content[pos].name;
+              this.success = 1;
+              this.playlistList.content[pos] = null;
+            } else {
+              this.isLoading = false;
+              this.message = 'Failed, please try again';
+              this.success = -1;
+            }
+          }
+          ,()=>{
+            this.isLoading = false;
+            this.message = 'Failed, please try again';
+            this.success = -1;
+          })
+    }
+  }
 
+  refresh() {
+    this.isLoading = false;
+    this.success = 0;
+    this.message = '';
   }
 
 }
