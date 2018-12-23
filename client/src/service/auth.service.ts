@@ -1,6 +1,7 @@
 import {Inject, Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {catchError} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -11,16 +12,18 @@ export class AuthService {
   }
 
   attemptAuth(username: string, password: string): Observable<any> {
-    let headersContent = new HttpHeaders();
-    headersContent.append('Content-Type', 'application/x-www-form-urlencoded');
-    headersContent.append('Authorization', 'Basic ' + window.btoa('devglan-client:devglan-secret'));
-
+    const url = this.host + "/oauth/token";
+    let headersContent: HttpHeaders = new HttpHeaders({Authorization: 'Basic ' + window.btoa('devglan-client:devglan-secret')});
+    // let headersContent: HttpHeaders = new HttpHeaders()
+    //   .set('Authorization', 'Basic ' + window.btoa('devglan-client:devglan-secret'))
+    //   .set('Content-Type', 'application/x-www-form-urlencoded');
+    console.log(headersContent);
     const body = new HttpParams()
-      .set('username', username)
-      .set('password', password)
+      .set('username', "admin")
+      .set('password', "admin")
       .set('grant_type', 'password');
-
+    console.log(body);
     console.log('attempAuth ::');
-    return this.http.post<any>(this.host, body, {headers: headersContent});
+    return this.http.post<any>(url, body, {headers: headersContent});
   }
 }
