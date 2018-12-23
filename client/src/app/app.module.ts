@@ -13,6 +13,7 @@ import { CreatesongComponent } from './songs/createsong/createsong.component';
 import {FormsModule} from "@angular/forms";
 import {SingerService} from "../service/singer.service";
 import { SearchComponent } from './search/search.component';
+import { CreatePlaylistComponent } from './playlist/create-playlist/create-playlist.component';
 
 const host = "http://45.32.123.20:8080";
 @NgModule({
@@ -23,7 +24,8 @@ const host = "http://45.32.123.20:8080";
     ToplistComponent,
     ListsingerComponent,
     CreatesongComponent,
-    SearchComponent
+    SearchComponent,
+    CreatePlaylistComponent
   ],
   imports: [
     BrowserModule,
