@@ -22,6 +22,7 @@ export class AppComponent {
     this.authService.attemptAuth(this.username, this.password).subscribe(response => {
      // this.token.saveToken(response);
       console.log(response);
+      this.token.saveToken(response.access_token);
     }, err => {
       console.log(err)
     });
