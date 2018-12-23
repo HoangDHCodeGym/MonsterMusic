@@ -88,5 +88,6 @@ export class CreatesongComponent implements OnInit {
     this.creMessage = '';
     this.isFailed = false;
     this.isLoading = false;
+    this.singerList = [];
   }
 }
