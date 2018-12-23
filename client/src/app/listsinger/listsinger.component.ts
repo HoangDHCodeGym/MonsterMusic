@@ -47,8 +47,9 @@ export class ListsingerComponent implements OnInit {
       .subscribe(resp => {
         if (resp != null) {
           this.singerList = resp.content
+        } else {
+          this.singerList = [];
         }
-        this.singerList=[];
       })
   }
 
