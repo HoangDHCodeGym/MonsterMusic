@@ -7,12 +7,16 @@
   </div>
   <div class="form-group">
     <label for="description">Description</label>
-    <textarea rows="4" type="text" class="form-control" id="description" placeholder="Enter something about your playlist" name="description"
+    <textarea rows="4" type="text" class="form-control" id="description"
+              placeholder="Enter something about your playlist" name="description"
               [(ngModel)]="newPlaylist.description"></textarea>
   </div>
   <div class="alert alert-success" *ngIf="status>0">{{creMessage}}</div>
   <div class="alert alert-danger" *ngIf="status<0">{{creMessage}}</div>
   <div class="modal-footer">
-    <button type="button" [ngClass]="{'btn btn-secondary': status<=0,'btn btn-primary':status>0}" class="" data-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-primary" *ngIf="status<=0">Create</button>
+    <button type="button" [ngClass]="{'btn btn-secondary': (status<=0),'btn btn-primary':(status>0)}" class=""
+            data-dismiss="modal">Close
+    </button>
   </div>
 </form>
