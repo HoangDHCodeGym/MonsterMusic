@@ -65,7 +65,7 @@ export class ChoosePlaylistComponent implements OnInit {
     if (!this.isLoading) {
       this.isLoading = true;
       this.playlistService
-        .addSong(this.playlistList.content[pos].id, this.songId)
+        .addSong(this.songId,this.playlistList.content[pos].id)
         .subscribe(
           status => {
             if (status == 200) {

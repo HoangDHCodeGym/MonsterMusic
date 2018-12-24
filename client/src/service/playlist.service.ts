@@ -12,7 +12,10 @@ export class PlaylistService {
   addSong(songId: number, playlistId: number): Observable<number> {
     return this.httpClient
       .patch(this.host + '/api/playlists/' + playlistId, {songList: [songId]}, {observe: 'response'})
-      .pipe(map(response => response.status));
+      .pipe(map(response => {
+        console.log(response);
+        return response.status
+      }));
   }
 
   createPlaylist(playlist: PlaylistForm): Observable<Playlist> {
