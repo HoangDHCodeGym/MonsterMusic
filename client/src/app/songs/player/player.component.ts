@@ -46,6 +46,10 @@ export class PlayerComponent implements OnInit {
     });
   }
 
+  ngOnDestroy() {
+    this.reset();
+  }
+
   resolveSongResourceUrl() {
     this.songService
       .getSongById(this.songId)

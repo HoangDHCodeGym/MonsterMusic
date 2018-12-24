@@ -127,7 +127,7 @@
           <img class="card-img-top" [src]="'assets/images/playlist'+(i+1)+'.jpg'" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title">{{playlist.name}}</h5>
-            <p class="card-text">{{playlist.description.substring(0, 20)}}...</p>
+            <p class="card-text">{{playlist.description?.substring(0, 20)}}...</p>
           </div>
         </div>
       </div>
