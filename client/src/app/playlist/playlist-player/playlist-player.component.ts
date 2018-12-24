@@ -24,7 +24,7 @@ export class PlaylistPlayerComponent implements OnInit {
   songDuration: string = '0:00';
   currentSongURL: string = '';
   downloadSongURL: string = '';
-  songList: Array<Song>;
+  songList: Song[];
   audio: HTMLAudioElement;
   interval;
   playlist: Playlist;

@@ -53,7 +53,7 @@ export class ChoosePlaylistComponent implements OnInit {
             this.message = 'no playlist found';
             this.success = -1;
           }
-        },()=>{
+        }, () => {
           this.isLoading = false;
           this.message = 'no playlist found';
           this.success = -1;
@@ -65,7 +65,7 @@ export class ChoosePlaylistComponent implements OnInit {
     if (!this.isLoading) {
       this.isLoading = true;
       this.playlistService
-        .addSong(this.songId, this.playlistList.content[pos].id)
+        .addSong(this.playlistList.content[pos].id, this.songId)
         .subscribe(
           status => {
             if (status == 200) {
