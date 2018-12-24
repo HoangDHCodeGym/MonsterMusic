@@ -46,7 +46,17 @@ export class ChoosePlaylistComponent implements OnInit {
       .getUserPlaylist(this.userId)
       .subscribe(
         page => {
-          this.playlistList = page;
+          if (page != null) {
+            this.playlistList = page;
+          } else {
+            this.isLoading = false;
+            this.message = 'no playlist found';
+            this.success = -1;
+          }
+        },()=>{
+          this.isLoading = false;
+          this.message = 'no playlist found';
+          this.success = -1;
         }
       )
   }
@@ -70,7 +80,7 @@ export class ChoosePlaylistComponent implements OnInit {
               this.success = -1;
             }
           }
-          ,()=>{
+          , () => {
             this.isLoading = false;
             this.message = 'Failed, please try again';
             this.success = -1;
