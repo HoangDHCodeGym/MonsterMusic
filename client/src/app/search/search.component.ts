@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SongService} from "../../service/song.service";
 import {Router} from "@angular/router";
 
@@ -8,19 +8,20 @@ import {Router} from "@angular/router";
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-  private searchResult;
+  searchResult;
 
   constructor(private songService: SongService,
-              private router: Router) { }
+              private router: Router) {
+  }
 
   ngOnInit() {
   }
 
-  search(e: string){
+  search(e: string) {
     this.searchResult = [];
-    if(e!=''||e.length!=0){
-      this.songService.getSongsByName(e,4).subscribe(resp => {
-        if (resp != null){
+    if (e != '' || e.length != 0) {
+      this.songService.getSongsByName(e, 4).subscribe(resp => {
+        if (resp != null) {
           this.searchResult = resp.content;
         }
       })
@@ -30,5 +31,10 @@ export class SearchComponent implements OnInit {
   toMusicPage(id: number) {
     this.searchResult = [];
     this.router.navigate(['music/' + id])
+  }
+
+  toSearchPage(query: string) {
+    this.searchResult = [];
+    this.router.navigate(['search/' + query]);
   }
 }
