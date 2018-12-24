@@ -72,11 +72,17 @@ export class PlaylistListComponent implements OnInit {
       .getSongsByPlaylist_Id(playlistId, 1)
       .subscribe(resp => {
         if (resp != null) {
-          this.router
-            .navigate(['playlist/'+playlistId+'/music/' + resp.content[0].id])
+          if (resp.content.length != 0) {
+            this.router
+              .navigate(['playlist/' + playlistId + '/music/' + resp.content[0].id])
+          } else {
+            document.getElementById('playlistShowErr').click()
+          }
         }
       })
 
   }
+
+
 
 }
