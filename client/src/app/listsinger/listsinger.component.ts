@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./listsinger.component.css']
 })
 export class ListsingerComponent implements OnInit {
-  @Input() title: string = 'Singer';
+  @Input() title: string = '#Singer';
   singerLoaded: boolean = false;
   private _singerName;
   @Input()

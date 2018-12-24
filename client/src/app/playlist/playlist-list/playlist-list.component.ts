@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
 })
 export class PlaylistListComponent implements OnInit {
   playlistLoaded: boolean = false;
-  @Input() title: string = 'Playlist';
+  @Input() title: string = '#Playlist';
   private _playlistName;
   @Input()
   set playlistName(playlistName: string) {

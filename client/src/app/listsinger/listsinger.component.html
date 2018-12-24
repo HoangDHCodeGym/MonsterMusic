@@ -1,7 +1,7 @@
-<h2 class="title">#{{title}}</h2>
+<h2 class="title">{{title}}</h2>
 <hr>
 <div class="box" *ngFor="let singer of singerList;index as i" (click)="toSingerSong(singer.id)">
-  <img [src]="'./assets/images/pic'+(i+1)+'.jpg'" alt="">
+  <img [src]="'./assets/images/playlist'+(i+1)+'.jpg'" alt="">
   <h5 class="card-title"> #{{singer.name}}</h5>
 </div>
 <div *ngIf="singerList.length==0&&singerLoaded">
