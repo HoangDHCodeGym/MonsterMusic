@@ -22,6 +22,7 @@ export class CreatePlaylistComponent implements OnInit {
   }
 
   onSubmit(playlistForm: NgForm) {
+    console.log(NgForm);
     if (playlistForm.valid) {
       this.refresh();
       this.playlistService

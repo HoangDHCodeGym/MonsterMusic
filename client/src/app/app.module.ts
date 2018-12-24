@@ -18,9 +18,11 @@ import {ChoosePlaylistComponent} from './playlist/choose-playlist/choose-playlis
 import {SearchListComponent} from './search/search-list/search-list.component';
 import {UserComponent} from "./user/user.component";
 
-const location = window.location;
-const host = location.protocol + '//' + location.host;
-console.log(host);
+// const location = window.location;
+// const host = location.protocol + '//' + location.host;
+// console.log(host);
+
+const host = 'http://localhost:8080';
 
 @NgModule({
   declarations: [

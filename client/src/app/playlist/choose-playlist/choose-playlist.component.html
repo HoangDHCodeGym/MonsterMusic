@@ -21,7 +21,7 @@
           <i class="fas fa-sync fa-spin" style="text-align: center"></i>
         </div>
         <div class="alert alert-success" *ngIf="(!isLoading && (success>0))">{{message}}</div>
-        <div class="alert alert-danger" *ngIf="(!isLoading && !(success<0))">{{message}}</div>
+        <div class="alert alert-danger" *ngIf="(!isLoading && (success<0))">{{message}}</div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" (click)="refresh()">Close</button>
