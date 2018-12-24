@@ -21,6 +21,5 @@ export class SingerService{
   getAllSinger(size: number,page = 0):Observable<Page<Singer>>{
     return this.http
     .get<Page<Singer>>(this.host+'/api/singers?size='+size+'&page='+page+'&sort=name')
-
   }
 }

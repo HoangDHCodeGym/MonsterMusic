@@ -1,5 +1,5 @@
 import {Injectable, Inject} from "@angular/core";
-import {Song, Page, SongForm} from "../model"
+import {Song, Page, SongForm, Playlist} from "../model"
 import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {from, observable, Observable} from 'rxjs';
 
@@ -19,13 +19,15 @@ export class SongService {
   }
 
   getSongs(size: number = 10, page: number = 0): Observable<Page<Song>> {
-    console.log(this.host + '/api/songs');
     return this.http.get<Page<Song>>(this.host + '/api/songs?sort=views,desc&page=' + page + '&size=' + size);
   }
 
   getSongsBySinger_Id(singerId: number, size: number = 10, page: number = 0): Observable<Page<Song>> {
-    console.log(this.host + '/api/songs');
-    return this.http.get<Page<Song>>(this.host + '/api/singers/'+singerId+'/songList?sort=views,desc&page=' + page + '&size=' + size);
+    return this.http.get<Page<Song>>(this.host + '/api/singers/' + singerId + '/songList?sort=views,desc&page=' + page + '&size=' + size);
+  }
+
+  getSongsByPlaylist_Id(playlistId: number, size: number = 10, page: number = 0): Observable<Page<Song>> {
+    return this.http.get<Page<Song>>(this.host + '/api/playlists/' + playlistId + '/songList?sort=views,desc&page=' + page + '&size=' + size);
   }
 
   getSongsByName(name: string, size: number): Observable<Page<Song>> {
