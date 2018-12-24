@@ -42,7 +42,8 @@ class PatchHandler {
         patchedList.addAll(origin);
         patchedList.addAll(patch);
         //removed duplicate in list.
-        return new ArrayList<>(new HashSet<>(patchedList));
+        List<T> set = new ArrayList<>(new HashSet<>(patchedList));
+        return set;
     }
 
 }

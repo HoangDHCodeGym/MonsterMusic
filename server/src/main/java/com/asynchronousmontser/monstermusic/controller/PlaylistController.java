@@ -93,20 +93,19 @@ public class PlaylistController {
                                                         @RequestBody Playlist playlist) {
         Playlist origin = playlistService.findOne(id);
         if (origin != null) {
+            playlist.setSongList(PatchHandler.patchList(
+                    origin.getSongList(), playlist.getSongList()));
             Playlist patchedOrigin = PatchHandler.patch(playlist, origin);
             patchedOrigin.setId(id);
-            patchedOrigin.setSongList(PatchHandler.patchList(
-                    origin.getSongList(),
-                    playlist.getSongList()
-            ));
             patchedOrigin = playlistService.save(patchedOrigin);
             return ResponseEntity.ok(patchedOrigin);
         }
         return ResponseEntity.notFound().build();
     }
+
     @GetMapping("/search/name")
     public ResponseEntity<Page<Playlist>> findByName(@RequestParam("q") String query,
-                                                   Pageable pageable) {
+                                                     Pageable pageable) {
         Page<Playlist> playlistPage = playlistService.findByName(query, pageable);
         if (playlistPage != null) {
             if (playlistPage.isEmpty()) {

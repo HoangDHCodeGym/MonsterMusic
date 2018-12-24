@@ -95,12 +95,12 @@ public class SongController {
                                                 @RequestBody Song song) {
         Song origin = songService.findOne(id);
         if (origin != null) {
-            Song patchedOrigin = PatchHandler.patch(song, origin);
-            patchedOrigin.setId(id);
-            patchedOrigin.setPlaylistList(PatchHandler.patchList(
+            song.setPlaylistList(PatchHandler.patchList(
                     origin.getPlaylistList(),
                     song.getPlaylistList()
             ));
+            Song patchedOrigin = PatchHandler.patch(song, origin);
+            patchedOrigin.setId(id);
             patchedOrigin = songService.save(patchedOrigin);
             return ResponseEntity.ok(patchedOrigin);
         }
@@ -122,9 +122,10 @@ public class SongController {
         Page<Song> songPage = songService.findByGene(queryId, pageable);
         return getPageResponseEntity(songPage);
     }
+
     @GetMapping("/search/singer")
     public ResponseEntity<Page<Song>> findBySinger(@RequestParam("q") String query,
-                                                 Pageable pageable) {
+                                                   Pageable pageable) {
         Integer queryId = Integer.parseInt(query);
         Page<Song> songPage = songService.findAllBySinger(queryId, pageable);
         return getPageResponseEntity(songPage);
