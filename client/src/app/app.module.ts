@@ -18,6 +18,7 @@ import {ChoosePlaylistComponent} from './playlist/choose-playlist/choose-playlis
 import {SearchListComponent} from './search/search-list/search-list.component';
 import {UserComponent} from "./user/user.component";
 import { PlaylistPlayerComponent } from './playlist/playlist-player/playlist-player.component';
+import { PlaylistListComponent } from './playlist/playlist-list/playlist-list.component';
 
 // const location = window.location;
 // const host = location.protocol + '//' + location.host;
@@ -38,7 +39,8 @@ const host = 'http://localhost:8080';
     ChoosePlaylistComponent,
     SearchListComponent,
     UserComponent,
-    PlaylistPlayerComponent
+    PlaylistPlayerComponent,
+    PlaylistListComponent
   ],
   imports: [
     BrowserModule,

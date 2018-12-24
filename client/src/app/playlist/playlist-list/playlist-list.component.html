@@ -1,0 +1,9 @@
+<h2 class="title">#{{title}}</h2>
+<hr>
+<div class="box" *ngFor="let playlist of playlistList;index as i" (click)="toSingerSong(playlist.id)">
+  <img [src]="'./assets/images/pic'+(i+1)+'.jpg'" alt="">
+  <h5 class="card-title"> #{{playlist.name}}</h5>
+</div>
+<div *ngIf="playlistList.length==0&&playlistLoaded">
+  <div class="alert alert-danger" style="text-align: center">no playlist found</div>
+</div>
