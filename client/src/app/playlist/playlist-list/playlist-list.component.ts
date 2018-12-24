@@ -73,7 +73,7 @@ export class PlaylistListComponent implements OnInit {
       .subscribe(resp => {
         if (resp != null) {
           this.router
-            .navigate(['music/' + resp.content[0].id])
+            .navigate(['playlist/'+playlistId+'/music/' + resp.content[0].id])
         }
       })
 

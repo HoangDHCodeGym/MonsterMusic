@@ -354,7 +354,8 @@ i:hover {
 }
 
 .card-deck {
-  margin-top: -20px;
+  height: 280px;
+  width: 680px;
 }
 
 /*===============================madebytien-detailsInfo=======================*/

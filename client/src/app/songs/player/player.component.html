@@ -118,22 +118,28 @@
     </div>
   </div>
   <div class="clear"></div>
-  <div class="row">
-    <!-- playlist list -->
-    <div class=" singer">
-      <h2 class="title-section fs18"> Popular Playlist</h2>
-      <div class="card-deck" *ngIf="playlistPage!=null">
-        <div class="card" *ngFor="let playlist of playlistPage.content;index as i">
-          <img class="card-img-top" [src]="'assets/images/playlist'+(i+1)+'.jpg'" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">{{playlist.name}}</h5>
-            <p class="card-text">{{playlist.description?.substring(0, 20)}}...</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!--<div class="row">-->
+    <!--&lt;!&ndash; playlist list &ndash;&gt;-->
+    <!--<div class=" singer">-->
+      <!--<h2 class="title-section fs18"> Popular Playlist</h2>-->
+      <!--<div class="card-deck" *ngIf="playlistPage!=null">-->
+        <!--<div class="card" *ngFor="let playlist of playlistPage.content;index as i">-->
+          <!--<img class="card-img-top" [src]="'assets/images/playlist'+(i+1)+'.jpg'" alt="Card image cap">-->
+          <!--<div class="card-body">-->
+            <!--<h5 class="card-title">{{playlist.name}}</h5>-->
+            <!--<p class="card-text">{{playlist.description?.substring(0, 20)}}...</p>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
   <!-- End Playlist list -->
+  <div class="content">
+    <app-listsinger [title]="'Other Singer'"></app-listsinger>
+  </div>
+  <div class="content">
+    <app-playlist-list [title]="'Popular Playlist'"></app-playlist-list>
+  </div>
   <br>
 </div>
 

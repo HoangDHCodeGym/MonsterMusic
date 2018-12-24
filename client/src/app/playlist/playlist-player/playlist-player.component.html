@@ -117,19 +117,11 @@
     </div>
   </div>
   <div class="clear"></div>
-  <div class="row">
-    <!-- playlist list -->
-    <div class=" singer">
-      <h2 class="title-section fs18">Popular Singer</h2>
-      <div class="card-deck" *ngIf="singerPage!=null">
-        <div class="card" *ngFor="let singer of singerPage.content;index as i">
-          <img class="card-img-top" [src]="'assets/images/pic'+(i+1)+'.jpg'" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">{{singer.name}}</h5>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="content">
+    <app-playlist-list [title]="'Other Playlist'"></app-playlist-list>
+  </div>
+  <div class="content">
+    <app-listsinger [title]="'Popular Singer'"></app-listsinger>
   </div>
   <!-- End Playlist list -->
   <br>

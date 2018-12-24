@@ -55,21 +55,7 @@
 
   <!-- playlist list -->
   <div class="content">
-    <div class="singer">
-      <h2 class="title-section fs18 title">#Playlist</h2>
-      <hr>
-      <div *ngIf="playlistPage==null&&playlistLoaded">
-        <div class="alert alert-danger" style="text-align: center">no song found</div>
-      </div>
-      <div class="card-deck" *ngIf="playlistPage!=null">
-        <div class="card" *ngFor="let playlist of playlistPage.content;index as i">
-          <img class="card-img-top" [src]="'assets/images/playlist'+(i+1)+'.jpg'" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">{{playlist.name}}</h5>
-          </div>
-        </div>
-      </div>
-    </div>
+    <app-playlist-list [playlistName]="query"></app-playlist-list>
   </div>
   <!-- End Playlist list -->
   <br>
