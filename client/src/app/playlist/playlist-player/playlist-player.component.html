@@ -76,7 +76,7 @@
 
       <!-- End player -->
       <div class="songmusic row">
-        <h3 class="footer-heading md-4">{{playlist.name}}'s Song</h3>
+        <h3 class="footer-heading md-4" *ngIf="playlist">{{playlist.name}}'s Song</h3>
         <div class="table-responsive-md">
           <table class="table" *ngIf="playlist!=null">
             <tr *ngFor="let song of songList">
