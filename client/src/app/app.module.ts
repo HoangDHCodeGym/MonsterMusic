@@ -21,11 +21,9 @@ import { PlaylistPlayerComponent } from './playlist/playlist-player/playlist-pla
 import { PlaylistListComponent } from './playlist/playlist-list/playlist-list.component';
 import { PopupErrComponent } from './popup-err/popup-err.component';
 
-// const location = window.location;
-// const host = location.protocol + '//' + location.host;
-// console.log(host);
-
-const host = 'http://45.32.123.20:8080';
+const location = window.location;
+const host = location.protocol + '//' + location.host;
+console.log(host);
 
 @NgModule({
   declarations: [
