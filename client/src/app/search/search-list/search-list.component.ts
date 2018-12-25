@@ -16,11 +16,11 @@ export class SearchListComponent implements OnInit {
   query: string = '';
   downloadSongURL: string = this.host + '/api/files/';
 
-  constructor(private playlistService: PlaylistService,
-              private songService: SongService,
-              private router: ActivatedRoute,
-              private routerL: Router,
-              @Inject('HOST') private host: string) {
+  constructor(
+    private songService: SongService,
+    private router: ActivatedRoute,
+    private routerL: Router,
+    @Inject('HOST') private host: string) {
   }
 
   ngOnInit() {
@@ -32,32 +32,27 @@ export class SearchListComponent implements OnInit {
         this.query = param.get('q');
         if (this.query != null || this.query != '') {
           this.getSongList();
-          this.playlistService
-          //.getAllPlaylist(3)
-            .getPlaylistByName(this.query, 3)
-            .subscribe(resp => {
-              this.playlistPage = resp;
-              this.playlistLoaded = true;
-            },()=>{this.playlistLoaded = true;});
         }
       })
   }
-  getSongList(){
+
+  getSongList() {
     this.songService
-      .getSongsByName(this.query, 6,this.pageEngine.current)
+      .getSongsByName(this.query, 6, this.pageEngine.current)
       .subscribe(resp => {
         this.songPage = resp;
         this.songLoaded = true;
-        this.pageEngine.totalPages=this.songPage.totalPages;
+        this.pageEngine.totalPages = this.songPage.totalPages;
         this.pageEngine.current = this.songPage.number
-      },()=>{this.songLoaded = true;});
+      }, () => {
+        this.songLoaded = true;
+      });
   }
 
   songPage: Page<Song>;
 
   /** playlist **/
   songForPlaylist: number;
-  playlistPage: Page<Playlist>;
 
   addToPlayList(songId: number) {
     if (this.songForPlaylist == songId) {
@@ -71,6 +66,7 @@ export class SearchListComponent implements OnInit {
     this.routerL.navigate(['/music/' + id]);
     window.scroll(0, 0);
   }
+
   next() {
     this.pageEngine.next();
     this.getSongList();
