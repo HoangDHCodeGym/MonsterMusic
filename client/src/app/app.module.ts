@@ -17,12 +17,13 @@ import {CreatePlaylistComponent} from './playlist/create-playlist/create-playlis
 import {ChoosePlaylistComponent} from './playlist/choose-playlist/choose-playlist.component';
 import {SearchListComponent} from './search/search-list/search-list.component';
 import {UserComponent} from "./user/user.component";
-import { PlaylistPlayerComponent } from './playlist/playlist-player/playlist-player.component';
-import { PlaylistListComponent } from './playlist/playlist-list/playlist-list.component';
-import { PopupErrComponent } from './popup-err/popup-err.component';
+import {PlaylistPlayerComponent} from './playlist/playlist-player/playlist-player.component';
+import {PlaylistListComponent} from './playlist/playlist-list/playlist-list.component';
+import {PopupErrComponent} from './popup-err/popup-err.component';
 
 const location = window.location;
-const host = 'http://45.32.123.20:8080';
+const host = location.protocol + '//' + location.host;
+console.log(host);
 
 @NgModule({
   declarations: [

@@ -7,6 +7,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class PopupErrComponent implements OnInit {
   private _message: string = '';
+  modalName: string = 'pop-up-err';
+
   @Input()
   set message(message: string) {
     this._message = message;
