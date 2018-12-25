@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Page, Playlist} from "../../../model";
 import {PlaylistService} from "../../../service/playlist.service";
+import {CommunicateService} from "../../../service/communicate.service";
 
 @Component({
   selector: 'app-choose-playlist',
@@ -34,7 +35,8 @@ export class ChoosePlaylistComponent implements OnInit {
   //TODO:user.
   userId = 1;
 
-  constructor(private playlistService: PlaylistService) {
+  constructor(private playlistService: PlaylistService,
+              private communicateService: CommunicateService) {
   }
 
   ngOnInit() {
@@ -65,7 +67,7 @@ export class ChoosePlaylistComponent implements OnInit {
     if (!this.isLoading) {
       this.isLoading = true;
       this.playlistService
-        .addSong(this.songId,this.playlistList.content[pos].id)
+        .addSong(this.songId, this.playlistList.content[pos].id)
         .subscribe(
           status => {
             if (status == 200) {
@@ -74,6 +76,10 @@ export class ChoosePlaylistComponent implements OnInit {
                 + this.playlistList.content[pos].name;
               this.success = 1;
               this.playlistList.content[pos] = null;
+              this.communicateService.event
+                .songUpdate.trigger();
+              this.communicateService.event
+                .playListUpdate.trigger();
             } else {
               this.isLoading = false;
               this.message = 'Failed, please try again';
