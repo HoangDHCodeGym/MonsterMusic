@@ -49,6 +49,7 @@ export class PlaylistPlayerComponent implements OnInit {
     this.router.paramMap.subscribe((paramMap: ParamMap) => {
       this.songId = Number(paramMap.get('mid'));
       this.playlistId = Number(paramMap.get('pid'));
+      this.pageEngine = new PagingEngine();
       this.getPlaylist();
       this.resolveSongResourceUrl();
     });

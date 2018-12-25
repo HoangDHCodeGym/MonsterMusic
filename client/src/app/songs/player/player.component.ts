@@ -43,6 +43,7 @@ export class PlayerComponent implements OnInit {
     this.downloadSongURL = this.host + '/api/files/';
     this.router.paramMap.subscribe((paramMap: ParamMap) => {
       this.songId = Number(paramMap.get('id'));
+      this.pageEngine = new PagingEngine();
       this.resolveSongResourceUrl();
     });
   }
