@@ -30,8 +30,8 @@ export class SongService {
     return this.http.get<Page<Song>>(this.host + '/api/playlists/' + playlistId + '/songList?sort=views,desc&page=' + page + '&size=' + size);
   }
 
-  getSongsByName(name: string, size: number): Observable<Page<Song>> {
-    return this.http.get<Page<Song>>(this.host + '/api/songs/search/name?q=' + name + '&size=' + size + '&page=0&sort=name');
+  getSongsByName(name: string, size: number,page:number =0): Observable<Page<Song>> {
+    return this.http.get<Page<Song>>(this.host + '/api/songs/search/name?q=' + name + '&size=' + size + '&page='+page+'&sort=name');
   }
 
   getSongsAndSortByDESC(size: number, page: number = 0): Observable<Page<Song>> {

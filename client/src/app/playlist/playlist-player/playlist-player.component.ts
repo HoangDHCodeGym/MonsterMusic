@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Page, Playlist, Singer, Song} from "../../../model";
+import {Page, PagingEngine, Playlist, Singer, Song} from "../../../model";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {SongService} from "../../../service/song.service";
 import {PlaylistService} from "../../../service/playlist.service";
@@ -13,6 +13,7 @@ import {SingerService} from "../../../service/singer.service";
   styleUrls: ['./playlist-player.component.css']
 })
 export class PlaylistPlayerComponent implements OnInit {
+  pageEngine: PagingEngine = new PagingEngine();
   songId: number;
   playlistId: number;
   songGene: string;
@@ -79,9 +80,10 @@ export class PlaylistPlayerComponent implements OnInit {
 
   getPlaylistSongList(playlistId: number): void {
     this.songService
-      .getSongsByPlaylist_Id(playlistId, 5)
+      .getSongsByPlaylist_Id(playlistId, 5,this.pageEngine.current)
       .subscribe((songPage) => {
-        this.songList = songPage.content;
+        this.pageEngine.totalPages = songPage.totalPages;
+        this.pageEngine.current = songPage.number;
       });
   }
 

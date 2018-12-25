@@ -111,7 +111,7 @@
         </div>
         <!--paging-->
         <hr>
-        <nav>
+        <nav *ngIf="pageEngine.totalPages>1">
           <ul class="pagination justify-content-center">
             <li class="page-item">
               <a class="page-link" aria-label="Previous" (click)="previous()">

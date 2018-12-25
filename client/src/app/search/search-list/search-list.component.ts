@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Page, Playlist, Singer, Song} from "../../../model";
+import {Page, PagingEngine, Playlist, Singer, Song} from "../../../model";
 import {PlaylistService} from "../../../service/playlist.service";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {SongService} from "../../../service/song.service";
@@ -10,6 +10,7 @@ import {SongService} from "../../../service/song.service";
   styleUrls: ['./search-list.component.css']
 })
 export class SearchListComponent implements OnInit {
+  pageEngine: PagingEngine = new PagingEngine();
   songLoaded: boolean = false;
   playlistLoaded: boolean = false;
   query: string = '';
@@ -31,10 +32,12 @@ export class SearchListComponent implements OnInit {
         this.query = param.get('q');
         if (this.query != null || this.query != '') {
           this.songService
-            .getSongsByName(this.query, 6)
+            .getSongsByName(this.query, 6,this.pageEngine.current)
             .subscribe(resp => {
               this.songPage = resp;
               this.songLoaded = true;
+              this.pageEngine.totalPages=this.songPage.totalPages;
+              this.pageEngine.current = this.songPage.number
             },()=>{this.songLoaded = true;});
           this.playlistService
           //.getAllPlaylist(3)
