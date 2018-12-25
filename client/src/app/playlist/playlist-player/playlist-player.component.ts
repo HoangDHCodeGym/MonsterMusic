@@ -85,6 +85,7 @@ export class PlaylistPlayerComponent implements OnInit {
       .subscribe((songPage) => {
         this.pageEngine.totalPages = songPage.totalPages;
         this.pageEngine.current = songPage.number;
+        this.songList = songPage.content;
       });
   }
 
