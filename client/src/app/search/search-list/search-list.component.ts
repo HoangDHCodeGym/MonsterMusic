@@ -1,6 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {Page, PagingEngine, Playlist, Singer, Song} from "../../../model";
-import {PlaylistService} from "../../../service/playlist.service";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {SongService} from "../../../service/song.service";
 import {CommunicateService} from "../../../service/communicate.service";
