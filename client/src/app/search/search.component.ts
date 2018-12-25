@@ -33,8 +33,9 @@ export class SearchComponent implements OnInit {
     this.router.navigate(['music/' + id])
   }
 
-  toSearchPage(query: string) {
+  toSearchPage(query: HTMLInputElement) {
     this.searchResult = [];
-    this.router.navigate(['search/' + query]);
+    this.router.navigate(['search/' + query.value]);
+    query.value = '';
   }
 }
