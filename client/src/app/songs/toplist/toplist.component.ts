@@ -10,6 +10,7 @@ import {CommunicateService} from "../../../service/communicate.service";
   styleUrls: ['./toplist.component.css']
 })
 export class ToplistComponent implements OnInit {
+  @Input() size: number = 5;
   songlist: Song[] = [];
   kPopSongList: Song[] = [];
   vPopSongList: Song[] = [];
@@ -34,22 +35,22 @@ export class ToplistComponent implements OnInit {
   }
 
   public getAllSongList() {
-    this.songService.getSongsAndSortByDESC(5).subscribe(res => {
+    this.songService.getSongsAndSortByDESC(this.size).subscribe(res => {
       if (res != null) {
         this.songlist = res.content
       }
     });
-    this.songService.getSongByGene(1, 5).subscribe(res => {
+    this.songService.getSongByGene(1, this.size).subscribe(res => {
       if (res != null) {
         this.kPopSongList = res.content
       }
     });
-    this.songService.getSongByGene(2, 5).subscribe(res => {
+    this.songService.getSongByGene(2, this.size).subscribe(res => {
       if (res != null) {
         this.vPopSongList = res.content
       }
     });
-    this.songService.getSongByGene(3, 5).subscribe(res => {
+    this.songService.getSongByGene(3, this.size).subscribe(res => {
       if (res != null) {
         this.usAndUkSongList = res.content
       }
