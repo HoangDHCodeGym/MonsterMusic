@@ -77,7 +77,7 @@
       <!-- End player -->
 
       <div class="songmusic row">
-        <h3 class="footer-heading md-4">List Song of {{songSinger||'best'}}</h3>
+        <h3 class="footer-heading md-4">List Song of {{songSinger || 'best'}}</h3>
         <div class="table-responsive-md">
           <table class="table">
             <tr *ngFor="let song of songList">
@@ -111,19 +111,19 @@
         </div>
         <!--paging-->
         <hr>
-        <nav aria-label="Page navigation example">
+        <nav>
           <ul class="pagination justify-content-center">
             <li class="page-item">
-              <a class="page-link" href="#" aria-label="Previous">
+              <a class="page-link" aria-label="Previous" (click)="previous()">
                 <span aria-hidden="true">&laquo;</span>
                 <span class="sr-only">Previous</span>
               </a>
             </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
             <li class="page-item">
-              <a class="page-link" href="#" aria-label="Next">
+              <a class="page-link">{{pageEngine.current+1+' of '+pageEngine.totalPages}}</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" aria-label="Next" (click)="next()">
                 <span aria-hidden="true">&raquo;</span>
                 <span class="sr-only">Next</span>
               </a>
@@ -143,19 +143,19 @@
 
   <div class="clear"></div>
   <!--<div class="row">-->
-    <!--&lt;!&ndash; playlist list &ndash;&gt;-->
-    <!--<div class=" singer">-->
-      <!--<h2 class="title-section fs18"> Popular Playlist</h2>-->
-      <!--<div class="card-deck" *ngIf="playlistPage!=null">-->
-        <!--<div class="card" *ngFor="let playlist of playlistPage.content;index as i">-->
-          <!--<img class="card-img-top" [src]="'assets/images/playlist'+(i+1)+'.jpg'" alt="Card image cap">-->
-          <!--<div class="card-body">-->
-            <!--<h5 class="card-title">{{playlist.name}}</h5>-->
-            <!--<p class="card-text">{{playlist.description?.substring(0, 20)}}...</p>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
+  <!--&lt;!&ndash; playlist list &ndash;&gt;-->
+  <!--<div class=" singer">-->
+  <!--<h2 class="title-section fs18"> Popular Playlist</h2>-->
+  <!--<div class="card-deck" *ngIf="playlistPage!=null">-->
+  <!--<div class="card" *ngFor="let playlist of playlistPage.content;index as i">-->
+  <!--<img class="card-img-top" [src]="'assets/images/playlist'+(i+1)+'.jpg'" alt="Card image cap">-->
+  <!--<div class="card-body">-->
+  <!--<h5 class="card-title">{{playlist.name}}</h5>-->
+  <!--<p class="card-text">{{playlist.description?.substring(0, 20)}}...</p>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
   <!--</div>-->
   <!-- End Playlist list -->
   <div class="content">

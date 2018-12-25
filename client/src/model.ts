@@ -43,8 +43,8 @@ interface User {
   id: number,
   username: string,
   name: string,
-  email:string,
-  age:number,
+  email: string,
+  age: number,
 
   songList: number,     //the length of the list
   playlistList: number,//the length of the list
@@ -83,20 +83,56 @@ interface UserForm {
   name: string,
   username: string,
   password: string,
-  email:string,
-  age:number,
-}
-
-export interface Page<T> {
-  content:T[],
-  number: number
-  size: number,
-  totalElements: number,
-  totalPages: number,
+  email: string,
+  age: number,
 }
 
 interface Gene {
   id: number,
   name: string,
   description: string
+}
+
+export interface Page<T> {
+  content: T[],
+  number: number
+  size: number,
+  totalElements: number,
+  totalPages: number,
+}
+
+export class PagingEngine {
+  current: number;
+  totalPages: number;
+
+  constructor(current?: number, totalPages?: number) {
+    this.current = current || 0;
+    this.totalPages = totalPages || 1;
+  }
+
+  isFirst(): boolean {
+    return this.current == 0;
+  }
+
+  isLast(): boolean {
+    return this.current >= (this.totalPages - 1);
+  }
+
+  next() {
+    if (this.current < (this.totalPages - 1)) {
+      this.current++;
+    }
+  }
+
+  toPage(page: number) {
+    if (page < this.totalPages && page >= 0) {
+      this.current = page;
+    }
+  }
+
+  previous() {
+    if (this.current > 0) {
+      this.current--;
+    }
+  }
 }

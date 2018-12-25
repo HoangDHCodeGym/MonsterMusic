@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {SongService} from "../../../service/song.service";
 import * as $ from 'jquery';
-import {Page, Playlist, Song, SongForm} from "../../../model";
+import {Page, PagingEngine, Playlist, Song, SongForm} from "../../../model";
 import {PlaylistService} from "../../../service/playlist.service";
 
 @Component({
@@ -24,6 +24,7 @@ export class PlayerComponent implements OnInit {
   songList: Array<Song>;
   audio: HTMLAudioElement;
   interval;
+  pageEngine: PagingEngine = new PagingEngine();
 
   static timeConverter(time: number): string {
     const seconds = Math.floor(time % 60);
@@ -71,17 +72,22 @@ export class PlayerComponent implements OnInit {
   }
 
   getSongList(singerId: number): void {
+    console.log('fetch');
     if (singerId <= 0) {
       this.songService
-        .getSongs(5)
+        .getSongs(5, this.pageEngine.current)
         .subscribe((songPage) => {
+            this.pageEngine.totalPages = songPage.totalPages;
+            this.pageEngine.current = songPage.number;
             this.songList = songPage.content;
           }
         );
     } else {
       this.songService
-        .getSongsBySinger_Id(singerId, 5)
+        .getSongsBySinger_Id(singerId, 5,this.pageEngine.current)
         .subscribe((songPage) => {
+          this.pageEngine.totalPages = songPage.totalPages;
+          this.pageEngine.current = songPage.number;
           this.songList = songPage.content;
         })
     }
@@ -160,6 +166,22 @@ export class PlayerComponent implements OnInit {
       .subscribe(page => {
         this.playlistPage = page;
       })
+  }
+
+  /** paging **/
+  next() {
+    this.pageEngine.next();
+    this.getSongList(this.singerId);
+  }
+
+  previous() {
+    this.pageEngine.previous();
+    this.getSongList(this.singerId);
+  }
+
+  toPage(page: number) {
+    this.pageEngine.toPage(page);
+    this.getSongList(this.singerId)
   }
 
 }
