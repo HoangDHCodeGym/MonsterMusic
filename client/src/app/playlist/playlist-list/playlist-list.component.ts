@@ -3,6 +3,7 @@ import {Playlist} from "../../../model";
 import {PlaylistService} from "../../../service/playlist.service";
 import {SongService} from "../../../service/song.service";
 import {Router} from "@angular/router";
+import {CommunicateService} from "../../../service/communicate.service";
 
 @Component({
   selector: 'app-playlist-list',
@@ -28,7 +29,16 @@ export class PlaylistListComponent implements OnInit {
 
   constructor(private playlistService: PlaylistService,
               private songService: SongService,
-              private router: Router) {
+              private router: Router,
+              private communicateService: CommunicateService) {
+    this.communicateService
+      .event
+      .playListUpdate
+      .getObservable()
+      .subscribe(() => {
+          this.ngOnInit()
+        }
+      );
   }
 
   ngOnInit() {

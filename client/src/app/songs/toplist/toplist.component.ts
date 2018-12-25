@@ -2,6 +2,7 @@ import {Component, Inject, Input, OnInit} from '@angular/core';
 import {SongService} from "../../../service/song.service";
 import {Song} from "../../../model";
 import {Router} from "@angular/router";
+import {CommunicateService} from "../../../service/communicate.service";
 
 @Component({
   selector: 'app-toplist',
@@ -16,13 +17,20 @@ export class ToplistComponent implements OnInit {
   downloadSongURL: string = '';
 
   constructor(private songService: SongService, @Inject('HOST') private host: string,
-              private router: Router) {
+              private router: Router,
+              private communicateService: CommunicateService) {
+    this.communicateService
+      .event
+      .songUpdate
+      .getObservable()
+      .subscribe(() => {
+        this.ngOnInit();
+      })
   }
 
   ngOnInit() {
     this.getAllSongList();
     this.downloadSongURL = this.host + '/api/files/';
-    console.log(this.downloadSongURL);
   }
 
   public getAllSongList() {

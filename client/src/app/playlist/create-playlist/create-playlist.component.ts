@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {PlaylistService} from "../../../service/playlist.service";
 import {PlaylistForm} from "../../../model";
 import {NgForm} from "@angular/forms";
+import {CommunicateService} from "../../../service/communicate.service";
 
 @Component({
   selector: 'app-create-playlist',
@@ -18,20 +19,24 @@ export class CreatePlaylistComponent implements OnInit {
     name: null,
   };
 
-  constructor(private playlistService: PlaylistService) {
+  constructor(private playlistService: PlaylistService,
+              private communicateService: CommunicateService) {
   }
 
   onSubmit(playlistForm: NgForm) {
-    console.log(NgForm);
     if (playlistForm.valid) {
       this.refresh();
       this.playlistService
         .createPlaylist(this.newPlaylist)
         .subscribe((playlist) => {
           if (playlist != null) {
-            this.creMessage = 'successfully created '+playlist.name;
+            this.creMessage = 'successfully created ' + playlist.name;
             this.status = 1;
-            playlistForm.reset()
+            playlistForm.reset();
+            this.communicateService
+              .event
+              .playListUpdate
+              .trigger();
           } else {
             this.status = -1;
             this.creMessage = 'Please try again'
@@ -46,9 +51,10 @@ export class CreatePlaylistComponent implements OnInit {
   ngOnInit() {
     this.status = 0;
   }
-  refresh(){
-    this.status=0;
-    this.creMessage='';
+
+  refresh() {
+    this.status = 0;
+    this.creMessage = '';
   }
 
 }

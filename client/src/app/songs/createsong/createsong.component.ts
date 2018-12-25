@@ -4,6 +4,7 @@ import {SongService} from "../../../service/song.service";
 import {SingerService} from "../../../service/singer.service";
 import {NgForm} from "@angular/forms";
 import {Router} from "@angular/router";
+import {CommunicateService} from "../../../service/communicate.service";
 
 @Component({
   selector: 'app-createsong',
@@ -29,17 +30,18 @@ export class CreatesongComponent implements OnInit {
 
   constructor(private songService: SongService,
               private singerService: SingerService,
-              private router: Router) {
+              private router: Router,
+              private communicateService: CommunicateService) {
   }
 
   ngOnInit() {
     this.creMessage = '';
     this.router.events.subscribe(
       () => {
-         this.refresh();
-         document
-           .getElementById('close-play-tab')
-           .click();
+        this.refresh();
+        document
+          .getElementById('close-play-tab')
+          .click();
       }
     )
   }
@@ -60,6 +62,10 @@ export class CreatesongComponent implements OnInit {
           this.currentUrlToMusicPage = '/music/' + this.currentSongId;
           this.creMessage = "success!!";
           this.isFailed = false;
+          this.communicateService
+            .event
+            .songUpdate
+            .trigger();
         } else {
           this.isFailed = true;
           this.creMessage = 'Failed, please try again !'

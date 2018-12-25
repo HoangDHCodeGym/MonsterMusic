@@ -3,6 +3,7 @@ import {SingerService} from "../../service/singer.service";
 import {Singer} from "../../model";
 import {SongService} from "../../service/song.service";
 import {Router} from "@angular/router";
+import {CommunicateService} from "../../service/communicate.service";
 
 @Component({
   selector: 'app-listsinger',
@@ -28,7 +29,16 @@ export class ListsingerComponent implements OnInit {
 
   constructor(private singerService: SingerService,
               private songService: SongService,
-              private router: Router) {
+              private router: Router,
+              private communicateService: CommunicateService) {
+    this.communicateService
+      .event
+      .songUpdate
+      .getObservable()
+      .subscribe(() => {
+          this.ngOnInit()
+        }
+      )
   }
 
   ngOnInit() {
@@ -76,7 +86,7 @@ export class ListsingerComponent implements OnInit {
           if (resp.content.length != 0) {
             this.router
               .navigate(['music/' + resp.content[0].id])
-          }else {
+          } else {
             document.getElementById('err singer song empty').click()
           }
         }
