@@ -7,3 +7,5 @@
 <div *ngIf="singerList.length==0&&singerLoaded">
   <div class="alert alert-danger" style="text-align: center">no singer found</div>
 </div>
+<app-popup-err [message]="'This singer has no song !'"
+               [modalName]="'err singer song empty'"></app-popup-err>

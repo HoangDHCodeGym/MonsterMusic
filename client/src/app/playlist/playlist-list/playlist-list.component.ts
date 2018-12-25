@@ -76,7 +76,7 @@ export class PlaylistListComponent implements OnInit {
             this.router
               .navigate(['playlist/' + playlistId + '/music/' + resp.content[0].id])
           } else {
-            document.getElementById('playlistShowErr').click()
+            document.getElementById('err playlist empty').click()
           }
         }
       })

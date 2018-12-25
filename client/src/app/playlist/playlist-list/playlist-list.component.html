@@ -7,5 +7,5 @@
 <div *ngIf="playlistList.length==0&&playlistLoaded">
   <div class="alert alert-danger" style="text-align: center">no playlist found</div>
 </div>
-<app-popup-err [message]="'This playlist is empty !'"></app-popup-err>
-<button style="display:none" data-target="#pop-up-err-modal" data-toggle="modal" id="playlistShowErr"></button>
+<app-popup-err [message]="'This playlist is empty !'"
+[modalName]="'err playlist empty'"></app-popup-err>

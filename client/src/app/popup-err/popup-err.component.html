@@ -11,8 +11,9 @@
         <div class="alert alert-danger">{{message}}</div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="close()">Close</button>
       </div>
     </div>
   </div>
 </div>
+<button style="display:none" [attr.data-target]="'#'+modalName+'-modal'" data-toggle="modal" id="{{originModalName}}"></button>

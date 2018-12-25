@@ -7,7 +7,18 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class PopupErrComponent implements OnInit {
   private _message: string = '';
-  modalName: string = 'pop-up-err';
+  private _modalName: string = 'pop-up-err';
+  originModalName: string = 'pop-up-err';
+
+  @Input()
+  set modalName(modalName: string) {
+    this.originModalName = modalName;
+    this._modalName = modalName.split(' ').join('-');
+  }
+
+  get modalName() {
+    return this._modalName;
+  }
 
   @Input()
   set message(message: string) {
@@ -18,10 +29,16 @@ export class PopupErrComponent implements OnInit {
     return this._message
   }
 
+  @Output() closed: EventEmitter<void> = new EventEmitter<void>()
+
   constructor() {
   }
 
   ngOnInit() {
+  }
+
+  close() {
+    this.closed.emit();
   }
 
 }

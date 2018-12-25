@@ -72,8 +72,12 @@ export class ListsingerComponent implements OnInit {
       .getSongsBySinger_Id(singerId, 1)
       .subscribe(resp => {
         if (resp != null) {
-          this.router
-            .navigate(['music/' + resp.content[0].id])
+          if (resp.content.length != 0) {
+            this.router
+              .navigate(['music/' + resp.content[0].id])
+          }else {
+            document.getElementById('err singer song empty').click()
+          }
         }
       })
 
