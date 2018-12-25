@@ -170,5 +170,13 @@ export class PlaylistPlayerComponent implements OnInit {
         this.playlist = playlist;
       })
   }
+  next() {
+    this.pageEngine.next();
+    this.getPlaylistSongList(this.playlistId);
+  }
 
+  previous() {
+    this.pageEngine.previous();
+    this.getPlaylistSongList(this.playlistId);
+  }
 }

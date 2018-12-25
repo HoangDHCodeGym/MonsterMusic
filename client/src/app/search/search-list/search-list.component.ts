@@ -31,14 +31,7 @@ export class SearchListComponent implements OnInit {
         this.playlistLoaded = false;
         this.query = param.get('q');
         if (this.query != null || this.query != '') {
-          this.songService
-            .getSongsByName(this.query, 6,this.pageEngine.current)
-            .subscribe(resp => {
-              this.songPage = resp;
-              this.songLoaded = true;
-              this.pageEngine.totalPages=this.songPage.totalPages;
-              this.pageEngine.current = this.songPage.number
-            },()=>{this.songLoaded = true;});
+          this.getSongList();
           this.playlistService
           //.getAllPlaylist(3)
             .getPlaylistByName(this.query, 3)
@@ -48,6 +41,16 @@ export class SearchListComponent implements OnInit {
             },()=>{this.playlistLoaded = true;});
         }
       })
+  }
+  getSongList(){
+    this.songService
+      .getSongsByName(this.query, 6,this.pageEngine.current)
+      .subscribe(resp => {
+        this.songPage = resp;
+        this.songLoaded = true;
+        this.pageEngine.totalPages=this.songPage.totalPages;
+        this.pageEngine.current = this.songPage.number
+      },()=>{this.songLoaded = true;});
   }
 
   songPage: Page<Song>;
@@ -67,5 +70,14 @@ export class SearchListComponent implements OnInit {
   toMusicPage(id: number) {
     this.routerL.navigate(['/music/' + id]);
     window.scroll(0, 0);
+  }
+  next() {
+    this.pageEngine.next();
+    this.getSongList();
+  }
+
+  previous() {
+    this.pageEngine.previous();
+    this.getSongList();
   }
 }
