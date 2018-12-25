@@ -4,6 +4,7 @@ import {SongService} from "../../../service/song.service";
 import * as $ from 'jquery';
 import {Page, PagingEngine, Playlist, Song, SongForm} from "../../../model";
 import {PlaylistService} from "../../../service/playlist.service";
+import {CommunicateService} from "../../../service/communicate.service";
 
 @Component({
   selector: 'app-player',
@@ -36,7 +37,8 @@ export class PlayerComponent implements OnInit {
               private routerL: Router,
               @Inject('HOST') private host,
               private songService: SongService,
-              private playlistService: PlaylistService) {
+              private playlistService: PlaylistService,
+              private communicateService: CommunicateService) {
   }
 
   ngOnInit() {
@@ -46,6 +48,14 @@ export class PlayerComponent implements OnInit {
       this.pageEngine = new PagingEngine();
       this.resolveSongResourceUrl();
     });
+    this.communicateService
+      .event
+      .songUpdate
+      .getObservable()
+      .subscribe(() => {
+        this.pageEngine = new PagingEngine();
+        this.resolveSongResourceUrl();
+      });
   }
 
   ngOnDestroy() {
@@ -85,7 +95,7 @@ export class PlayerComponent implements OnInit {
         );
     } else {
       this.songService
-        .getSongsBySinger_Id(singerId, 5,this.pageEngine.current)
+        .getSongsBySinger_Id(singerId, 5, this.pageEngine.current)
         .subscribe((songPage) => {
           this.pageEngine.totalPages = songPage.totalPages;
           this.pageEngine.current = songPage.number;

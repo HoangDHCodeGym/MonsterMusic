@@ -3,6 +3,7 @@ import {Page, PagingEngine, Playlist, Singer, Song} from "../../../model";
 import {PlaylistService} from "../../../service/playlist.service";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {SongService} from "../../../service/song.service";
+import {CommunicateService} from "../../../service/communicate.service";
 
 @Component({
   selector: 'app-search-list',
@@ -12,7 +13,6 @@ import {SongService} from "../../../service/song.service";
 export class SearchListComponent implements OnInit {
   pageEngine: PagingEngine = new PagingEngine();
   songLoaded: boolean = false;
-  playlistLoaded: boolean = false;
   query: string = '';
   downloadSongURL: string = this.host + '/api/files/';
 
@@ -20,20 +20,32 @@ export class SearchListComponent implements OnInit {
     private songService: SongService,
     private router: ActivatedRoute,
     private routerL: Router,
-    @Inject('HOST') private host: string) {
+    @Inject('HOST') private host: string,
+    private communicateService: CommunicateService) {
   }
 
   ngOnInit() {
     this.router
       .paramMap
       .subscribe((param: ParamMap) => {
+        this.pageEngine = new PagingEngine();
         this.songLoaded = false;
-        this.playlistLoaded = false;
         this.query = param.get('q');
         if (this.query != null || this.query != '') {
           this.getSongList();
         }
-      })
+      });
+    this.communicateService
+      .event
+      .songUpdate
+      .getObservable()
+      .subscribe(() => {
+        this.songLoaded = false;
+        this.pageEngine = new PagingEngine();
+        if (this.query != null || this.query != '') {
+          this.getSongList();
+        }
+      });
   }
 
   getSongList() {

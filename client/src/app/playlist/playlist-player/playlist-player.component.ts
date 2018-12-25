@@ -6,6 +6,7 @@ import {PlaylistService} from "../../../service/playlist.service";
 import {PlayerComponent} from "../../songs/player/player.component";
 import * as $ from 'jquery';
 import {SingerService} from "../../../service/singer.service";
+import {CommunicateService} from "../../../service/communicate.service";
 
 @Component({
   selector: 'app-playlist-player',
@@ -41,7 +42,8 @@ export class PlaylistPlayerComponent implements OnInit {
               @Inject('HOST') private host,
               private songService: SongService,
               private playlistService: PlaylistService,
-              private singerService: SingerService) {
+              private singerService: SingerService,
+              private communicateService: CommunicateService) {
   }
 
   ngOnInit() {
@@ -53,6 +55,15 @@ export class PlaylistPlayerComponent implements OnInit {
       this.getPlaylist();
       this.resolveSongResourceUrl();
     });
+    this.communicateService
+      .event
+      .songUpdate
+      .getObservable()
+      .subscribe(() => {
+        this.pageEngine = new PagingEngine();
+        this.getPlaylist();
+        this.resolveSongResourceUrl();
+      });
   }
 
   ngOnDestroy() {
@@ -81,7 +92,7 @@ export class PlaylistPlayerComponent implements OnInit {
 
   getPlaylistSongList(playlistId: number): void {
     this.songService
-      .getSongsByPlaylist_Id(playlistId, 5,this.pageEngine.current)
+      .getSongsByPlaylist_Id(playlistId, 5, this.pageEngine.current)
       .subscribe((songPage) => {
         this.pageEngine.totalPages = songPage.totalPages;
         this.pageEngine.current = songPage.number;
@@ -171,6 +182,7 @@ export class PlaylistPlayerComponent implements OnInit {
         this.playlist = playlist;
       })
   }
+
   next() {
     this.pageEngine.next();
     this.getPlaylistSongList(this.playlistId);
