@@ -11,6 +11,7 @@ import {Router} from "@angular/router";
 })
 export class ListsingerComponent implements OnInit {
   @Input() title: string = '#Singer';
+  @Input() size: number = 5;
   singerLoaded: boolean = false;
   private _singerName;
   @Input()
@@ -54,7 +55,7 @@ export class ListsingerComponent implements OnInit {
   getSingerByName(singerName: string) {
     this.singerLoaded = false;
     this.singerService
-      .getSingers(singerName, 5)
+      .getSingers(singerName, this.size)
       .subscribe(resp => {
         if (resp != null) {
           this.singerList = resp.content

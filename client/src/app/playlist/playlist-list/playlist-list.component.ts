@@ -11,6 +11,7 @@ import {Router} from "@angular/router";
 })
 export class PlaylistListComponent implements OnInit {
   playlistLoaded: boolean = false;
+  @Input() size: number = 5;
   @Input() title: string = '#Playlist';
   private _playlistName;
   @Input()
@@ -54,7 +55,7 @@ export class PlaylistListComponent implements OnInit {
   getPlaylistByName(playlistName: string) {
     this.playlistLoaded = false;
     this.playlistService
-      .getPlaylistByName(playlistName, 5)
+      .getPlaylistByName(playlistName, this.size)
       .subscribe(resp => {
         if (resp != null) {
           this.playlistList = resp.content
@@ -82,7 +83,6 @@ export class PlaylistListComponent implements OnInit {
       })
 
   }
-
 
 
 }
