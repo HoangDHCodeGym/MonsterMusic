@@ -168,4 +168,16 @@ export class PlaylistPlayerComponent implements OnInit {
       })
   }
 
+  nextSong(): void {
+    let index: number = this.songList.findIndex(x => x.id == this.songId);
+    if (index < this.songList.length) {
+      this.routerL.navigate(['/playlist/'+ this.playlistId+'/music/' + this.songList[index+1].id]);
+    }
+  }
+
+  previousSong(): void {
+    let index: number = this.songList.findIndex(x => x.id == this.songId);
+    if (index > 0)
+    this.routerL.navigate(['/playlist/'+ this.playlistId+'/music/' + this.songList[index-1].id]);
+  }
 }
