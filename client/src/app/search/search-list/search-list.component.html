@@ -1,0 +1,84 @@
+<!--playmusic-->
+<div class="container">
+  <div class="row">
+    <!-- Main player column -->
+    <div class="content">
+      <div class="songmusic row">
+        <h3 class="footer-heading md-4 title">#Song List</h3>
+        <hr>
+        <div class="table-responsive-md">
+          <div *ngIf="songPage==null&&songLoaded">
+            <div class="alert alert-danger" style="text-align: center">no song found</div>
+          </div>
+          <table class="table" *ngIf="songPage?.content">
+            <tr *ngFor="let song of songPage.content">
+              <td class="d-flex">
+                <figure class="image mr-4">
+                  <img src="assets/images/default.png" alt="" class="img-fluid">
+                </figure>
+                <div class="text">
+                  <a (click)="toMusicPage(song.id)" class="playlist_title"><h3
+                    class="heading font-weight-light">{{song.name}}</h3></a>
+                  <a href="#">
+                    <small class="text-muted">{{song.views}} <i class="fas fa-headphones"></i></small>
+                  </a><br>
+                  <a href="#">
+                    <small class="text-muted">{{song.singer?.name || "Unknown"}}</small>
+                  </a>
+                </div>
+              </td>
+              <td>
+                <div class="button">
+                  <a (click)="toMusicPage(song.id)"> <i class="fa fa-play"></i></a>
+                  <a href="{{downloadSongURL + song.link}}"> <i class="fa fa-download"></i></a>
+                  <a data-toggle="modal" data-target="#choose-playlist-modal"
+                     (click)="addToPlayList(song.id)">
+                    <i class="fa fa-plus"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <!--paging-->
+        <hr>
+        <nav *ngIf="pageEngine.totalPages>1">
+          <ul class="pagination justify-content-center">
+            <li class="page-item">
+              <a class="page-link" aria-label="Previous" (click)="previous()">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link">{{pageEngine.current+1+' of '+pageEngine.totalPages}}</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" aria-label="Next" (click)="next()">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <!--end paging-->
+      </div>
+    </div>
+    <div class="sidebar">
+      <app-toplist
+        [choose-playlist-input]="songForPlaylist">
+      </app-toplist>
+    </div>
+  </div>
+  <div class="content">
+    <app-listsinger [size]="6" [singerName]="query"></app-listsinger>
+  </div>
+
+
+  <!-- playlist list -->
+  <div class="content">
+    <app-playlist-list [size]="6" [playlistName]="query"></app-playlist-list>
+  </div>
+  <!-- End Playlist list -->
+  <br>
+</div>

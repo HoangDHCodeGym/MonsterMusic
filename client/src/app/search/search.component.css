@@ -1,0 +1,7 @@
+.search-result{
+  position: absolute;
+  top: 54px;
+  width: 227px;
+  z-index: 9;
+  cursor: pointer;
+}

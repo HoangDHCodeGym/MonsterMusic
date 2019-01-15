@@ -1,0 +1,11 @@
+<form class="form-inline my-2 my-lg-0">
+  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+         (keyup)="search(element.value)" (change)="toSearchPage(element)" #element>
+  <button class="btn btn-outline-light my-2 my-sm-0" (click)="toSearchPage(element)">Search</button>
+  <div class="list-group search-result" *ngIf="searchResult">
+    <a class="list-group-item list-group-item-action" *ngFor="let song of searchResult"
+       (click)="toMusicPage(song.id)">{{song.name}}
+      <small class="boldT">by {{song.singer?.name || 'unknown'}}</small>
+    </a>
+  </div>
+</form>
